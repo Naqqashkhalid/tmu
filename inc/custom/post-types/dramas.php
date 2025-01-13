@@ -1,0 +1,68 @@
+<?php
+add_action( 'init', 'drama_register_post_type' );
+function drama_register_post_type() {
+	$labels = [
+		'name'                     => esc_html__( 'Drama', 'dramas' ),
+		'singular_name'            => esc_html__( 'Drama', 'dramas' ),
+		'add_new'                  => esc_html__( 'Add New Drama', 'dramas' ),
+		'add_new_item'             => esc_html__( 'Add New Drama', 'dramas' ),
+		'edit_item'                => esc_html__( 'Edit Drama', 'dramas' ),
+		'new_item'                 => esc_html__( 'New Drama', 'dramas' ),
+		'view_item'                => esc_html__( 'View Drama', 'dramas' ),
+		'view_items'               => esc_html__( 'View Drama', 'dramas' ),
+		'search_items'             => esc_html__( 'Search Drama', 'dramas' ),
+		'not_found'                => esc_html__( 'No Drama found.', 'dramas' ),
+		'not_found_in_trash'       => esc_html__( 'No Drama found in Trash.', 'dramas' ),
+		'parent_item_colon'        => esc_html__( 'Parent Drama:', 'dramas' ),
+		'all_items'                => esc_html__( 'All Dramas', 'dramas' ),
+		'archives'                 => esc_html__( 'Drama Archives', 'dramas' ),
+		'attributes'               => esc_html__( 'Drama Attributes', 'dramas' ),
+		'insert_into_item'         => esc_html__( 'Insert into Drama', 'dramas' ),
+		'uploaded_to_this_item'    => esc_html__( 'Uploaded to this Drama', 'dramas' ),
+		'featured_image'           => esc_html__( 'Featured image', 'dramas' ),
+		'set_featured_image'       => esc_html__( 'Set featured image', 'dramas' ),
+		'remove_featured_image'    => esc_html__( 'Remove featured image', 'dramas' ),
+		'use_featured_image'       => esc_html__( 'Use as featured image', 'dramas' ),
+		'menu_name'                => esc_html__( 'Dramas', 'dramas' ),
+		'filter_items_list'        => esc_html__( 'Filter Dramas list', 'dramas' ),
+		'filter_by_date'           => esc_html__( '', 'dramas' ),
+		'items_list_navigation'    => esc_html__( 'Drama list navigation', 'dramas' ),
+		'items_list'               => esc_html__( 'Drama list', 'dramas' ),
+		'item_published'           => esc_html__( 'Drama published.', 'dramas' ),
+		'item_published_privately' => esc_html__( 'Drama published privately.', 'dramas' ),
+		'item_reverted_to_draft'   => esc_html__( 'Drama reverted to draft.', 'dramas' ),
+		'item_scheduled'           => esc_html__( 'Drama scheduled.', 'dramas' ),
+		'item_updated'             => esc_html__( 'Drama updated.', 'dramas' ),
+		'text_domain'              => esc_html__( 'dramas', 'dramas' ),
+	];
+	$args = [
+		'label'               => esc_html__( 'Drama', 'dramas' ),
+		'labels'              => $labels,
+		'description'         => '',
+		'public'              => true,
+		'hierarchical'        => false,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'show_ui'             => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'show_in_rest'        => false,
+		'query_var'           => true,
+		'can_export'          => true,
+		'delete_with_user'    => true,
+		'has_archive'         => true,
+		'rest_base'           => '',
+		'show_in_menu'        => true,
+		'menu_position'       => 4,
+		'menu_icon'           => 'dashicons-video-alt3',
+		'capability_type'     => 'post',
+		'supports'            => ['title', 'editor', 'thumbnail', 'comments'],
+		'taxonomies'          => ['channel', 'by-year', 'genre'],
+		'rewrite'             => [
+			'with_front' => false,
+			'feeds' => false
+		],
+	];
+
+	if(get_option( 'tmu_dramas' ) === 'on') register_post_type( 'drama', $args );
+}

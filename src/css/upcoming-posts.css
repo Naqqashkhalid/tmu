@@ -1,0 +1,92 @@
+.day-column h3 {
+  display: block;
+  position: relative;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  margin-top: 30px !important;
+  padding-left: 10px;
+}
+
+.day-column h3:before {
+  content: "";
+  width: 5px;
+  height: 100%;
+  background-color: #F97316;
+  display: block;
+  position: absolute;
+  left: 0;
+}
+
+.single-result {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+.image-container {
+  position: relative;
+  width: 50px;
+  margin-right: 0.5rem;
+}
+
+.result-image {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 0;
+  padding-bottom: 148%;
+  overflow: hidden;
+  border-radius: .75rem;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 15%), 0 6px 20px 0 rgb(0 0 0 / 0%);
+}
+
+.result-image img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+}
+
+.result-details {
+  font-size: .875rem;
+  letter-spacing: .01937em;
+  border: none;
+  text-align: left;
+  background: none;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #515151;
+}
+
+.result-title {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.result-title:hover, .image-container:hover { opacity: .6 }
+
+.day-posts-block:hover { text-decoration: none!important; }
+
+.result-meta { overflow: hidden; text-overflow: ellipsis; }
+
+@media (min-width: 768px) {
+  .day-posts-block {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .single-result:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+}
+
+@media (max-width: 767px) {
+  .single-result:last-child { padding-bottom: 10px; }
+}

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e3e4e4;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #cd201f;
+      }
+    </style>
+  </defs>
+  <g id="Group_1991" data-name="Group 1991" transform="translate(-267 -699)">
+    <rect id="Rectangle_450" data-name="Rectangle 450" class="cls-1" width="36" height="36" transform="translate(267 699)"/>
+    <g id="Group_1990" data-name="Group 1990" transform="translate(271.5 706.875)">
+      <rect id="Rectangle_941" data-name="Rectangle 941" class="cls-2" width="18.749" height="13.869" transform="translate(4.649 3.191)"/>
+      <path id="Icon_ionic-logo-youtube" data-name="Icon ionic-logo-youtube" class="cls-3" d="M26.819,8.972a4.1,4.1,0,0,0-3.9-4.282c-2.921-.137-5.9-.19-8.943-.19h-.949c-3.037,0-6.022.053-8.943.19a4.108,4.108,0,0,0-3.9,4.292C.053,10.859-.005,12.737,0,14.614s.053,3.754.179,5.637a4.113,4.113,0,0,0,3.9,4.3c3.069.142,6.217.206,9.418.2q4.809.016,9.418-.2a4.114,4.114,0,0,0,3.9-4.3c.127-1.883.185-3.76.179-5.642Q27.009,11.793,26.819,8.972Zm-15.9,10.815V9.425L18.561,14.6Z" transform="translate(0 -4.5)"/>
+    </g>
+  </g>
+</svg>

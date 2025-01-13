@@ -1,0 +1,68 @@
+<?php
+add_action( 'init', 'videos_register_post_type' );
+function videos_register_post_type() {
+	$labels = [
+		'name'                     => esc_html__( 'Videos', 'your-textdomain' ),
+		'singular_name'            => esc_html__( 'Video', 'your-textdomain' ),
+		'add_new'                  => esc_html__( 'Add New', 'your-textdomain' ),
+		'add_new_item'             => esc_html__( 'Add New Video', 'your-textdomain' ),
+		'edit_item'                => esc_html__( 'Edit Video', 'your-textdomain' ),
+		'new_item'                 => esc_html__( 'New Video', 'your-textdomain' ),
+		'view_item'                => esc_html__( 'View Video', 'your-textdomain' ),
+		'view_items'               => esc_html__( 'View Videos', 'your-textdomain' ),
+		'search_items'             => esc_html__( 'Search Videos', 'your-textdomain' ),
+		'not_found'                => esc_html__( 'No videos found.', 'your-textdomain' ),
+		'not_found_in_trash'       => esc_html__( 'No videos found in Trash.', 'your-textdomain' ),
+		'parent_item_colon'        => esc_html__( 'Parent Video:', 'your-textdomain' ),
+		'all_items'                => esc_html__( 'All Videos', 'your-textdomain' ),
+		'archives'                 => esc_html__( 'Video Archives', 'your-textdomain' ),
+		'attributes'               => esc_html__( 'Video Attributes', 'your-textdomain' ),
+		'insert_into_item'         => esc_html__( 'Insert into video', 'your-textdomain' ),
+		'uploaded_to_this_item'    => esc_html__( 'Uploaded to this video', 'your-textdomain' ),
+		'featured_image'           => esc_html__( 'Featured image', 'your-textdomain' ),
+		'set_featured_image'       => esc_html__( 'Set featured image', 'your-textdomain' ),
+		'remove_featured_image'    => esc_html__( 'Remove featured image', 'your-textdomain' ),
+		'use_featured_image'       => esc_html__( 'Use as featured image', 'your-textdomain' ),
+		'menu_name'                => esc_html__( 'Videos', 'your-textdomain' ),
+		'filter_items_list'        => esc_html__( 'Filter videos list', 'your-textdomain' ),
+		'filter_by_date'           => esc_html__( '', 'your-textdomain' ),
+		'items_list_navigation'    => esc_html__( 'Videos list navigation', 'your-textdomain' ),
+		'items_list'               => esc_html__( 'Videos list', 'your-textdomain' ),
+		'item_published'           => esc_html__( 'Video published.', 'your-textdomain' ),
+		'item_published_privately' => esc_html__( 'Video published privately.', 'your-textdomain' ),
+		'item_reverted_to_draft'   => esc_html__( 'Video reverted to draft.', 'your-textdomain' ),
+		'item_scheduled'           => esc_html__( 'Video scheduled.', 'your-textdomain' ),
+		'item_updated'             => esc_html__( 'Video updated.', 'your-textdomain' ),
+		'text_domain'              => esc_html__( 'your-textdomain', 'your-textdomain' ),
+	];
+	$args = [
+		'label'               => esc_html__( 'Videos', 'your-textdomain' ),
+		'labels'              => $labels,
+		'description'         => '',
+		'public'              => true,
+		'hierarchical'        => false,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'show_ui'             => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'show_in_rest'        => false,
+		'query_var'           => true,
+		'can_export'          => true,
+		'delete_with_user'    => true,
+		'has_archive'         => true,
+		'rest_base'           => '',
+		'show_in_menu'        => true,
+		'menu_position'       => 7,
+		'menu_icon'           => 'dashicons-playlist-video',
+		'capability_type'     => 'post',
+		'supports'            => ['title', 'thumbnail', 'comments'],
+		'taxonomies'          => [],
+		'rewrite'             => [
+			'with_front' => false,
+			'feeds' => false
+		],
+	];
+
+	register_post_type( 'video', $args );
+}

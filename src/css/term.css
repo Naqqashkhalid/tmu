@@ -1,0 +1,194 @@
+body { overflow: auto!important; height: 100%!important; }
+.archive-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    gap: 2%;
+}
+.archive-header { width: 70%; }
+.sidebar-container { width: 28%; padding: 10px; background-color: #fff; position: relative; }
+.term-sidebar { position: sticky; top: 0; }
+.term-sidebar ul { margin-left: 1.1em }
+.term-sidebar .sidebar-title { font-size: 28px; font-weight: 600; margin-bottom: 20px; }
+.archive-header h1 { font-size: 25px }
+
+.heading {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    line-height: 1;
+    color: #000;
+    margin: 30px 0 10px;
+}
+
+.heading h2 {
+	background-color: #323846;
+    color: #fff;
+    margin-bottom: 0;
+    padding: 5px 10px 10px;
+    width: 100%;
+}
+
+.term-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.sort-container { position: relative; right: 10px; }
+.sort-container:hover .sort-options { display:flex; }
+.sort-posts .selected { position: relative; color: #02c8f0; fill: currentColor; cursor: pointer; font-weight: 600; font-size: 14px; padding-bottom: 10px; }
+.sort-posts .selected svg { position: absolute; top: 3px; }
+.sort-options { display: none; flex-direction: column; position: absolute; right: 0; z-index: 99; margin-top: 5px; background-color: #fff; border-radius: 4px; box-shadow: 0 0 18px #00000026; padding: 16px; }
+.sort-options .sort-option { padding: 10px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.sort-option:hover { background-color: rgb(240, 240, 240); color: rgb(45, 46, 47); }
+.sort-option.active { background-color: rgb(217, 246, 253); color: rgb(0, 118, 146); }
+
+.items-container {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 2%;
+    row-gap: 10px;
+    position: relative;
+}
+
+.term-item {
+    display: block;
+    width: 32%;
+}
+
+.item-details h3 a { display: block; color: #0c0c0f; margin-top: 5px; margin-bottom: 3px; }
+.item-details h3 a:hover { color: #02c8f0 }
+.item-details .permalink { display: block; font-size: 14px; text-decoration: underline !important; }
+
+/*.item-poster {
+	width: 210px;
+    height: 300px;
+    overflow: hidden;
+}*/
+
+.item-poster { display: block; height: 0; width: 100%; padding-bottom: 140%; position: relative; }
+.item-poster img { display: block; position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
+/*
+.item-poster img {
+	width: 210px;
+    height: 300px;
+    object-fit: cover;
+}*/
+
+.drama-term-item {
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align: center;
+}
+
+.drama-term-item h3 { text-decoration: none; }
+.channel-term {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 100%;
+}
+.channel-term .term-title {
+    display: block;
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: 700 !important;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.term-logo {
+  display: block;
+  height: 35px;
+  object-fit: cover;
+  width: auto;
+}
+
+h3 {
+    text-decoration: underline;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.25;
+    color: #0c0c0f;
+    margin-bottom: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.release-date {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.65px;
+    color: #fff;
+    margin-top: 5px;
+    padding: 2px 7px 2px 6px;
+    background-color: #000000;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.button {
+    padding: 10px;
+    width: 100%;
+    background-color: #02c8f0;
+    text-align: center;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: black;
+}
+
+.loading { position: absolute; top: 0; width: 100%; height: 100%; background: #ddddddb0; z-index: 9; }
+.lds-grid, .lds-grid div { box-sizing: border-box; }
+.lds-grid { display: inline-block; width: 80px; height: 80px; position: absolute; top: 50%; left: 50%; }
+.lds-grid div { position: absolute; width: 16px; height: 16px; border-radius: 50%; background: currentColor; animation: lds-grid 1.2s linear infinite; }
+.lds-grid div:nth-child(1) { top: 8px; left: 8px; animation-delay: 0s; }
+.lds-grid div:nth-child(2) { top: 8px; left: 32px; animation-delay: -0.4s; }
+.lds-grid div:nth-child(3) { top: 8px; left: 56px; animation-delay: -0.8s; }
+.lds-grid div:nth-child(4) { top: 32px; left: 8px; animation-delay: -0.4s; }
+.lds-grid div:nth-child(5) { top: 32px; left: 32px; animation-delay: -0.8s; }
+.lds-grid div:nth-child(6) { top: 32px; left: 56px; animation-delay: -1.2s; }
+.lds-grid div:nth-child(7) { top: 56px; left: 8px; animation-delay: -0.8s; }
+.lds-grid div:nth-child(8) { top: 56px; left: 32px; animation-delay: -1.2s; }
+.lds-grid div:nth-child(9) { top: 56px; left: 56px; animation-delay: -1.6s; }
+@keyframes lds-grid { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+.footer-links-container, .faqs { padding: 20px; background-color: #fff; margin-top: 20px }
+.footer-links-container h3 { font-weight: 800; font-size: 20px; }
+.footer-links { display: flex; column-gap: 2%; row-gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+.footer-links a { display: block; width: 23.5%; font-size: 14px; font-weight: 600; }
+
+.faq-single { margin-top:20px; }
+.faq-single .question { font-weight: 700; font-size: 14px; }
+.faq-single .answer { font-size: 14px }
+
+@media (max-width: 1024px) {
+    .term-header { flex-direction: column; gap: 10px }
+    .breadcrumb { justify-content: center; }
+    .channel-term .term-title { font-size: 20px }
+    .sidebar-container { width:100% }
+    .archive-header { width:100% }
+    .term-item { width:49% }
+}
+
+@media (max-width: 768px) {
+  .archive-container { padding:0; }
+  .faqs { padding: 5px }
+  .footer-links-container { padding:10px }
+  .footer-links-container h3 { font-size: 19px; }
+  .footer-links { row-gap: 5px; }
+  .footer-links a { width: 100%; }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/inc/custom/meta-box/aio/src" isTestSource="false" packagePrefix="MBAIO" />
+      <sourceFolder url="file://$MODULE_DIR$/inc/custom/meta-box/src" isTestSource="false" packagePrefix="MetaBox" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,15 @@
+<svg id="Group_845" data-name="Group 845" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #e3e4e4;
+      }
+
+      .cls-2 {
+        fill: #2c54a8;
+      }
+    </style>
+  </defs>
+  <rect id="Rectangle_451" data-name="Rectangle 451" class="cls-1" width="36" height="36"/>
+  <path id="Icon_awesome-facebook-f" data-name="Icon awesome-facebook-f" class="cls-2" d="M13.621,13.5l.667-4.343H10.12V6.338a2.172,2.172,0,0,1,2.449-2.347h1.895V.293A23.105,23.105,0,0,0,11.1,0C7.668,0,5.425,2.08,5.425,5.846v3.31H1.609V13.5H5.425V24h4.7V13.5Z" transform="translate(10.39 6)"/>
+</svg>

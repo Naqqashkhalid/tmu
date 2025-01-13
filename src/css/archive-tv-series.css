@@ -1,0 +1,119 @@
+body { background-color: #fff; }
+.grid-container.container#page { max-width: unset; }
+.site-content#content { padding:0; }
+.archive-header { max-width:1400px; margin: 0 auto; padding: 20px 10px; }
+.breadcrumb { padding:0 }
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+h2 {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.25;
+    color: #0c0c0f;
+    margin-bottom: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.scroll-btns { display:flex; gap:10px; }
+
+.scroll-btn {
+	padding: 0;
+    margin: 0;
+    background: unset;
+    height: 30px;
+    width: 30px;
+}
+
+.new-releases, .upcoming-tv-series, .trailer {
+	margin-bottom: 30px;
+}
+
+.new-release-flex, .upcoming-tv-series-flex {
+	display: flex;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    overflow-x: auto;	
+    scroll-behavior: smooth;
+	transition: scroll-left 5s ease-in-out;
+    padding-bottom: 10px;
+}
+
+.new-release-box, .upcoming-tv-series-box {
+    display: block;
+    width: 210px;
+    min-width: 210px;
+    text-align: center;
+    box-shadow: 0 4px 8px #0000001a;
+    transition: transform .3s ease-in-out;
+    transform-style: preserve-3d;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.new-release-box:hover, .upcoming-tv-series-box:hover {
+    transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 4px 10px #0003, 0 0 4px #0000001a !important;
+}
+
+.trailer-flex, .episode-flex {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1%;
+    row-gap: 20px;
+}
+
+.trailer-box, .episode_container {
+    width: 24%;
+}
+
+.new-release-poster, .upcoming-tv-series-poster {
+	width: 210px;
+	height: 300px;
+	overflow: hidden;
+}
+
+.new-release-poster img, .upcoming-tv-series-poster img {
+	width: 210px;
+    height: 300px;
+	object-fit: cover;
+}
+
+.new-release-details .release-date, .upcoming-tv-series-details .release-date, .genres, .ep-release {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.65px;
+    color: #fff;
+    margin-top: 5px;
+    padding: 2px 7px 2px 6px;
+    background-color: #000000;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.genres, .ep-release {
+    display: block;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 768px) {
+	.scroll-btns { display:none }
+    .trailer-box, .episode_container { width: 100%; }
+}

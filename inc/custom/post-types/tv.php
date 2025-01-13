@@ -1,0 +1,68 @@
+<?php
+add_action( 'init', 'tv_register_post_type' );
+function tv_register_post_type() {
+	$labels = [
+		'name'                     => esc_html__( 'TV Show', 'tv-series' ),
+		'singular_name'            => esc_html__( 'TV Show', 'tv-series' ),
+		'add_new'                  => esc_html__( 'Add New TV Show', 'tv-series' ),
+		'add_new_item'             => esc_html__( 'Add New TV Show', 'tv-series' ),
+		'edit_item'                => esc_html__( 'Edit TV Show', 'tv-series' ),
+		'new_item'                 => esc_html__( 'New TV Show', 'tv-series' ),
+		'view_item'                => esc_html__( 'View TV Show', 'tv-series' ),
+		'view_items'               => esc_html__( 'View TV Show', 'tv-series' ),
+		'search_items'             => esc_html__( 'Search TV Show', 'tv-series' ),
+		'not_found'                => esc_html__( 'No tv show found.', 'tv-series' ),
+		'not_found_in_trash'       => esc_html__( 'No tv show found in Trash.', 'tv-series' ),
+		'parent_item_colon'        => esc_html__( 'Parent TV Show:', 'tv-series' ),
+		'all_items'                => esc_html__( 'All TV Shows', 'tv-series' ),
+		'archives'                 => esc_html__( 'TV Show Archives', 'tv-series' ),
+		'attributes'               => esc_html__( 'TV Show Attributes', 'tv-series' ),
+		'insert_into_item'         => esc_html__( 'Insert into TV Show', 'tv-series' ),
+		'uploaded_to_this_item'    => esc_html__( 'Uploaded to this TV Show', 'tv-series' ),
+		'featured_image'           => esc_html__( 'Featured image', 'tv-series' ),
+		'set_featured_image'       => esc_html__( 'Set featured image', 'tv-series' ),
+		'remove_featured_image'    => esc_html__( 'Remove featured image', 'tv-series' ),
+		'use_featured_image'       => esc_html__( 'Use as featured image', 'tv-series' ),
+		'menu_name'                => esc_html__( 'TV Shows', 'tv-series' ),
+		'filter_items_list'        => esc_html__( 'Filter TV Shows list', 'tv-series' ),
+		'filter_by_date'           => esc_html__( '', 'tv-series' ),
+		'items_list_navigation'    => esc_html__( 'TV list navigation', 'tv-series' ),
+		'items_list'               => esc_html__( 'TV list', 'tv-series' ),
+		'item_published'           => esc_html__( 'TV published.', 'tv-series' ),
+		'item_published_privately' => esc_html__( 'TV published privately.', 'tv-series' ),
+		'item_reverted_to_draft'   => esc_html__( 'TV reverted to draft.', 'tv-series' ),
+		'item_scheduled'           => esc_html__( 'TV scheduled.', 'tv-series' ),
+		'item_updated'             => esc_html__( 'TV updated.', 'tv-series' ),
+		'text_domain'              => esc_html__( 'tv-series', 'tv-series' ),
+	];
+	$args = [
+		'label'               => esc_html__( 'TV', 'tv-series' ),
+		'labels'              => $labels,
+		'description'         => '',
+		'public'              => true,
+		'hierarchical'        => false,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'show_ui'             => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'show_in_rest'        => false,
+		'query_var'           => true,
+		'can_export'          => true,
+		'delete_with_user'    => true,
+		'has_archive'         => true,
+		'rest_base'           => '',
+		'show_in_menu'        => true,
+		'menu_position'       => 4,
+		'menu_icon'           => 'dashicons-video-alt3',
+		'capability_type'     => 'post',
+		'supports'            => ['title', 'editor', 'thumbnail', 'comments'],
+		'taxonomies'          => ['channel', 'by-year', 'genre'],
+		'rewrite'             => [
+			'with_front' => false,
+			'feeds' => false
+		],
+	];
+
+	if(get_option( 'tmu_tv_series' ) === 'on') register_post_type( 'tv', $args );
+}

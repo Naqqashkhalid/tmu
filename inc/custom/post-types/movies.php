@@ -1,0 +1,67 @@
+<?php
+add_action( 'init', 'movies_register_post_type' );
+function movies_register_post_type() {
+	$labels = [
+		'name'                     => esc_html__( 'Movies', 'your-textdomain' ),
+		'singular_name'            => esc_html__( 'Movie', 'your-textdomain' ),
+		'add_new'                  => esc_html__( 'Add New', 'your-textdomain' ),
+		'add_new_item'             => esc_html__( 'Add New Movie', 'your-textdomain' ),
+		'edit_item'                => esc_html__( 'Edit Movie', 'your-textdomain' ),
+		'new_item'                 => esc_html__( 'New Movie', 'your-textdomain' ),
+		'view_item'                => esc_html__( 'View Movie', 'your-textdomain' ),
+		'view_items'               => esc_html__( 'View Movies', 'your-textdomain' ),
+		'search_items'             => esc_html__( 'Search Movies', 'your-textdomain' ),
+		'not_found'                => esc_html__( 'No movies found.', 'your-textdomain' ),
+		'not_found_in_trash'       => esc_html__( 'No movies found in Trash.', 'your-textdomain' ),
+		'parent_item_colon'        => esc_html__( 'Parent Movie:', 'your-textdomain' ),
+		'all_items'                => esc_html__( 'All Movies', 'your-textdomain' ),
+		'archives'                 => esc_html__( 'Movie Archives', 'your-textdomain' ),
+		'attributes'               => esc_html__( 'Movie Attributes', 'your-textdomain' ),
+		'insert_into_item'         => esc_html__( 'Insert into movie', 'your-textdomain' ),
+		'uploaded_to_this_item'    => esc_html__( 'Uploaded to this movie', 'your-textdomain' ),
+		'featured_image'           => esc_html__( 'Featured image', 'your-textdomain' ),
+		'set_featured_image'       => esc_html__( 'Set featured image', 'your-textdomain' ),
+		'remove_featured_image'    => esc_html__( 'Remove featured image', 'your-textdomain' ),
+		'use_featured_image'       => esc_html__( 'Use as featured image', 'your-textdomain' ),
+		'menu_name'                => esc_html__( 'Movies', 'your-textdomain' ),
+		'filter_items_list'        => esc_html__( 'Filter movies list', 'your-textdomain' ),
+		'filter_by_date'           => esc_html__( '', 'your-textdomain' ),
+		'items_list_navigation'    => esc_html__( 'Movies list navigation', 'your-textdomain' ),
+		'items_list'               => esc_html__( 'Movies list', 'your-textdomain' ),
+		'item_published'           => esc_html__( 'Movie published.', 'your-textdomain' ),
+		'item_published_privately' => esc_html__( 'Movie published privately.', 'your-textdomain' ),
+		'item_reverted_to_draft'   => esc_html__( 'Movie reverted to draft.', 'your-textdomain' ),
+		'item_scheduled'           => esc_html__( 'Movie scheduled.', 'your-textdomain' ),
+		'item_updated'             => esc_html__( 'Movie updated.', 'your-textdomain' ),
+	];
+	$args = [
+		'label'               => esc_html__( 'Movies', 'your-textdomain' ),
+		'labels'              => $labels,
+		'description'         => '',
+		'public'              => true,
+		'hierarchical'        => false,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'show_ui'             => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'show_in_rest'        => false,
+		'query_var'           => true,
+		'can_export'          => true,
+		'delete_with_user'    => true,
+		'has_archive'         => true,
+		'rest_base'           => '',
+		'show_in_menu'        => true,
+		'menu_position'       => 5,
+		'menu_icon'           => 'dashicons-format-video',
+		'capability_type'     => 'post',
+		'supports'            => ['title', 'editor', 'thumbnail', 'comments'],
+		'taxonomies'          => ['by-year', 'genre'],
+		'rewrite'             => [
+			'with_front' => false,
+			'feeds' => false
+		],
+	];
+
+	if(get_option( 'tmu_movies' ) === 'on') register_post_type( 'movie', $args );
+}
