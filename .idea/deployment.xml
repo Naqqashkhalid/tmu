@@ -6,8 +6,8 @@
       <paths name="pak+asian">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/allasiandrama/public_html/wp-content/plugins/tmu" local="$PROJECT_DIR$" web="/" />
-            <mapping deploy="/home/pakdramas/public_html/wp-content/plugins/tmu" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/allasiandrama/public_html/wp-content/plugins/tmu/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/pakdramas/public_html/wp-content/plugins/tmu/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

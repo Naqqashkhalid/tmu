@@ -280,17 +280,17 @@ function single_drama_episodes($drama, $mobile=false) {
     $data = '';
     if ($drama['last_episode']):
         $title = get_the_title($drama['last_episode']->ID);
-        $data .= '<div class="episode" id="last-episode">';
+        $data .= '<a href="'.get_permalink($drama['last_episode']->ID).'" title="'.$title.'" class="episode" id="last-episode">';
         if(!$mobile) $data .= '<p class="episode-head">Last Aired Episode</p>';
-        $data .= '<a href="'.get_permalink($drama['last_episode']->ID).'" title="'.$title.'">';
+        $data .= '<div>';
         $data .= '<img '.(has_post_thumbnail($drama['last_episode']->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($drama['last_episode']->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$title.'" width="100%" height="100%">';
         $data .= '<div class="episode-details">';
         if($mobile) $data .= '<div class="episode-head">Last Aired Episode</div>';
         $data .= '<div class="ep-air-date">AIRED ON '.date( 'd/m/Y', strtotime($drama['last_episode']->air_date) ).'</div>';
         $data .= '<div class="ep-no">Episode '.$drama['last_episode']->episode_no.'</div>';
         $data .= '</div>';
+        $data .= '</div >';
         $data .= '</a>';
-        $data .= '</div>';
     endif;
 
     if(!$drama['finished'] && $drama['next_episode']):
@@ -316,41 +316,41 @@ function desktop_single_drama_episodes($drama) {
     if ($drama['last_episode']):
         $title = get_the_title($drama['last_episode']->ID);
         $episode_plot = $drama['last_episode']->overview ? wp_trim_words(stripslashes(trim(preg_replace('/\s+/', ' ', str_replace('"', ' ', wp_strip_all_tags($drama['last_episode']->overview))))), 20) : get_drama_episode_plot_dessc($drama['last_episode']->ID);
-        $data .= '<div class="episode" id="last-episode">
+        $data .= '<a href="'.get_permalink($drama['last_episode']->ID).'" title="'.$title.'" class="episode" id="last-episode">
 			<div class="episode-section">
-				<a href="'.get_permalink($drama['last_episode']->ID).'" class="episode-img" title="'.$title.'">
+				<div class="episode-img">
 					<img '.(has_post_thumbnail($drama['last_episode']->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($drama['last_episode']->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$title.'" width="100%" height="100%">
-				</a>
+				</div>
 				<div class="episode-meta">
 					<p class="episode-head">'.($drama['last_episode']->episode_type === 'finale' ? 'Last' : 'Previous').' Episode</p>
 					<div class="ep-air-date">'.date( 'D, M d, Y', strtotime($drama['last_episode']->air_date) ).'</div>
 				</div>
 			</div>
-			<a href="'.get_permalink($drama['last_episode']->ID).'" class="episode-details" title="'.$title.'">
+			<div class="episode-details">
 				<div class="ep-title">'.$title.'</div>
 				<div class="ep-description">'.$episode_plot.'</div>
-			</a>
-		</div>';
+			</div>
+		</a>';
     endif;
 
     if(!$drama['finished'] && $drama['next_episode']):
         $title = get_the_title($drama['next_episode']->ID);
         $episode_plot = $drama['next_episode']->overview ? wp_trim_words(stripslashes(trim(preg_replace('/\s+/', ' ', str_replace('"', ' ', wp_strip_all_tags($drama['last_episode']->overview))))), 20) : get_drama_episode_plot_dessc($drama['next_episode']->ID);
-        $data .= '<div class="episode" id="next-episode">
+        $data .= '<a href="'.get_permalink($drama['next_episode']->ID).'" class="episode" id="next-episode">
 			<div class="episode-section">
-				<a href="'.get_permalink($drama['next_episode']->ID).'" class="episode-img" title="'.$title.'">
+				<div class="episode-img">
 					<img '.(has_post_thumbnail($drama['next_episode']->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($drama['next_episode']->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$title.'" width="100%" height="100%">
-				</a>
+				</div>
 				<div class="episode-meta">
 					<p class="episode-head">Next Episode</p>
 					<div class="ep-air-date">'.date( 'D, M d, Y', $drama['next_episode_timestamp'] ).'</div>
 				</div>
 			</div>
-			<a href="'.get_permalink($drama['next_episode']->ID).'" class="episode-details" title="'.$title.'">
+			<div class="episode-details">
 				<div class="ep-title">'.$title.'</div>
 				<div class="ep-description">'.$episode_plot.'</div>
-			</a>
-		</div>';
+			</div>
+		</a>';
     endif;
     return $data;
 }
