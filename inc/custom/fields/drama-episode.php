@@ -18,6 +18,13 @@ function drama_episode( $meta_boxes ) {
                 'type'       => 'post',
                 'post_type'  => ['drama'],
                 'field_type' => 'select_advanced',
+                'columns' => 8,
+            ],
+            [
+                'name'      => __( 'Video', 'dramas' ),
+                'id'        => $prefix . 'video',
+                'type'      => 'text',
+                'columns'       => 3,
             ],
             [
                 'name'    => __( 'Episode No', 'drama-episode' ),
@@ -1227,12 +1234,6 @@ function drama_episode( $meta_boxes ) {
                         ],
                     ],
                 ],
-            ],
-            [
-                'name'      => __( 'Video', 'dramas' ),
-                'id'        => $prefix . 'video',
-                'type'      => 'text',
-                'columns'       => 3,
             ],
         ],
     ];

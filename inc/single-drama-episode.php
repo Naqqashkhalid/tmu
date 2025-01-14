@@ -28,8 +28,8 @@ function single_drama_episode($content){
   $director_id = get_credits_ids_by_profession($episode['credits'][ 'crew' ], 'directing', 'Director', 1);
   $producer_id = get_credits_ids_by_profession($episode['credits']['crew'], 'production', 'Producer', 1);
 
-  $director_id = $director_id ? (is_array($director_id) ? $director_id[0] : $director_id) : $wpdb->get_var($wpdb->prepare("SELECT crew.person FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.dramas = %d AND crew.job='Director' AND posts.post_status = 'publish'", $episode['dramas']));
-  $producer_id = $producer_id ? (is_array($producer_id) ? $producer_id[0] : $producer_id) : $wpdb->get_var($wpdb->prepare("SELECT crew.person FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.dramas = %d AND crew.job='Producer' AND posts.post_status = 'publish'", $episode['dramas']));
+  $director_id = $director_id ? (is_array($director_id) ? $director_id[0] : $director_id) : $wpdb->get_var($wpdb->prepare("SELECT crew.person FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.dramas = posts.ID) WHERE crew.dramas = %d AND crew.job='Director' AND posts.post_status = 'publish'", $episode['dramas']));
+  $producer_id = $producer_id ? (is_array($producer_id) ? $producer_id[0] : $producer_id) : $wpdb->get_var($wpdb->prepare("SELECT crew.person FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.dramas = posts.ID) WHERE crew.dramas = %d AND crew.job='Producer' AND posts.post_status = 'publish'", $episode['dramas']));
 
   // if ('publish' !== get_post_status( $director_id )) {	$wpdb->delete( $wpdb->prefix . 'tmu_dramas_crew', ['ID' => $director_id], ['%d'] ); }
   // if ('publish' !== get_post_status( $producer_id )) {	$wpdb->delete( $wpdb->prefix . 'tmu_dramas_crew', ['ID' => $producer_id], ['%d'] ); }
@@ -44,8 +44,8 @@ function single_drama_episode($content){
 
   $casts = $episode['credits']['cast'] ? episode_credit($episode['credits']['cast']) : '';
   $crew = $episode['credits']['crew'] ? episode_credit($episode['credits']['crew']) : '';
-  $main_casts = !$casts ? $wpdb->get_results($wpdb->prepare("SELECT cast.* FROM {$wpdb->prefix}tmu_dramas_cast cast JOIN {$wpdb->prefix}posts AS posts ON (cast.ID = posts.ID) WHERE cast.dramas = %d AND posts.post_status = 'publish'", $episode['dramas'])) : '';
-  $main_crew = !$crew ? $wpdb->get_results($wpdb->prepare("SELECT crew.* FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.dramas = %d AND posts.post_status = 'publish'", $episode['dramas'])) : '';
+  $main_casts = !$casts ? $wpdb->get_results($wpdb->prepare("SELECT cast.* FROM {$wpdb->prefix}tmu_dramas_cast cast JOIN {$wpdb->prefix}posts AS posts ON (cast.dramas = posts.ID) WHERE cast.dramas = %d AND posts.post_status = 'publish'", $episode['dramas'])) : '';
+  $main_crew = !$crew ? $wpdb->get_results($wpdb->prepare("SELECT crew.* FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.dramas = posts.ID) WHERE crew.dramas = %d AND posts.post_status = 'publish'", $episode['dramas'])) : '';
   $casts = $casts ? $casts : ($main_casts ? drama_episode_credit($main_casts) : ['credits' => '', 'schema' => '']);
   $crew = $crew ? $crew : ($main_crew ? drama_episode_credit($main_crew) : ['credits' => '', 'schema' => '']);
   $episode['video'] = $episode['video'] ? extractYouTubeId($episode['video']) : '';

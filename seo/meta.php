@@ -37,7 +37,7 @@ function seo_meta_tags($title='') {
     <?php if($_SERVER['REQUEST_URI'] !== '/drama/' && $_SERVER['REQUEST_URI'] !== '/tv/' && $_SERVER['REQUEST_URI'] !== '/movie/' && $_SERVER['REQUEST_URI'] !== '/people/' && $_SERVER['REQUEST_URI'] !== '/video/' && $_SERVER['REQUEST_URI'] !== '/episode/' && $_SERVER['REQUEST_URI'] !== '/drama-episode/') { ?><link rel="alternate" type="application/rss+xml" title="<?= $title ?> &raquo; Feed" href="<?= $permalink ?>feed/" /> <?php } ?>
     <?php
 }
-if ( !is_plugin_active( 'seo-by-rank-math/rank-math.php' ) ) add_action('wp_head', 'seo_meta_tags', 1);
+if ( !is_plugin_active( 'seo-by-rank-math/rank-math.php' ) || str_contains($_SERVER['REQUEST_URI'], '/episodes/')) add_action('wp_head', 'seo_meta_tags', 1);
 
 
 function get_og_type($post_type){

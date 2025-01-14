@@ -280,17 +280,17 @@ function single_drama_episodes($drama, $mobile=false) {
     $data = '';
     if ($drama['last_episode']):
         $title = get_the_title($drama['last_episode']->ID);
-        $data .= '<a href="'.get_permalink($drama['last_episode']->ID).'" title="'.$title.'" class="episode" id="last-episode">';
+        $data .= '<div class="episode" id="last-episode">';
         if(!$mobile) $data .= '<p class="episode-head">Last Aired Episode</p>';
-        $data .= '<div>';
+        $data .= '<a href="'.get_permalink($drama['last_episode']->ID).'" title="'.$title.'">';
         $data .= '<img '.(has_post_thumbnail($drama['last_episode']->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($drama['last_episode']->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$title.'" width="100%" height="100%">';
         $data .= '<div class="episode-details">';
         if($mobile) $data .= '<div class="episode-head">Last Aired Episode</div>';
         $data .= '<div class="ep-air-date">AIRED ON '.date( 'd/m/Y', strtotime($drama['last_episode']->air_date) ).'</div>';
         $data .= '<div class="ep-no">Episode '.$drama['last_episode']->episode_no.'</div>';
         $data .= '</div>';
-        $data .= '</div >';
         $data .= '</a>';
+        $data .= '</div>';
     endif;
 
     if(!$drama['finished'] && $drama['next_episode']):
