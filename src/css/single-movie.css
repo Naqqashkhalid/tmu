@@ -114,6 +114,7 @@
 .heading {
     display: flex;
     justify-content: space-between;
+	color: #0e9272;
 }
 
 .movie-details-section {
