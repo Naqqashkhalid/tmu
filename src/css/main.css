@@ -17,12 +17,12 @@ body { background-color: #fff; }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #f9731699; 
+  background: #097056a6;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #f9731699; 
+  background: #097056d9;
 }
 
 .main-navigation, .main-navigation ul ul {
@@ -61,7 +61,7 @@ a {
     text-decoration: none!important;
 }
 
-a:hover, a:focus, a:active { color: #02c8f0; text-decoration: underline!important;}
+a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!important;}
 
 .sep {
     margin: 0 5px;
@@ -91,7 +91,7 @@ a:hover, a:focus, a:active { color: #02c8f0; text-decoration: underline!importan
 
 .short-heading:before {
 	content: "";
-    background-color: #0E9272;
+    background-color:  #FF6F61;
 	width: 0.25rem;
     border-radius: 0.25rem;
     height: 83.333333%;
@@ -398,7 +398,13 @@ a:hover, a:focus, a:active { color: #02c8f0; text-decoration: underline!importan
     height: 30px;
     width: 30px;
 }
+.scroll-btn .btn-left, .btn-right {
+    fill: #0E9272;
+}
 
+.scroll-btn .btn-left:hover, .btn-right:hover {
+    fill: #097056;
+}
 .born-today-view-button { display:none }
 
 .heading { position: relative; }

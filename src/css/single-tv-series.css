@@ -125,7 +125,8 @@ p { margin-bottom: 0 }
     justify-content: left;
     margin-right: .5rem;
     padding-right: .6rem;
-    color: #F5F5F5
+    color: #F5F5F5;
+    margin-bottom: 0rem!important;
 }
 
 .episodes-container-desktop .episode-head:after {
@@ -164,8 +165,14 @@ border-bottom: 1px solid #0A3D4D;
 }
 
 .episode a {
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    overflow: hidden;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    background-color: #F5F5F5;
 }
 
 .episodes-container .episode a {

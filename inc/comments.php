@@ -210,7 +210,7 @@ function get_rating_style(){
   .rate-this-pop-modal .select-stars-rating input:hover::before, .rating input:hover::before,
   .rate-this-pop-modal .select-stars-rating input:checked ~ input::before, .rating input:checked ~ input::before,
   .rate-this-pop-modal .select-stars-rating input:checked::before, .rating input:checked::before{
-    color: #ea580c;
+    color: #ffd700;
   }
   .single_comment { justify-content: left; margin: 0; width: unset;}
   .single_comment input { pointer-events: none; width: 11.2px; height: 18px; margin-left: -1px;}
