@@ -135,7 +135,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .videos .videos-gallery {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1.5%;
+	gap: 2%;
 }
 
 .video-single, .episode-single {

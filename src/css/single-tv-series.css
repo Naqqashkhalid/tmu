@@ -175,6 +175,12 @@ border-bottom: 1px solid #0A3D4D;
     background-color: #F5F5F5;
 }
 
+.episode a:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    text-decoration: none!important;
+}
+
 .episodes-container .episode a {
 background-color: #2a2f32;
 }
@@ -322,7 +328,7 @@ box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); /* Subtle shadow */
 .episodes-container .episode .ep-air-date:hover { color: #FF6F61; }
 .episodes-container .episode .ep-no { font-size: 15px; color: white; font-weight: 700; }
 .episodes-container-mobile .episode .ep-no, .episodes-container-mobile .ep-air-date { color: #353535; font-size: 14px; font-weight: 700; }
-.episodes-container-mobile  .episode-head { color: #02c8f0; font-weight: 600; font-size: 14px; }
+.episodes-container-mobile  .episode-head { color: #FF6F61; font-weight: 600; font-size: 14px; }
 .drama-videos .video-single { width: 100%!important; }
 
 .episodes-btn { justify-content: space-between; }

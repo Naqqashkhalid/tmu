@@ -433,7 +433,7 @@ function styles_sidebar($post_type){
 	.circle-box .person-details h3 a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black!important }
 	.circle-box .profession { color:black; margin:0!important; font-size: 14px; }
 
-	.item-box { display: block; position: relative; margin-bottom:20px; background: black; border-radius: 10px; overflow: hidden; }
+	.item-box { display: block; position: relative; margin-bottom:10px; background: black; border-radius: 5px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); transition: box-shadow 0.2s ease,transform 0.2s ease; }
 	.item-poster { display: block; height: 0; width: 100%; padding-bottom: 140%; position: relative; }
 	.item-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
 	.item-details { padding: 7px; }
