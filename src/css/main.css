@@ -411,7 +411,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .heading h2 { margin-left: 10px; margin-bottom: 0 }
 .heading h2:before {
     content: "";
-    background-color: #F97316;
+    background-color: #ff6f61;
     width: 0.25rem;
     border-radius: 0.25rem;
     height: 83.333333%;
