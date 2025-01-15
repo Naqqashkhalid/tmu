@@ -3,10 +3,16 @@
   <component name="PublishConfigData" autoUpload="Always" serverName="pak+asian" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
-      <paths name="pak+asian">
+      <paths name="asian">
         <serverdata>
           <mappings>
             <mapping deploy="/home/allasiandrama/public_html/wp-content/plugins/tmu/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="pak+asian">
+        <serverdata>
+          <mappings>
             <mapping deploy="/home/pakdramas/public_html/wp-content/plugins/tmu/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>

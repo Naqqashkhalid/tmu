@@ -525,27 +525,34 @@ function get_post_rating($rating){
   
   .singlerate .rate-detail {
     margin: 6px 0 0 0;
-    font-size: 1.5rem;
-	display: flex;
+    font-size: 1.2rem;
+    display: flex;
     flex-direction: column;
-	line-height: 1.2;
-    color: #619E14;
-  }
+    line-height: 1.5;
+    color: #FFD700;
+}
   
 .singlerate .rate-detail:hover{
 	text-decoration: none!important;
+    transform: scale(1.1); /* Slightly enlarges on hover */
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
   .total-votes {
     font-size: 0.75rem;
     font-weight: 400;
-    color: #8f8f8f;
+    color: #b0b0b0;
   }
 
   .rate-star {
     display: flex;
-    color: #619E14;
+    color: #FFD700;
 	
+  }
+  
+  .rate-star:hover {
+    transform: scale(1.1); /* Slightly enlarges on hover */
+    transition: transform 0.2s ease, color 0.2s ease;
   }
 
 </style>

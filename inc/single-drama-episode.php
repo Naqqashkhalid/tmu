@@ -156,7 +156,7 @@ function drama_episode_header($episode, $director, $producer, $average_ratings){
 				($producer ? '<div'.(!$director ? ' class="width-100"' : '').'>'.$producer.'<div class="font-size-13">Producer</div></div>' : '').'
 			</div>
 			<div class="watch-buttons">
-					'.($where_to_watch ? '<a href="https://www.eonline.live/redirect/'.$where_to_watch.'" target="_blank" title="WHERE TO WATCH">WHERE TO WATCH</a>' : '').'
+					'.($where_to_watch ? '<a href="' . get_site_url() . '/redirect/'.$where_to_watch.'" target="_blank" title="WHERE TO WATCH">WHERE TO WATCH</a>' : '').'
 			</div>
 		</div>
 	</section>';

@@ -12,9 +12,8 @@ function redirect_url($slug){
 			<?php do_action( 'generate_before_main_content' ); ?>
 			<div style="text-align: center;">
 				<h1>See you later!</h1>
-				<p>You are leaving Eonline and you will be automatically redirected to <span class="text-primary"><?= $short_slug ?>...</span> in a moment.</p>
-				<a href="https://www.eonline.live/"><button class="btn-primary" title="Back to Eonline">Back to Eonline</button></a>
-			</div>
+                <p>You are leaving <?php echo get_bloginfo( 'name' ); ?> and you will be automatically redirected to <span class="text-primary"><?= $short_slug ?>...</span> in a moment.</p>
+                <a href="<?php echo get_site_url(); ?>"><button class="btn-primary" title="Back to <?php echo get_bloginfo( 'name' ); ?>">Back to <?php echo get_bloginfo( 'name' ); ?></button></a>			</div>
 			<?php do_action( 'generate_after_main_content' ); ?>
 		</main>
 	</div>

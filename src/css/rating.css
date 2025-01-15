@@ -104,8 +104,9 @@
 
 .rate-submit-button {
     display: inline-flex;
-    background-color: #F97316;
-    border: 1px solid #ea580c;
+    background-color: #0E9272;
+    box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); /* Subtle shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth effect */
     outline: 2px solid transparent;
     outline-offset: 2px;
     color: white;
@@ -120,4 +121,8 @@
     align-items: center;
 }
 
-.rate-submit-button:hover { background-color:#ea580c }
+.rate-submit-button:hover {
+    background-color:#FF6F61;
+    box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); /* Accent shadow on hover */
+    transform: translateY(-2px); /* Slight "lift" effect */
+}

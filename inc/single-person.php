@@ -71,7 +71,7 @@ function person_header($post_id, $person){
 	$upcoming_movie = person_upcoming($post_id);
   $data = '';
   $data .= '<section class="movie-trailer">';
-  $data .= '<div class="feature-image"><img '. (has_post_thumbnail() ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url(get_the_ID(), 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$person['name'].'" width="100%" height="100%">';
+  $data .= '<div class="feature-image" data-gallery-id="img-1" onclick="featureImage(this)"><img '. (has_post_thumbnail() ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url(get_the_ID(), 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$person['name'].'" width="100%" height="100%">';
   $social = $person['social_media_account'] ? socialmedia($person['social_media_account']) : '';
   $data .= $social ? '<div class="socialmedia desktop">'.$social.'</div>' : '';
   $data .= '</div>';
