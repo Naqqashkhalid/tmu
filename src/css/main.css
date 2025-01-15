@@ -1,7 +1,7 @@
 h1 { font-size: 28px!important; font-weight: bold!important }
 
 .entry-content p { text-align: justify; }
-.separate-containers .comments-area, .inside-article, .separate-containers .page-header, .separate-containers .paging-navigation { padding: 20px!important }
+.separate-containers .comments-area, .inside-article, .separate-containers .page-header, .separate-containers .paging-navigation { padding: 10px!important }
 
 body { background-color: #fff; }
 
