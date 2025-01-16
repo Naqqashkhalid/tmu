@@ -16,7 +16,7 @@ function module_1($post_type){
             <div class="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path id="Icon_material-arrow-drop-down" data-name="Icon material-arrow-drop-down" class="cls-1" d="M10.5,15l5,5,5-5Z" transform="translate(-10.5 -15)"/></svg></div>
         </button>
     </div>
-
+    
     <div class="buttons_modals_multi">
         <!-- ---------------------------------------------------------- -->
         <div id="clear_all_flex">
@@ -38,21 +38,6 @@ function module_1($post_type){
     }
 
     if($post_type!=='drama') {
-        $args = array(
-            'taxonomy'   => 'by-year', // Replace 'category' with your desired taxonomy
-            'orderby'    => 'count',
-            'order'      => 'DESC', // Order by descending count (most items first)
-            'hide_empty' => false, // Include terms with no associated items
-        );
-
-        $sorted_terms = get_terms( $args );
-        $year_data = '';
-        foreach ( $sorted_terms as $term ) {
-            $year_data .= '<div class="form-group">
-                        <input type="checkbox" class="year_filter" name="year_filter[]" value="'.$term->slug.'" id="'.$term->slug.'">
-                        <label for="'.$term->slug.'">'.$term->name.'</label>
-                    </div>';
-        }
         $data .= '<!-- LANGUAGE button  -->
         <button class="myBtn_multi" id="languageHighlightActive" onclick="select_filters(\'language\');">LANGUAGE
             <span id="languageSelectCnt"></span>
@@ -103,93 +88,84 @@ function module_1($post_type){
             <button id="apply_sort_by" class="applly-button-modals" data-element="sort_by">apply filter</button>
         </div>
     </div>
-</div>
-
-<div class="modal_asdf modal_multi_asdf" id="year_button_modals" style="display: none;">
-    <div class="modal-content_asdf">
-        <div class="modal_drop_check_flex_header">
-            <h3>YEAR</h3>
-            <span class="close close_multi" data-close="year"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"><path id="Icon_ionic-md-close" data-name="Icon ionic-md-close" style="fill:#fff;" d="M24.523,9.223l-1.7-1.7-6.8,6.8-6.8-6.8-1.7,1.7,6.8,6.8-6.8,6.8,1.7,1.7,6.8-6.8,6.8,6.8,1.7-1.7-6.8-6.8Z" transform="translate(-7.523 -7.523)"/></svg></span>
-        </div>
-        <div class="new">
-            <form>
-                '.$year_data.'
-            </form>
-        </div>
-        <div class="button_flex_modals">
-            <button id="clear_year" class="clear-button-modals" data-element="year">Clear Filter</button>
-            <button id="apply_year" class="applly-button-modals" data-element="year">apply filter</button>
-        </div>
-    </div>
 </div>';
 
-    if($post_type==='drama') {
-        $args = array(
-            'taxonomy'   => 'channel', // Replace 'category' with your desired taxonomy
-            'orderby'    => 'count',
-            'order'      => 'DESC', // Order by descending count (most items first)
-            'hide_empty' => false, // Include terms with no associated items
-        );
-
-        $sorted_terms = get_terms( $args );
-        $channel_data = '';
-        foreach ( $sorted_terms as $term ) {
-            $channel_data .= '<div class="form-group">
-                        <input type="checkbox" class="channel_filter" name="channel_filter[]" value="'.$term->slug.'" id="'.$term->slug.'">
-                        <label for="'.$term->slug.'">'.$term->name.'</label>
-                    </div>';
-        }
-        $data .= '<div class="modal_asdf modal_multi_asdf" id="channel_button_modals" style="display: none;">
-        <div class="modal-content_asdf">
-            <div class="modal_drop_check_flex_header">
-                <h3>CHANNEL</h3>
-                <span class="close close_multi" data-close="channel"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"><path id="Icon_ionic-md-close" data-name="Icon ionic-md-close" style="fill:#fff;" d="M24.523,9.223l-1.7-1.7-6.8,6.8-6.8-6.8-1.7,1.7,6.8,6.8-6.8,6.8,1.7,1.7,6.8-6.8,6.8,6.8,1.7-1.7-6.8-6.8Z" transform="translate(-7.523 -7.523)"/></svg></span>
-            </div>
-            <div class="new">
-                <form>
-                    '.$channel_data.'
-                </form>
-            </div>
-            <div class="button_flex_modals">
-                <button id="clear_channel" class="clear-button-modals" data-element="channel">Clear Filter</button>
-                <button id="apply_channel" class="applly-button-modals" data-element="channel">apply filter</button>
-            </div>
-        </div>
-    </div>';
-    }
-
-    if($post_type!=='drama') {
-        $taxonomies = ['network','country','genre','by-year','language'];
+    if($post_type ==='drama') {
+        $taxonomies = ['channel', 'by-year'];
         $term_data = '';
         foreach ($taxonomies as $taxonomy) {
             $args = array(
-                'taxonomy'   => $taxonomy, // Replace 'category' with your desired taxonomy
-                'orderby'    => 'count',
-                'order'      => 'DESC', // Order by descending count (most items first)
-                'hide_empty' => false, // Include terms with no associated items
+                'taxonomy' => $taxonomy, // Replace 'category' with your desired taxonomy
+                'orderby' => 'count',
+                'order' => 'DESC', // Order by descending count (most items first)
+                'hide_empty' => true, // Include terms with no associated items
             );
 
-            $sorted_terms = get_terms( $args );
-            foreach ( $sorted_terms as $term ) {
+
+            $sorted_terms = get_terms($args);
+            foreach ($sorted_terms as $term) {
                 $term_data .= '<div class="form-group">
-                        <input type="checkbox" class="'.$term->slug.'_filter" name="'.$term->slug.'_filter[]" value="'.$term->slug.'" id="'.$term->slug.'">
-                        <label for="'.$term->slug.'">'.$term->name.'</label>
+                        <input type="checkbox" class="' . $term->slug . '_filter" name="' . $term->slug . '_filter[]" value="' . $term->slug . '" id="' . $term->slug . '">
+                        <label for="' . $term->slug . '">' . $term->name . '</label>
                     </div>';
             }
-            $data .= '<div class="modal_asdf modal_multi_asdf" id="'.$taxonomy.'_button_modals" style="display: none;">
+            if ($taxonomy === 'by-year') $taxonomy = 'year';
+            $data .= '<div class="modal_asdf modal_multi_asdf" id="' . $taxonomy . '_button_modals" style="display: none;">
                 <div class="modal-content_asdf">
                     <div class="modal_drop_check_flex_header">
-                        <h3>'.strtoupper($taxonomy).'</h3>
-                        <span class="close close_multi" data-close="'.$taxonomy.'"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"><path id="Icon_ionic-md-close" data-name="Icon ionic-md-close" style="fill:#fff;" d="M24.523,9.223l-1.7-1.7-6.8,6.8-6.8-6.8-1.7,1.7,6.8,6.8-6.8,6.8,1.7,1.7,6.8-6.8,6.8,6.8,1.7-1.7-6.8-6.8Z" transform="translate(-7.523 -7.523)"/></svg></span>
+                        <h3>' . strtoupper($taxonomy) . '</h3>
+                        <span class="close close_multi" data-close="' . $taxonomy . '"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"><path id="Icon_ionic-md-close" data-name="Icon ionic-md-close" style="fill:#fff;" d="M24.523,9.223l-1.7-1.7-6.8,6.8-6.8-6.8-1.7,1.7,6.8,6.8-6.8,6.8,1.7,1.7,6.8-6.8,6.8,6.8,1.7-1.7-6.8-6.8Z" transform="translate(-7.523 -7.523)"/></svg></span>
                     </div>
                     <div class="new">
                         <form>
-                            '.$term_data.'
+                            ' . $term_data . '
                         </form>
                     </div>
                     <div class="button_flex_modals">
-                        <button id="clear_'.$taxonomy.'" class="clear-button-modals" data-element="'.$taxonomy.'">Clear Filter</button>
-                        <button id="apply_'.$taxonomy.'" class="applly-button-modals" data-element="'.$taxonomy.'">apply filter</button>
+                        <button id="clear_' . $taxonomy . '" class="clear-button-modals" data-element="' . $taxonomy . '">Clear Filter</button>
+                        <button id="apply_' . $taxonomy . '" class="applly-button-modals" data-element="' . $taxonomy . '">apply filter</button>
+                    </div>
+                </div>
+            </div>';
+            $term_data = '';
+        }
+    }
+
+
+    if($post_type!=='drama') {
+        $taxonomies = ['network', 'country', 'genre', 'language', 'by-year'];
+        $term_data = '';
+        foreach ($taxonomies as $taxonomy) {
+            $args = array(
+                'taxonomy' => $taxonomy, // Replace 'category' with your desired taxonomy
+                'orderby' => 'count',
+                'order' => 'DESC', // Order by descending count (most items first)
+                'hide_empty' => true, // Include terms with no associated items
+            );
+
+
+            $sorted_terms = get_terms($args);
+            foreach ($sorted_terms as $term) {
+                $term_data .= '<div class="form-group">
+                        <input type="checkbox" class="' . $term->slug . '_filter" name="' . $term->slug . '_filter[]" value="' . $term->slug . '" id="' . $term->slug . '">
+                        <label for="' . $term->slug . '">' . $term->name . '</label>
+                    </div>';
+            }
+            if ($taxonomy === 'by-year') $taxonomy = 'year';
+            $data .= '<div class="modal_asdf modal_multi_asdf" id="' . $taxonomy . '_button_modals" style="display: none;">
+                <div class="modal-content_asdf">
+                    <div class="modal_drop_check_flex_header">
+                        <h3>' . strtoupper($taxonomy) . '</h3>
+                        <span class="close close_multi" data-close="' . $taxonomy . '"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"><path id="Icon_ionic-md-close" data-name="Icon ionic-md-close" style="fill:#fff;" d="M24.523,9.223l-1.7-1.7-6.8,6.8-6.8-6.8-1.7,1.7,6.8,6.8-6.8,6.8,1.7,1.7,6.8-6.8,6.8,6.8,1.7-1.7-6.8-6.8Z" transform="translate(-7.523 -7.523)"/></svg></span>
+                    </div>
+                    <div class="new">
+                        <form>
+                            ' . $term_data . '
+                        </form>
+                    </div>
+                    <div class="button_flex_modals">
+                        <button id="clear_' . $taxonomy . '" class="clear-button-modals" data-element="' . $taxonomy . '">Clear Filter</button>
+                        <button id="apply_' . $taxonomy . '" class="applly-button-modals" data-element="' . $taxonomy . '">apply filter</button>
                     </div>
                 </div>
             </div>';
