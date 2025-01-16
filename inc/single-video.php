@@ -14,7 +14,6 @@ function single_video($content){
 		$movie_permalink = get_permalink($result);
 	}
 	$main_title = get_the_title($result);
-    var_dump("abc");
 	
 	return video_style().'<div class="video_details">
 		<a href="'.$movie_permalink.'" class="movie_poster" title="'.$main_title.'">'.(has_post_thumbnail($result) ? get_the_post_thumbnail( $result, 'medium' ) : '').'</a>

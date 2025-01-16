@@ -555,7 +555,6 @@ function get_post_rating($rating){
     transition: transform 0.2s ease, color 0.2s ease;
   }
   
-  .rate-this-button:hover { color: #ff6f61!important;}
 
 </style>
 <div class="ratebox">

@@ -444,10 +444,11 @@ function styles_sidebar($post_type){
 	.episode-poster { display: block; height: 0; width: 100%; padding-bottom: 56.4%; position: relative; }
 	.episode-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
 	.all_items { position: relative; }
-	.item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 6%; }
-	.item-sidebar .item-box { width: 47%; }
-	.loadmore { cursor: pointer; background: #F97316; color: #FFFFFF; background-color: #F97316; padding: 11px 25px; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 100%; border-radius: 10px; }
-	.loadmore:hover { color: #FFFFFF; background-color: #ea580c; }
+	.item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 2%; }
+    .item-sidebar .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }
+	.item-sidebar .item-box { width: 49%; }
+	.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block; box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+	.loadmore:hover { background-color: #E65A50; color: #FFFFFF; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }
 	.loading {
 	    position: absolute;
 	    top: 0;

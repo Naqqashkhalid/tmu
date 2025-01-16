@@ -111,7 +111,7 @@ h3:not(.blog-posts h3) {
     grid-template-rows: auto auto auto 1fr;
 }
 
-.featured-third .post-content .post-tag { margin-top: 5px; background-color: #F97316; color: #FFFFFF; }
+.featured-third .post-content .post-tag { margin-top: 5px; background-color: #0E9272; color: #FFFFFF; }
 
 .featured-second .post-content .post-tags {
     position: absolute;
@@ -161,7 +161,7 @@ h3:not(.blog-posts h3) {
     width: fit-content;
     max-width: 100%;
     padding: 6px 12px;
-    background: #F97316;
+    background: #0E9272;
 /*    border: 1px solid #b6b4b5;
     border-radius: 4px;*/
     -moz-border-radius: 4px;
@@ -247,7 +247,7 @@ h3:not(.blog-posts h3) {
 .new-release-flex, .upcoming-movies-flex {
     display: flex;
     -webkit-overflow-scrolling: touch;
-    gap: 12px;
+    gap: 1%;
     overflow-x: auto;   
     scroll-behavior: smooth;
     transition: scroll-left 5s ease-in-out;
@@ -263,8 +263,8 @@ h3:not(.blog-posts h3) {
     transition: transform .3s ease-in-out;
     transform-style: preserve-3d;
     padding-bottom: 5px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
     overflow: hidden;
 }
 

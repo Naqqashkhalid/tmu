@@ -50,21 +50,22 @@ function trending_styles(){
 	    transition: transform .3s ease-in-out;
 	    transform-style: preserve-3d;
 	    padding-bottom: 10px;
-	    border-radius: 10px;
+	    border-radius: 5px;
 	    border: 1px solid #ddd;
     	overflow: hidden;
 	}
 	.trending-item:hover {
 		transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
 	    box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
-	    border-radius: 10px;
+	    border-radius: 5px;
+	    text-decoration: none!important;
 	}
 	.trending-poster { position: relative; padding-bottom: 140%; }
 	.trending-no {
 		position: absolute;
 	    top: 10px;
 	    left: 10px;
-	    background: #000000c4;
+	    background: #0e9272;
 	    color: #ffffff;
 	    z-index: 2 !important;
 	    border-radius: 5px;

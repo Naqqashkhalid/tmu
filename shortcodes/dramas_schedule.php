@@ -178,7 +178,7 @@ function schedule_styles(){
 	.dramas_schedule {
 		display: flex;
 		justify-content: center;
-		margin: 40px 0;
+		margin: 25px 0;
 		gap: 10px;
 	}
 	.dramas_schedule .days {
@@ -198,33 +198,36 @@ function schedule_styles(){
 	}
 
 	.dramas_schedule .days .day.active, .dramas_schedule .days .day:hover {
-		color: #272727;
-    background: #02c8f0;
+		color: #FFFFFF;
+    background: #0E9272;
+    box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 	}
 
 	.archive-dramas {
 		display: flex;
-		column-gap: 2%;
-		row-gap: 15px;
+		column-gap: 1%;
+		row-gap: 5px;
 	  flex-wrap: wrap;
 	}
 	.drama-box {
 		display: block;
     position: relative;
-    width: 18.4%;
+    width: 15.8%;
     margin-bottom: 20px;
     text-align: center;
     box-shadow: 0 4px 8px #0000001a;
     transition: transform .3s ease-in-out;
     transform-style: preserve-3d;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #ddd;
     overflow: hidden;
 	}
 	.drama-box:hover {
     transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
     box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-decoration: none!important;
 	}
 	.drama-poster {
 		display: block;
@@ -255,18 +258,18 @@ function schedule_styles(){
     margin-top: 5px;
 	}
 	.drama-details .schedule-time {
-		letter-spacing: 0.65px;
+	letter-spacing: 0.65px;
     color: #ffffff;
     overflow: hidden;
     max-width: 100%;
     display: inline-block;
-    background: #232323 !important;
-    font-size: 13px;
+    background: #0E9272 !important;
+    font-size: 13px !important;
     font-weight: bold;
-    padding: 5px 5px;
-    border-radius: 4px;
+    padding: 2px 4px;
+    border-radius: 3px;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 	}
 	.arrows {
 		display: none;

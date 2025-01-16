@@ -45,7 +45,7 @@ function single_person($content){
   $data .= '<div style="text-align: end; font-weight: 600;">Last Updated: '.date( 'd F Y',get_the_modified_time( 'U' )).'</div>';
 			
   $data .= '<div class="text-container">';
-  $data .= $content ? ($tp > 2 ? '<p>' . $firstparagraphs . ' <a id="showMoreLink" title="read more">read more...</a></p><div id="additional-text" style="display: none">' . $remainingContent . '</div>' : $content) : 'We don\'t have a biography for '.$person['name'].'.' ;
+  $data .= $content ? ($tp > 2 ? '<p>' . $firstparagraphs . ' <a class="showmore" id="showMoreLink" title="read more">read more...</a></p><div id="additional-text" style="display: none">' . $remainingContent . '</div>' : $content) : 'We don\'t have a biography for '.$person['name'].'.' ;
   $data .= '</div>';
   $data .= known_for();
   $data .= $person['videos'] ? display_videos($person['videos']) : '';
@@ -169,6 +169,7 @@ function person_extra_css(){
 		margin-top: 5px;
 		color: #ddd;
 		font-size: 14px;
+		margin-bottom: 0.8rem!important;
 	}
 	.born {
 		font-size: 14px;
@@ -178,16 +179,18 @@ function person_extra_css(){
 	.born span { font-weight: 400; }
 	.born p { margin-bottom: 5px; }
 	.net-worth {
-		font: 600 17px/1.35 Gilroy;
-		background: #2e2e5d;
-		letter-spacing: 0.26px;
-		text-align: center!important;
-		text-transform: uppercase;
-		color: #f5f5fa;
-		padding: 5px 0;
-		width: 100%;
-		margin-top: 20px;
+		font-size: 17px;
+        font-weight: bold;
+        background: #0e9272;
+        letter-spacing: 0.26px;
+        text-align: center !important;
+        text-transform: uppercase;
+        color: #f5f5fa;
+        padding: 5px 0;
+        width: 100%;
+        margin-top: 10px;
 	}
+	.showmore { font-weight: bold;}
 	.videos { margin-top: 30px; }
 	.opacity-5 { opacity: .5 }
 	.recent-title a { font-size: 18px; }
@@ -548,16 +551,15 @@ function known_for(){
 .heading h2 { font-size: 22px; font-weight: 700; }
 
 .known-for-details .known-item-title {
-	text-decoration: underline;
   font-size: 15px;
   font-weight: bold;
   line-height: 1.25;
-  color: #0c0c0f;
+  color: #333333;
   margin-bottom: 0 !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 10px 0;
+  padding: 5px 0;
   text-align: center;
 }
 
@@ -586,30 +588,31 @@ function known_for(){
 
 .known-for-box {
 	display: block;
-  width: 160px;
-  margin-bottom: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px #0000001a;
-  transition: transform .3s ease-in-out;
-  transform-style: preserve-3d;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+    width: 180px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px #0000001a;
+    transition: transform .3s ease-in-out;
+    transform-style: preserve-3d;
+    border-radius: 5px;
+    border: 1px solid #E0E0E0;
 }
 
 .known-for-box:hover {
     transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
     box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-decoration: none!important;
 }
 
 .known-for-poster {
-	width: 160px;
-	height: 220px;
+	width: 180px;
+	height: 252px;
 	overflow: hidden;
 }
 .known-for-poster img {
-	width: 160px;
-  height: 220px;
+	width: 180px;
+  height: 252px;
 	object-fit: cover;
 }
 #showMoreLink { cursor: pointer; }

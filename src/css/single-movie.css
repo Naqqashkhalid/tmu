@@ -146,9 +146,7 @@
 }
 
 .detail-item .th {
-	background-color: #0e9272; /* Green background */
 	font-weight: bold;
-	color: #ffffff; /* White text for contrast */
 	text-align: left;
 	padding: 10px; /* Add padding for spacing */
 	border-right: 1px solid #e0e0e0; /* Add a divider between columns */
@@ -307,14 +305,18 @@
     cursor: pointer;
 }
 .tab_item.active {
-	background-color: #FF6F61;
+	background-color: #0e9272;
     color: #FFFFFF;
+	box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tab_item:hover, .show_full_credits:hover {
 	background-color: #E65A50;
     color: #FFFFFF;
-	transform: scale(1.02);
+	/*transform: scale(1.02);*/
+	box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); /* Accent shadow on hover */
+	transform: translateY(-2px); /* Slight "lift" effect */
 }
 
 .person-movies .tab_item {
@@ -326,7 +328,7 @@
 .show_full_credits {
 	border-radius: 0.313rem;
     padding: 0.406rem 1.906rem;
-    background: #FF6F61;
+    background: #0e9272;
     line-height: 18px;
     color: #FFFFFF;
     display: inline-block;
@@ -334,6 +336,8 @@
     font-weight: 600;
     cursor: pointer;
     margin-top: 20px;
+	box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 
