@@ -176,7 +176,7 @@ function single_drama($content){
 
     if ($related_news):
         $data .= '<div class="related-news">';
-        $data .= '<h2 class="short-heading weight-700 font-size-36 news-title">'.$title.' Drama News – Latest Updates and Stories</h2>';
+        $data .= '<h2 class="short-heading weight-700 font-size-22 news-title">'.$title.' Drama News – Latest Updates and Stories</h2>';
         $data .= '<p class = "heading-des">Stay informed with all the '.$title.' Drama related news. From exclusive insights to breaking updates, plot twists, cast news and more so don’t miss any important story about '.$title.'.</p>';
         $data .= $related_news;
         $data .= '</div>';
