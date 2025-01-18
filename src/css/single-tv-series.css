@@ -181,11 +181,13 @@ border-bottom: 1px solid #0A3D4D;
     text-decoration: none!important;
 }
 
+
+
 .episodes-container .episode a {
 background-color: #2a2f32;
 }
 
-.episodes-container .episode a:hover { background-color: #2a2c30; }
+.episodes-container .episode a:hover { background-color: #2a2c30!important; }
 
 .episode img {
 display: block;
@@ -214,7 +216,7 @@ gap: 2px;
 text-decoration: none!important;
 }
 
-.episodes-container-desktop .episode .episode-details:hover .ep-title  { color: #FF6F61; }
+.episodes-container-desktop .episode .episode-details:hover .ep-title  { color: #097056; }
 
 .episodes-container-desktop .episode .ep-title { font-weight: 800; color: #2C2C2C; }
 .episodes-container-desktop .episode .ep-description {     color: #4A4A4A; font-size: 0.9rem; line-height: 1.5; }
@@ -310,15 +312,15 @@ text-align: center;
 font-weight: 700;
 color: #F5F5F5;
 margin-top: 5px;
-box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); /* Subtle shadow */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth effect */
+/*box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); !* Subtle shadow *!*/
+/*    transition: transform 0.2s ease, box-shadow 0.2s ease; !* Smooth effect *!*/
 }
 .watch-trailer-btn a:hover{
-    background-color: #FF6F61;
-    color: #F5F5F5;
-    text-decoration: none!important;
-    box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); /* Accent shadow on hover */
-    transform: translateY(-2px); /* Slight "lift" effect */
+    background-color: #097056; /* Darker shade of main color */
+    color: #FFFFFF; /* Keep the text readable */
+    text-decoration: none !important;
+    /*box-shadow: 0px 6px 10px  rgba(9, 112, 86, 0.8); !* Slightly darker shadow *!*/
+    /*transform: translateY(-2px); !* Slight "lift" effect *!*/
 }
 .trailer-mobile { display: none }
 

@@ -16,7 +16,7 @@
 }
 
 .movie_details a { color: white }
-.movie_details a:hover { color: #FF6F61; text-decoration: none!important; }
+.movie_details a:hover { color: #0e9272; text-decoration: none!important; }
 
 .movie_details .release {
 	margin:0 auto 20px;
@@ -47,13 +47,13 @@
 .star-cast-container { display: flex; flex-wrap: nowrap; column-gap: 1%; row-gap: 10px;  overflow: hidden; margin-bottom: 2rem; }
 .single-cast-item { display: flex; flex-wrap: nowrap; align-items: center; min-width: 24.25%; padding: .4rem .5rem .4rem .4rem; background: #F5F5F5; border-radius: 8px; gap: 10px; }
 .single-cast-item .cast-name { font-weight: 700; }
-.single-cast-item:hover { background-color: rgba(255, 111, 97, 0.1); border-left: 3px solid #FF6F61; }
+.single-cast-item:hover { background-color: rgba(14, 146, 114, 0.1); border-left: 3px solid #0e9272; outline: none; box-shadow: 0 0 8px rgba(14, 146, 114, 0.5); }
 .star-cast-container .credit-img { position: relative; height: 60px; width: 40px; border-radius: 5px; background-color: #ddd; overflow: hidden; }
 .star-cast-container .credit-img img { display: block; position: absolute; top: 0; width: 100%; height: 100%; object-position: top; object-fit: cover; }
 .star-cast-container .credit-details { width: calc(100% - 50px); line-height: 1.3; }
 .star-cast-container .credit-details div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .star-cast-container .credit-details div a { color: #2C2C2C; }
-.star-cast-container .credit-details div a:hover {color: #FF6F61}
+.star-cast-container .credit-details div a:hover {color: #0e9272}
 .star-cast-container .credit-character { color: #B0B0B0}
 
 .cast_crew { margin-bottom: 30px }
@@ -101,8 +101,7 @@
 .credit-block .credit-img img {height:80px; width: 50px; }
 .credit-block .block1, .item .item-block { display: flex; align-items: center; gap: 10px; }
 .credit-block .credit-character, .item .item-extra { font-weight:normal; color: #999999; text-align: right;}
-.credit-name { width: max-content; }
-.credit-name a:hover { text-decoration: none!important; }
+.credit-name {	width: max-content; }
 
 .heading-2 {
 	font-size: 1.3rem;
@@ -307,16 +306,16 @@
 .tab_item.active {
 	background-color: #0e9272;
     color: #FFFFFF;
-	box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	/*box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);*/
+	/*transition: transform 0.2s ease, box-shadow 0.2s ease;*/
 }
 
 .tab_item:hover, .show_full_credits:hover {
-	background-color: #E65A50;
-    color: #FFFFFF;
+	background-color: #097056;
+	color: #FFFFFF;
 	/*transform: scale(1.02);*/
-	box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); /* Accent shadow on hover */
-	transform: translateY(-2px); /* Slight "lift" effect */
+	/*box-shadow: 0px 6px 10px rgba(63, 64, 71, 0.6);!* Accent shadow on hover *!*/
+	/*transform: translateY(-2px); !* Slight "lift" effect *!*/
 }
 
 .person-movies .tab_item {
@@ -377,7 +376,7 @@
 .more-like-this-flex .item-box { min-width: 180px; }
 .more-like-this-flex .item-details h3 { color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .more-like-this-flex .item-details .genres {color: #F5F5F5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.more-like-this-flex .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }
+.more-like-this-flex .item-box:hover { background-color: #097056; text-decoration: none!important; }
 
 @media (max-width: 960px) {
 	.site-content { flex-direction: column; }
