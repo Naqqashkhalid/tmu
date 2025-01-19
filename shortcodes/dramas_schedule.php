@@ -36,7 +36,7 @@ function dramas_schedule($atts=[]){
 	$heading = (is_home() ? 'h3' : 'h2');
 	$today = date("l");
 
-	$data = schedule_styles().'<div class="schedule_container"><div class="dramas_schedule">
+	$data = '<div class="schedule_container"><div class="dramas_schedule">
 		<div class="prev arrows"><i class="arrow left"></i></div>
 		<div class="days">
 			<div class="day '.($today=== 'Monday' ? 'active' : '').'" for="monday">Monday</div>
@@ -171,163 +171,163 @@ prevButton.addEventListener("click", () => {
 }
 
 
-function schedule_styles(){
-	return '
-<style>
-	h1 { text-align: center; }
-	.dramas_schedule {
-		display: flex;
-		justify-content: center;
-		margin: 25px 0;
-		gap: 10px;
-	}
-	.dramas_schedule .days {
-		display: flex;
-		justify-content: center;
-		gap: 10px;
-	}
-	.dramas_schedule .days .day {
-    color: #ffffff;
-  	background: #272727;
-    font-size: 1.1em;
-    font-weight: 500;
-    line-height: 1.4em;
-    padding: 8px 16px 8px 16px;
-    cursor: pointer;
-    text-transform: uppercase;
-	}
-
-	.dramas_schedule .days .day.active, .dramas_schedule .days .day:hover {
-		color: #FFFFFF;
-    background: #0E9272;
-    box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-	}
-
-	.archive-dramas {
-		display: flex;
-		column-gap: 1%;
-		row-gap: 5px;
-	  flex-wrap: wrap;
-	}
-	.drama-box {
-		display: block;
-    position: relative;
-    width: 15.8%;
-    margin-bottom: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px #0000001a;
-    transition: transform .3s ease-in-out;
-    transform-style: preserve-3d;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    overflow: hidden;
-	}
-	.drama-box:hover {
-    transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
-    border-radius: 5px;
-    text-decoration: none!important;
-	}
-	.drama-poster {
-		display: block;
-    height: 0;
-    width: 100%;
-    padding-bottom: 140%;
-    position: relative;
-	}
-	.drama-poster img {
-		display: block;
-		position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-	}
-	.drama-details { text-align: center; }
-	.archive-dramas .drama-title {
-    font-size: 17px;
-    font-weight: bold;
-    line-height: 1.25;
-    color: #0c0c0f;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    margin-bottom: 0;
-    margin-top: 5px;
-	}
-	.drama-details .schedule-time {
-	letter-spacing: 0.65px;
-    color: #ffffff;
-    overflow: hidden;
-    max-width: 100%;
-    display: inline-block;
-    background: #0E9272 !important;
-    font-size: 13px !important;
-    font-weight: bold;
-    padding: 2px 4px;
-    border-radius: 3px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-	}
-	.arrows {
-		display: none;
-    align-items: center;
-    background: #353535;
-    color: white;
-    border-color: white;
-    padding: 5px 18px 5px 18px;
-    height: 42px;
-    margin-top: 3px;
-	}
-	.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-	}
-	.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-	}
-	.arrow {
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 4px;
-	}
-	.next {
-		border-radius: 0 5px 5px 0;
-	}
-	.prev {
-		border-radius: 5px 0 0 5px;
-	}
-
-	.footer-links-container, .faqs { padding: 20px; background-color: #fff; margin-top: 20px }
-	.footer-links-container h3 { font-weight: 800; font-size: 20px; }
-	.footer-links { display: flex; column-gap: 2%; row-gap: 20px; flex-wrap: wrap; margin-top: 20px; }
-	.footer-links a { display: block; width: 23.5%; font-size: 14px; font-weight: 600; }
-
-	@media (max-width: 900px) {
-		.arrows { display: flex; }
-		.dramas_schedule .days { width: 100%; text-align: center; }
-		.dramas_schedule .days .day:not(.active) { display: none; }
-		.dramas_schedule .days .day.active { font-weight: 700; font-size: 1.5em; padding: 0 20px; width: 100%; }
-		.day.active { color: #272727!important; background: #ffffff!important; border-bottom: 2px solid #272727!important; }
-	}
-
-	@media (max-width: 768px) {
-		.drama-box { width: 49%; }
-		.archive-dramas .drama-title { font-size: 14px; margin-bottom: 4px!important; }
-		.schedule-time { font-size: 10px!important; padding: 5px 5px; margin-top: 5px!important; }
-		.footer-links-container { padding:10px }
-	  .footer-links-container h3 { font-size: 19px; }
-	  .footer-links { row-gap: 5px; }
-	  .footer-links a { width: 100%; }
-	}
-
-</style>
-';
-}
+//function schedule_styles(){
+//	return '
+//<style>
+//	h1 { text-align: center; }
+//	.dramas_schedule {
+//		display: flex;
+//		justify-content: center;
+//		margin: 25px 0;
+//		gap: 10px;
+//	}
+//	.dramas_schedule .days {
+//		display: flex;
+//		justify-content: center;
+//		gap: 10px;
+//	}
+//	.dramas_schedule .days .day {
+//    color: #ffffff;
+//  	background: #272727;
+//    font-size: 1.1em;
+//    font-weight: 500;
+//    line-height: 1.4em;
+//    padding: 8px 16px 8px 16px;
+//    cursor: pointer;
+//    text-transform: uppercase;
+//	}
+//
+//	.dramas_schedule .days .day.active, .dramas_schedule .days .day:hover {
+//		color: #FFFFFF;
+//    background: #0E9272;
+//    box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
+//    transition: transform 0.2s ease, box-shadow 0.2s ease;
+//	}
+//
+//	.archive-dramas {
+//		display: flex;
+//		column-gap: 1%;
+//		row-gap: 5px;
+//	  flex-wrap: wrap;
+//	}
+//	.drama-box {
+//		display: block;
+//    position: relative;
+//    width: 15.8%;
+//    margin-bottom: 20px;
+//    text-align: center;
+//    box-shadow: 0 4px 8px #0000001a;
+//    transition: transform .3s ease-in-out;
+//    transform-style: preserve-3d;
+//    border-radius: 5px;
+//    border: 1px solid #ddd;
+//    overflow: hidden;
+//	}
+//	.drama-box:hover {
+//    transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
+//    box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
+//    border-radius: 5px;
+//    text-decoration: none!important;
+//	}
+//	.drama-poster {
+//		display: block;
+//    height: 0;
+//    width: 100%;
+//    padding-bottom: 140%;
+//    position: relative;
+//	}
+//	.drama-poster img {
+//		display: block;
+//		position: absolute;
+//    top: 0;
+//    width: 100%;
+//    height: 100%;
+//    object-fit: cover;
+//	}
+//	.drama-details { text-align: center; }
+//	.archive-dramas .drama-title {
+//    font-size: 17px;
+//    font-weight: bold;
+//    line-height: 1.25;
+//    color: #0c0c0f;
+//    white-space: nowrap;
+//    overflow: hidden;
+//    text-overflow: ellipsis;
+//    text-align: center;
+//    margin-bottom: 0;
+//    margin-top: 5px;
+//	}
+//	.drama-details .schedule-time {
+//	letter-spacing: 0.65px;
+//    color: #ffffff;
+//    overflow: hidden;
+//    max-width: 100%;
+//    display: inline-block;
+//    background: #0E9272 !important;
+//    font-size: 13px !important;
+//    font-weight: bold;
+//    padding: 2px 4px;
+//    border-radius: 3px;
+//    margin-top: 5px;
+//    margin-bottom: 5px;
+//	}
+//	.arrows {
+//		display: none;
+//    align-items: center;
+//    background: #353535;
+//    color: white;
+//    border-color: white;
+//    padding: 5px 18px 5px 18px;
+//    height: 42px;
+//    margin-top: 3px;
+//	}
+//	.right {
+//    transform: rotate(-45deg);
+//    -webkit-transform: rotate(-45deg);
+//	}
+//	.left {
+//    transform: rotate(135deg);
+//    -webkit-transform: rotate(135deg);
+//	}
+//	.arrow {
+//    border: solid #fff;
+//    border-width: 0 2px 2px 0;
+//    display: inline-block;
+//    padding: 4px;
+//	}
+//	.next {
+//		border-radius: 0 5px 5px 0;
+//	}
+//	.prev {
+//		border-radius: 5px 0 0 5px;
+//	}
+//
+//	.footer-links-container, .faqs { padding: 20px; background-color: #fff; margin-top: 20px }
+//	.footer-links-container h3 { font-weight: 800; font-size: 20px; }
+//	.footer-links { display: flex; column-gap: 2%; row-gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+//	.footer-links a { display: block; width: 23.5%; font-size: 14px; font-weight: 600; }
+//
+//	@media (max-width: 900px) {
+//		.arrows { display: flex; }
+//		.dramas_schedule .days { width: 100%; text-align: center; }
+//		.dramas_schedule .days .day:not(.active) { display: none; }
+//		.dramas_schedule .days .day.active { font-weight: 700; font-size: 1.5em; padding: 0 20px; width: 100%; }
+//		.day.active { color: #272727!important; background: #ffffff!important; border-bottom: 2px solid #272727!important; }
+//	}
+//
+//	@media (max-width: 768px) {
+//		.drama-box { width: 49%; }
+//		.archive-dramas .drama-title { font-size: 14px; margin-bottom: 4px!important; }
+//		.schedule-time { font-size: 10px!important; padding: 5px 5px; margin-top: 5px!important; }
+//		.footer-links-container { padding:10px }
+//	  .footer-links-container h3 { font-size: 19px; }
+//	  .footer-links { row-gap: 5px; }
+//	  .footer-links a { width: 100%; }
+//	}
+//
+//</style>
+//';
+//}
 
 function schedule_template($result, $heading){
 	$data = '<a class="drama-box" href="'.get_permalink($result->ID).'">';

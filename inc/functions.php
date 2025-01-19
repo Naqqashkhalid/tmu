@@ -582,6 +582,9 @@ function add_additional_scripts() {
     if (get_post_type() == 'episode' || get_post_type() == 'drama-episode') {
         wp_enqueue_style( 'episode_css', plugin_dir_url( __DIR__ ) . 'src/css/single-episode.css', array(), '1.1', 'all' );
     }
+    if (get_post_type() == 'video' ) {
+        wp_enqueue_style( 'video_css', plugin_dir_url( __DIR__ ) . 'src/css/single-video.css', array(), '1.1', 'all' );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'add_additional_scripts' );
 add_action( 'admin_enqueue_scripts', 'my_admin_styles' );

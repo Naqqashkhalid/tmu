@@ -501,27 +501,442 @@ table a:hover, p a:hover, .credit-name a:hover {
         font-weight: 600;
     }
 
+.heading { position: relative; }
+.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; }
+.heading h3:before { content: ""; width: 5px; height: 100%; background-color: #F97316; display: block; position: absolute; left: 0; }
+.main-with-sidebar { display: flex; flex-wrap: wrap; gap:2% }
+.content-wrapper { width: 70% }
+.sidebar { width: 26%; position: relative;}
+.sidebar-cont { position: sticky; top: 0;}
+.circle-box .person-poster { width:60px!important; height: 60px!important; padding: 0!important; margin:0!important }
+.circle-box { display: flex; align-items: center; width: 100%; gap: 10px; padding: 10px 0; border-bottom: 1px solid #ddd; }
+.circle-box .person-details { width: calc(100% - 70px); }
+.circle-box .person-details h3 { font-size: 17px!important; margin:0!important; font-weight:600 }
+.circle-box .person-details h3:hover, .circle-box .person-poster:hover ~ .person-details h3 { text-decoration: underline!important; }
+.circle-box .person-details h3 a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black!important }
+.circle-box .profession { color:black; margin:0!important; font-size: 14px; }
+
+.item-box { display: block; position: relative; margin-bottom:10px; background: black; border-radius: 5px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); transition: box-shadow 0.2s ease,transform 0.2s ease; }
+.item-poster { display: block; height: 0; width: 100%; padding-bottom: 140%; position: relative; }
+.item-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.item-details { padding: 7px; }
+.item-details h3 { font-size: 16px; font-weight: 600; margin: 0; }
+.item-details h3 a, .item-details .genres { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: white; }
+.item-details .genres { font-size: 10px }
+.episode-details h3 { font-size: 13px; font-weight: 400; margin-bottom: 5px }
+.episode-poster { display: block; height: 0; width: 100%; padding-bottom: 56.4%; position: relative; }
+.episode-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.all_items { position: relative; }
+.item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 2%; }
+.item-sidebar .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }
+.item-sidebar .item-box { width: 49%; }
+.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block; box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.loadmore:hover { background-color: #E65A50; color: #FFFFFF; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }
+.loading {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #ddddddb0;
+    z-index: 9;
+}
+
+.cls-1 { fill: #0c0c0f!important; }
+.cls-1:hover { fill: white; }
+
+.lds-grid,
+.lds-grid div {
+    box-sizing: border-box;
+}
+.lds-grid {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.lds-grid div {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: lds-grid 1.2s linear infinite;
+}
+.lds-grid div:nth-child(1) {
+    top: 8px;
+    left: 8px;
+    animation-delay: 0s;
+}
+.lds-grid div:nth-child(2) {
+    top: 8px;
+    left: 32px;
+    animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(3) {
+    top: 8px;
+    left: 56px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(4) {
+    top: 32px;
+    left: 8px;
+    animation-delay: -0.4s;
+}
+.lds-grid div:nth-child(5) {
+    top: 32px;
+    left: 32px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(6) {
+    top: 32px;
+    left: 56px;
+    animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(7) {
+    top: 56px;
+    left: 8px;
+    animation-delay: -0.8s;
+}
+.lds-grid div:nth-child(8) {
+    top: 56px;
+    left: 32px;
+    animation-delay: -1.2s;
+}
+.lds-grid div:nth-child(9) {
+    top: 56px;
+    left: 56px;
+    animation-delay: -1.6s;
+}
+@keyframes lds-grid {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+h1 { text-align: center; }
+.dramas_schedule {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+    gap: 10px;
+}
+.dramas_schedule .days {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.dramas_schedule .days .day {
+    color: #ffffff;
+    background: #272727;
+    font-size: 1.1em;
+    font-weight: 500;
+    line-height: 1.4em;
+    padding: 8px 16px 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.dramas_schedule .days .day.active, .dramas_schedule .days .day:hover {
+    color: #FFFFFF;
+    background: #0E9272;
+    box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.archive-dramas {
+    display: flex;
+    column-gap: 1%;
+    row-gap: 5px;
+    flex-wrap: wrap;
+}
+.drama-box {
+    display: block;
+    position: relative;
+    width: 15.8%;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px #0000001a;
+    transition: transform .3s ease-in-out;
+    transform-style: preserve-3d;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.drama-box:hover {
+    transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
+    border-radius: 5px;
+    text-decoration: none!important;
+}
+.drama-poster {
+    display: block;
+    height: 0;
+    width: 100%;
+    padding-bottom: 140%;
+    position: relative;
+}
+.drama-poster img {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.drama-details { text-align: center; }
+.archive-dramas .drama-title {
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1.25;
+    color: #0c0c0f;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.drama-details .schedule-time {
+    letter-spacing: 0.65px;
+    color: #ffffff;
+    overflow: hidden;
+    max-width: 100%;
+    display: inline-block;
+    background: #0E9272 !important;
+    font-size: 13px !important;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.arrows {
+    display: none;
+    align-items: center;
+    background: #353535;
+    color: white;
+    border-color: white;
+    padding: 5px 18px 5px 18px;
+    height: 42px;
+    margin-top: 3px;
+}
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.arrow {
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+}
+.next {
+    border-radius: 0 5px 5px 0;
+}
+.prev {
+    border-radius: 5px 0 0 5px;
+}
+
+.footer-links-container, .faqs { padding: 20px; background-color: #fff; margin-top: 20px }
+.footer-links-container h3 { font-weight: 800; font-size: 20px; }
+.footer-links { display: flex; column-gap: 2%; row-gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+.footer-links a { display: block; width: 23.5%; font-size: 14px; font-weight: 600; }
+
+reply-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.comments-title .title {
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+.comments-title {margin-top: 30px; gap:5px;}
+.comments-title:before {
+    content: '';
+    background-color: #02c8f0;
+    width: 0.25rem;
+    border-radius: 0.25rem;
+    height: 83.333333%;
+    position: absolute;
+    left: 0;
+}
+.count-comments {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #757575;
+}
+
+.comment-form {
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 4px;
+    box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 8%), 0 2px 4px 0 rgb(0 0 0 / 10%);
+    background-color: white;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.rate-this-pop-modal .select-stars-rating, .rating{
+    position: relative;
+    display: flex;
+    margin: 10px 0;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 100%;
+}
+.review { width: 100%; }
+.rate-this-pop-modal .select-stars-rating input, .rating input{
+    position: relative;
+    width: 18px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
+    appearance: none;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'fontAwesome'; /* Match the font-family above */
+    src: url('".plugin_dir_url( __DIR__ )."src/icons/fontawesome-webfont.woff2') format('woff2'), /* Match your font file and format */
+}
+
+.rate-this-pop-modal .select-stars-rating input::before, .rating input::before{
+    content: '\\f005';
+    position: absolute;
+    font-family: fontAwesome;
+    font-size: 29px;
+    position: absolute;
+    left: 4px;
+    color: #e3e3e6;
+    transition: 0.5s;
+}
+.rate-this-pop-modal .select-stars-rating input:nth-child(2n + 1)::before, .rating input:nth-child(2n + 1)::before{
+    left: initial;
+    right: 4px;
+}
+.rate-this-pop-modal .select-stars-rating input:hover ~ input::before, .rating input:hover ~ input::before,
+.rate-this-pop-modal .select-stars-rating input:hover::before, .rating input:hover::before,
+.rate-this-pop-modal .select-stars-rating input:checked ~ input::before, .rating input:checked ~ input::before,
+.rate-this-pop-modal .select-stars-rating input:checked::before, .rating input:checked::before{
+    color: #ffd700;
+}
+.single_comment { justify-content: left; margin: 0; width: unset;}
+.single_comment input { pointer-events: none; width: 11.2px; height: 18px; margin-left: -1px;}
+.single_comment input:nth-child(2n + 1)::before{ right: 2.4px; }
+.single_comment input:before { font-size: 16px; }
+.user-rating {display: flex; gap: 10px;} .user-rating:nth-child(1) {line-height: 1.1;}
+.comment-form #author, .comment-form #email { width: 49%; }
+
+.button {
+    margin-top: 5px;
+}
+
+.rate-this-pop-modal .select-stars-rating input:checked, .rating input:checked {
+    box-shadow: none;
+}
+
+.comment-body {
+    padding: 15px 10px;
+    border: 1px solid #ebebeb;
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.comment-content {
+    border: unset;
+    border-top: 1px solid #ddd;
+    padding: 15px 0 0 0;
+    margin-top: 10px;
+}
+
+.comment .children {
+    margin-top: -15px !important;
+}
+
+.vcard {font-size: 1.3rem;}
+
+.entry-meta.comment-metadata {
+    font-size: 12px;
+}
+
+.rate-value {line-height: 1.2; font-size: 15px}
+
+.comment-author.vcard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.comment-form-comment { width: 100%; }
+
+.comment-form-comment textarea::placeholder { color: #0000006b; font-size: 12px; }
+
+@media only screen and (max-width: 600px) { .comment-form #author, .comment-form #email { width: 100%; } }
+
+@media (max-width: 900px) {
+    .arrows { display: flex; }
+    .dramas_schedule .days { width: 100%; text-align: center; }
+    .dramas_schedule .days .day:not(.active) { display: none; }
+    .dramas_schedule .days .day.active { font-weight: 700; font-size: 1.5em; padding: 0 20px; width: 100%; }
+    .day.active { color: #272727!important; background: #ffffff!important; border-bottom: 2px solid #272727!important; }
+}
+
 @media (max-width: 768px) {
-	.inside-header { padding-right:10px!important; padding-left:10px!important; }
-	.grid--expbox--v2 { display: flex; flex-direction: column; gap: 10px; }
+    .drama-box { width: 49%; }
+    .archive-dramas .drama-title { font-size: 14px; margin-bottom: 4px!important; }
+    .schedule-time { font-size: 10px!important; padding: 5px 5px; margin-top: 5px!important; }
+    .footer-links-container { padding:10px }
+    .footer-links-container h3 { font-size: 19px; }
+    .footer-links { row-gap: 5px; }
+    .footer-links a { width: 100%; }
+}
+
+@media (max-width: 1040px) {
+    .content-wrapper { width: 100% }
+    .sidebar { width:100%; margin: 0; }
+    .item-sidebar { padding: 0 20px; }
+
+}
+
+@media (max-width: 768px) {
+    .inside-header { padding-right:10px!important; padding-left:10px!important; }
+    .grid--expbox--v2 { display: flex; flex-direction: column; gap: 10px; }
     .news-single { width: 100%; }
-    
+
 }
 
 @media screen and (max-width: 700px) {
-  .inside-article { padding: 10px !important }
-  .videos .videos-gallery a { flex: 1 1 100%; max-width: 100%; }
-  .short-heading h2 { font-size: 1.3rem; margin-left: 10px!important; }
-  .short-heading svg {display: none}
-/*  .breadcrumb { padding:0 }*/
-  .module_flexbox { column-gap: 2%!important }
-  .module_flexbox .module_post { width: 49%!important; }
-  .latest-posts-module { width: 49%!important; }
-  .last-episode.desktop { display: none!important; }
-  .birthdays-today { row-gap: 10px; column-gap: 2% }
-  .circle-box { min-width: 150px; width: 150px; }
+    .inside-article { padding: 10px !important }
+    .videos .videos-gallery a { flex: 1 1 100%; max-width: 100%; }
+    .short-heading h2 { font-size: 1.3rem; margin-left: 10px!important; }
+    .short-heading svg {display: none}
+    /*  .breadcrumb { padding:0 }*/
+    .module_flexbox { column-gap: 2%!important }
+    .module_flexbox .module_post { width: 49%!important; }
+    .latest-posts-module { width: 49%!important; }
+    .last-episode.desktop { display: none!important; }
+    .birthdays-today { row-gap: 10px; column-gap: 2% }
+    .circle-box { min-width: 150px; width: 150px; }
 }
 
 @media screen and (min-width: 701px) {
-  .last-episode.mobile { display: none; }
+    .last-episode.mobile { display: none; }
 }

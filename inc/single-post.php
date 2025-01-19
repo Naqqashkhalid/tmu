@@ -15,7 +15,7 @@ $sidebar = ($post_type === 'movie' || $post_type === 'drama' || $post_type === '
 get_header();
 
 
-if ($sidebar) styles_sidebar($post_type); ?>
+//if ($sidebar) styles_sidebar($post_type); ?>
 
 	<div <?php generate_do_attr( 'content' ); echo (($post_type == 'video' && is_singular()) ? 'style="width:100%!important"' : '') ?>>
 		<main class="site-main <?= $sidebar ? 'main-with-sidebar' : '' ?>" id="main">
@@ -415,132 +415,132 @@ function single_template_generate() {
 
 
 
-function styles_sidebar($post_type){
-?>
-<style type="text/css">
-	.heading { position: relative; }
-	.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; }
-	.heading h3:before { content: ""; width: 5px; height: 100%; background-color: #F97316; display: block; position: absolute; left: 0; }
-	.main-with-sidebar { display: flex; flex-wrap: wrap; gap:2% }
-	.content-wrapper { width: 70% }
-	.sidebar { width: 26%; position: relative;}
-    .sidebar-cont { position: sticky; top: 0;}
-	.circle-box .person-poster { width:60px!important; height: 60px!important; padding: 0!important; margin:0!important }
-	.circle-box { display: flex; align-items: center; width: 100%; gap: 10px; padding: 10px 0; border-bottom: 1px solid #ddd; }
-	.circle-box .person-details { width: calc(100% - 70px); }
-	.circle-box .person-details h3 { font-size: 17px!important; margin:0!important; font-weight:600 }
-	.circle-box .person-details h3:hover, .circle-box .person-poster:hover ~ .person-details h3 { text-decoration: underline!important; }
-	.circle-box .person-details h3 a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black!important }
-	.circle-box .profession { color:black; margin:0!important; font-size: 14px; }
-
-	.item-box { display: block; position: relative; margin-bottom:10px; background: black; border-radius: 5px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); transition: box-shadow 0.2s ease,transform 0.2s ease; }
-	.item-poster { display: block; height: 0; width: 100%; padding-bottom: 140%; position: relative; }
-	.item-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
-	.item-details { padding: 7px; }
-	.item-details h3 { font-size: 16px; font-weight: 600; margin: 0; }
-	.item-details h3 a, .item-details .genres { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: white; }
-	.item-details .genres { font-size: 10px }
-	.episode-details h3 { font-size: 13px; font-weight: 400; margin-bottom: 5px }
-	.episode-poster { display: block; height: 0; width: 100%; padding-bottom: 56.4%; position: relative; }
-	.episode-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }
-	.all_items { position: relative; }
-	.item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 2%; }
-    .item-sidebar .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }
-	.item-sidebar .item-box { width: 49%; }
-	.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block; box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-	.loadmore:hover { background-color: #E65A50; color: #FFFFFF; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }
-	.loading {
-	    position: absolute;
-	    top: 0;
-	    width: 100%;
-	    height: 100%;
-	    background: #ddddddb0;
-	    z-index: 9;
-	}
-
-	.cls-1 { fill: #0c0c0f!important; }
-	.cls-1:hover { fill: white; }
-
-	.lds-grid,
-	.lds-grid div {
-	  box-sizing: border-box;
-	}
-	.lds-grid {
-	  display: inline-block;
-	  width: 80px;
-	  height: 80px;
-	  position: absolute;
-	  top: 50%;
-	  left: 50%;
-	}
-	.lds-grid div {
-	  position: absolute;
-	  width: 16px;
-	  height: 16px;
-	  border-radius: 50%;
-	  background: currentColor;
-	  animation: lds-grid 1.2s linear infinite;
-	}
-	.lds-grid div:nth-child(1) {
-	  top: 8px;
-	  left: 8px;
-	  animation-delay: 0s;
-	}
-	.lds-grid div:nth-child(2) {
-	  top: 8px;
-	  left: 32px;
-	  animation-delay: -0.4s;
-	}
-	.lds-grid div:nth-child(3) {
-	  top: 8px;
-	  left: 56px;
-	  animation-delay: -0.8s;
-	}
-	.lds-grid div:nth-child(4) {
-	  top: 32px;
-	  left: 8px;
-	  animation-delay: -0.4s;
-	}
-	.lds-grid div:nth-child(5) {
-	  top: 32px;
-	  left: 32px;
-	  animation-delay: -0.8s;
-	}
-	.lds-grid div:nth-child(6) {
-	  top: 32px;
-	  left: 56px;
-	  animation-delay: -1.2s;
-	}
-	.lds-grid div:nth-child(7) {
-	  top: 56px;
-	  left: 8px;
-	  animation-delay: -0.8s;
-	}
-	.lds-grid div:nth-child(8) {
-	  top: 56px;
-	  left: 32px;
-	  animation-delay: -1.2s;
-	}
-	.lds-grid div:nth-child(9) {
-	  top: 56px;
-	  left: 56px;
-	  animation-delay: -1.6s;
-	}
-	@keyframes lds-grid {
-	  0%, 100% {
-	    opacity: 1;
-	  }
-	  50% {
-	    opacity: 0.5;
-	  }
-	}
-
-	@media (max-width: 1040px) {
-		.content-wrapper { width: 100% }
-		.sidebar { width:100%; margin: 0; }
-		.item-sidebar { padding: 0 20px; }
-
-	}
-</style>
+//function styles_sidebar($post_type){
+//?>
+<!--<style type="text/css">-->
+<!--	.heading { position: relative; }-->
+<!--	.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; }-->
+<!--	.heading h3:before { content: ""; width: 5px; height: 100%; background-color: #F97316; display: block; position: absolute; left: 0; }-->
+<!--	.main-with-sidebar { display: flex; flex-wrap: wrap; gap:2% }-->
+<!--	.content-wrapper { width: 70% }-->
+<!--	.sidebar { width: 26%; position: relative;}-->
+<!--    .sidebar-cont { position: sticky; top: 0;}-->
+<!--	.circle-box .person-poster { width:60px!important; height: 60px!important; padding: 0!important; margin:0!important }-->
+<!--	.circle-box { display: flex; align-items: center; width: 100%; gap: 10px; padding: 10px 0; border-bottom: 1px solid #ddd; }-->
+<!--	.circle-box .person-details { width: calc(100% - 70px); }-->
+<!--	.circle-box .person-details h3 { font-size: 17px!important; margin:0!important; font-weight:600 }-->
+<!--	.circle-box .person-details h3:hover, .circle-box .person-poster:hover ~ .person-details h3 { text-decoration: underline!important; }-->
+<!--	.circle-box .person-details h3 a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black!important }-->
+<!--	.circle-box .profession { color:black; margin:0!important; font-size: 14px; }-->
+<!---->
+<!--	.item-box { display: block; position: relative; margin-bottom:10px; background: black; border-radius: 5px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); transition: box-shadow 0.2s ease,transform 0.2s ease; }-->
+<!--	.item-poster { display: block; height: 0; width: 100%; padding-bottom: 140%; position: relative; }-->
+<!--	.item-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }-->
+<!--	.item-details { padding: 7px; }-->
+<!--	.item-details h3 { font-size: 16px; font-weight: 600; margin: 0; }-->
+<!--	.item-details h3 a, .item-details .genres { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: white; }-->
+<!--	.item-details .genres { font-size: 10px }-->
+<!--	.episode-details h3 { font-size: 13px; font-weight: 400; margin-bottom: 5px }-->
+<!--	.episode-poster { display: block; height: 0; width: 100%; padding-bottom: 56.4%; position: relative; }-->
+<!--	.episode-poster img { position: absolute; top: 0; width: 100%; height: 100%; object-fit: cover; }-->
+<!--	.all_items { position: relative; }-->
+<!--	.item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 2%; }-->
+<!--    .item-sidebar .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }-->
+<!--	.item-sidebar .item-box { width: 49%; }-->
+<!--	.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block; box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; }-->
+<!--	.loadmore:hover { background-color: #E65A50; color: #FFFFFF; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }-->
+<!--	.loading {-->
+<!--	    position: absolute;-->
+<!--	    top: 0;-->
+<!--	    width: 100%;-->
+<!--	    height: 100%;-->
+<!--	    background: #ddddddb0;-->
+<!--	    z-index: 9;-->
+<!--	}-->
+<!---->
+<!--	.cls-1 { fill: #0c0c0f!important; }-->
+<!--	.cls-1:hover { fill: white; }-->
+<!---->
+<!--	.lds-grid,-->
+<!--	.lds-grid div {-->
+<!--	  box-sizing: border-box;-->
+<!--	}-->
+<!--	.lds-grid {-->
+<!--	  display: inline-block;-->
+<!--	  width: 80px;-->
+<!--	  height: 80px;-->
+<!--	  position: absolute;-->
+<!--	  top: 50%;-->
+<!--	  left: 50%;-->
+<!--	}-->
+<!--	.lds-grid div {-->
+<!--	  position: absolute;-->
+<!--	  width: 16px;-->
+<!--	  height: 16px;-->
+<!--	  border-radius: 50%;-->
+<!--	  background: currentColor;-->
+<!--	  animation: lds-grid 1.2s linear infinite;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(1) {-->
+<!--	  top: 8px;-->
+<!--	  left: 8px;-->
+<!--	  animation-delay: 0s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(2) {-->
+<!--	  top: 8px;-->
+<!--	  left: 32px;-->
+<!--	  animation-delay: -0.4s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(3) {-->
+<!--	  top: 8px;-->
+<!--	  left: 56px;-->
+<!--	  animation-delay: -0.8s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(4) {-->
+<!--	  top: 32px;-->
+<!--	  left: 8px;-->
+<!--	  animation-delay: -0.4s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(5) {-->
+<!--	  top: 32px;-->
+<!--	  left: 32px;-->
+<!--	  animation-delay: -0.8s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(6) {-->
+<!--	  top: 32px;-->
+<!--	  left: 56px;-->
+<!--	  animation-delay: -1.2s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(7) {-->
+<!--	  top: 56px;-->
+<!--	  left: 8px;-->
+<!--	  animation-delay: -0.8s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(8) {-->
+<!--	  top: 56px;-->
+<!--	  left: 32px;-->
+<!--	  animation-delay: -1.2s;-->
+<!--	}-->
+<!--	.lds-grid div:nth-child(9) {-->
+<!--	  top: 56px;-->
+<!--	  left: 56px;-->
+<!--	  animation-delay: -1.6s;-->
+<!--	}-->
+<!--	@keyframes lds-grid {-->
+<!--	  0%, 100% {-->
+<!--	    opacity: 1;-->
+<!--	  }-->
+<!--	  50% {-->
+<!--	    opacity: 0.5;-->
+<!--	  }-->
+<!--	}-->
+<!---->
+<!--	@media (max-width: 1040px) {-->
+<!--		.content-wrapper { width: 100% }-->
+<!--		.sidebar { width:100%; margin: 0; }-->
+<!--		.item-sidebar { padding: 0 20px; }-->
+<!---->
+<!--	}-->
+<!--</style>-->
 <?php
-}
+//}

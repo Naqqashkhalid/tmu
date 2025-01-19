@@ -15,7 +15,7 @@ function single_video($content){
 	}
 	$main_title = get_the_title($result);
 	
-	return video_style().'<div class="video_details">
+	return '<div class="video_details">
 		<a href="'.$movie_permalink.'" class="movie_poster" title="'.$main_title.'">'.(has_post_thumbnail($result) ? get_the_post_thumbnail( $result, 'medium' ) : '').'</a>
 		<div class="details_section">
 			<h1 class="movie_title"><a href="'.$movie_permalink.'" title="'.$main_title.'">'.$main_title.'</a></h1>
@@ -91,100 +91,100 @@ function extractYouTubeId($url) {
   return $url;
 }
 
-function video_style(){
-	return '<style>
-.site-main, .entry-content { margin:0!important }
-.site-main {display:flex;flex-wrap:wrap;}
-.content-wrapper {width: 70%}
-.video_sidebar {
-	width: 30%;
-	background: white;
-}
-.video_details {
-	display: flex;
-	padding-right: 0.375rem;
-  gap: 15px;
-  margin-top: 20px
-}
-.movie_poster {
-	position: relative;
-	display: block;
-	width: 9.5rem;
-	aspect-ratio: 471 / 707;
-	flex-shrink: 0;
-	height: 228px;
-}
-.movie_poster img {
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
-	border-radius: 0.25rem;
-}
-.movie_title a {
-	display: block;
-	font-size: 24px;
-	font-weight: 600;
-	line-height: 1.3;
-	margin-bottom: 0.6rem;
-	text-decoration: underline!important;
-}
-.video_title {
-	font-size: 18px;
-    font-weight: 500;
-	line-height: 1.3;
-	margin-bottom: 0.5rem;
-}
-.social-sharing-icons {
-	display: flex;
-	gap: 10px;
-	margin: 20px 0;
-	padding: 10px 0;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-}
-.social-icon {
-	display: block;
-	height: 28px;
-    width: 28px;
-}
-
-.social-icon svg {
-	transition: height 0.3s ease-out, width 0.3s ease-out;
-}
-
-.social-icon svg:hover {
-	height: 26px;
-	width: 26px;
-}
-
-.video_sidebar {
-	padding: 20px;
-}
-
-.related-videos-title {
-	padding-left: 15px;
-    padding-bottom: 10px;
-}
-
-.related-video h3 {
-    margin: 7px 0 15px;
-    font-weight: 600;
-	text-decoration: underline;
-}
-
-.related-video .video-image { border-radius: 10px; }
-
-@media screen and (max-width: 1023.9px) {
-	.movie_poster { display: none; }
-	.content-wrapper, .video_sidebar {width: 100%}
-}
-
-@media screen and (min-width: 768px) {
-	.mobile-related { display: none }
-}
-
-@media screen and (max-width: 768px) {
-	.video_sidebar { display: none }
-}
-</style>';
-}
+//function video_style(){
+//	return '<style>
+//.site-main, .entry-content { margin:0!important }
+//.site-main {display:flex;flex-wrap:wrap;}
+//.content-wrapper {width: 70%}
+//.video_sidebar {
+//	width: 30%;
+//	background: white;
+//}
+//.video_details {
+//	display: flex;
+//	padding-right: 0.375rem;
+//  gap: 15px;
+//  margin-top: 20px
+//}
+//.movie_poster {
+//	position: relative;
+//	display: block;
+//	width: 9.5rem;
+//	aspect-ratio: 471 / 707;
+//	flex-shrink: 0;
+//	height: 228px;
+//}
+//.movie_poster img {
+//	object-fit: cover;
+//	width: 100%;
+//	height: 100%;
+//	border-radius: 0.25rem;
+//}
+//.movie_title a {
+//	display: block;
+//	font-size: 24px;
+//	font-weight: 600;
+//	line-height: 1.3;
+//	margin-bottom: 0.6rem;
+//	text-decoration: underline!important;
+//}
+//.video_title {
+//	font-size: 18px;
+//    font-weight: 500;
+//	line-height: 1.3;
+//	margin-bottom: 0.5rem;
+//}
+//.social-sharing-icons {
+//	display: flex;
+//	gap: 10px;
+//	margin: 20px 0;
+//	padding: 10px 0;
+//    border-top: 1px solid #ddd;
+//    border-bottom: 1px solid #ddd;
+//}
+//.social-icon {
+//	display: block;
+//	height: 28px;
+//    width: 28px;
+//}
+//
+//.social-icon svg {
+//	transition: height 0.3s ease-out, width 0.3s ease-out;
+//}
+//
+//.social-icon svg:hover {
+//	height: 26px;
+//	width: 26px;
+//}
+//
+//.video_sidebar {
+//	padding: 20px;
+//}
+//
+//.related-videos-title {
+//	padding-left: 15px;
+//    padding-bottom: 10px;
+//}
+//
+//.related-video h3 {
+//    margin: 7px 0 15px;
+//    font-weight: 600;
+//	text-decoration: underline;
+//}
+//
+//.related-video .video-image { border-radius: 10px; }
+//
+//@media screen and (max-width: 1023.9px) {
+//	.movie_poster { display: none; }
+//	.content-wrapper, .video_sidebar {width: 100%}
+//}
+//
+//@media screen and (min-width: 768px) {
+//	.mobile-related { display: none }
+//}
+//
+//@media screen and (max-width: 768px) {
+//	.video_sidebar { display: none }
+//}
+//</style>';
+//}
