@@ -381,13 +381,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 
 .block-seperate { padding: 20px; border: 2px solid #ddd; margin-top: 20px; margin-bottom: 20px; }
 
-.birthdays-today { display:flex; gap:20px; text-align:center; overflow-x: auto; scroll-behavior: smooth; transition: scroll-left 5s ease-in-out; }
-.circle-box { display: block; min-width: 200px; width: 200px; color: black; }
-.person-poster { display: block; position: relative; width: 100%; max-width: 100%; height: 0; padding-bottom: 100%; overflow: hidden; margin-bottom: 10px; border-radius: 100%; }
-.person-poster img { width:100%; height:auto; object-fit:cover;  position: absolute; top: 0; left: 0; }
-.person-age { color: #000; text-align:center; }
-.person-details h3 { font-size:15px !important }
-.heading.birthdays { display: flex; justify-content: space-between; margin: 30px 0 10px; }
+
 .scroll-btns {
     display: flex;
     gap: 10px;
@@ -407,8 +401,31 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
     fill: #097056;
 }
 .born-today-view-button { display:none }
+.born-today-view-button { display: block; line-height: 2; color: black; padding: 0 5px; border-radius: 5px; text-decoration: underline !important; font-weight: 600; }
+.birthdays-today { display:flex; gap:20px; text-align:center; overflow-x: auto; scroll-behavior: smooth; transition: scroll-left 5s ease-in-out; }
 
-.heading { position: relative; }
+.heading { position: relative; display: flex; justify-content: space-between; margin-bottom: 10px; }
+.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; }
+.heading h3:before { content: ""; width: 5px; height: 100%; background-color: #0e9272; display: block; position: absolute; left: 0; }
+.main-with-sidebar { display: flex; flex-wrap: wrap; gap:2% }
+.content-wrapper { width: 70% }
+.sidebar { width: 26%; position: relative;}
+.sidebar-cont { position: sticky; top: 0;}
+.circle-box { display: block; min-width: 200px; width: 200px; color: black; }
+.circle-box .profession { color:black; margin:0!important; font-size: 14px; }
+.person-poster { display: block; position: relative; width: 100%; max-width: 100%; height: 0; padding-bottom: 100%; overflow: hidden; margin-bottom: 10px; border-radius: 100%; }
+.person-poster img { width:100%; height:auto; object-fit:cover;  position: absolute; top: 0; left: 0; }
+.person-age { color: #000; text-align:center; }
+.person-details h3 { font-size:15px !important }
+
+.all_items .circle-box .person-details h3 { font-size: 17px!important; margin:0!important; font-weight:600 }
+.all_items .circle-box .person-details h3:hover, .circle-box .person-poster:hover ~ .person-details h3 { text-decoration: underline!important; }
+.all_items .circle-box .person-details h3 a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black!important }
+.all_items .circle-box {display: flex; align-items: center;width: 100%;gap: 10px; padding: 10px 0; border-bottom: 1px solid #ddd; }
+.all_items .circle-box .person-poster { width:60px!important; height: 60px!important; padding: 0!important; margin:0!important }
+
+
+
 .heading h2 { margin-left: 10px; margin-bottom: 0 }
 .heading h2:before {
     content: "";
@@ -491,30 +508,7 @@ table a:hover, p a:hover, .credit-name a:hover {
 
 .one-container .site-main>:last-child, .separate-containers .site-main>:last-child {  margin-bottom: 20px!important; }
 
-.born-today-view-button {
-        display: block;
-        line-height: 2;
-        color: black;
-        padding: 0 5px;
-        border-radius: 5px;
-        text-decoration: underline !important;
-        font-weight: 600;
-    }
 
-.heading { position: relative; }
-.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; }
-.heading h3:before { content: ""; width: 5px; height: 100%; background-color: #F97316; display: block; position: absolute; left: 0; }
-.main-with-sidebar { display: flex; flex-wrap: wrap; gap:2% }
-.content-wrapper { width: 70% }
-.sidebar { width: 26%; position: relative;}
-.sidebar-cont { position: sticky; top: 0;}
-.circle-box .person-poster { width:60px!important; height: 60px!important; padding: 0!important; margin:0!important }
-.circle-box { display: flex; align-items: center; width: 100%; gap: 10px; padding: 10px 0; border-bottom: 1px solid #ddd; }
-.circle-box .person-details { width: calc(100% - 70px); }
-.circle-box .person-details h3 { font-size: 17px!important; margin:0!important; font-weight:600 }
-.circle-box .person-details h3:hover, .circle-box .person-poster:hover ~ .person-details h3 { text-decoration: underline!important; }
-.circle-box .person-details h3 a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black!important }
-.circle-box .profession { color:black; margin:0!important; font-size: 14px; }
 
 .item-box { display: block; position: relative; margin-bottom:10px; background: black; border-radius: 5px; overflow: hidden; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); transition: box-shadow 0.2s ease,transform 0.2s ease; }
 .item-poster { display: block; height: 0; width: 100%; padding-bottom: 140%; position: relative; }
@@ -618,7 +612,7 @@ table a:hover, p a:hover, .credit-name a:hover {
     }
 }
 
-h1 { text-align: center; }
+.entry-title { text-align: center!important; }
 .dramas_schedule {
     display: flex;
     justify-content: center;
@@ -751,131 +745,6 @@ h1 { text-align: center; }
 .footer-links { display: flex; column-gap: 2%; row-gap: 20px; flex-wrap: wrap; margin-top: 20px; }
 .footer-links a { display: block; width: 23.5%; font-size: 14px; font-weight: 600; }
 
-reply-title {
-    font-size: 20px;
-    font-weight: 600;
-}
-.comments-title .title {
-    padding-left: 15px;
-    padding-bottom: 10px;
-}
-.comments-title {margin-top: 30px; gap:5px;}
-.comments-title:before {
-    content: '';
-    background-color: #02c8f0;
-    width: 0.25rem;
-    border-radius: 0.25rem;
-    height: 83.333333%;
-    position: absolute;
-    left: 0;
-}
-.count-comments {
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.6;
-    color: #757575;
-}
-
-.comment-form {
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 4px;
-    box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 8%), 0 2px 4px 0 rgb(0 0 0 / 10%);
-    background-color: white;
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 5px;
-}
-
-.rate-this-pop-modal .select-stars-rating, .rating{
-    position: relative;
-    display: flex;
-    margin: 10px 0;
-    flex-direction: row-reverse;
-    justify-content: center;
-    width: 100%;
-}
-.review { width: 100%; }
-.rate-this-pop-modal .select-stars-rating input, .rating input{
-    position: relative;
-    width: 18px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-appearance: none;
-    appearance: none;
-    overflow: hidden;
-    border: 0;
-    padding: 0;
-}
-
-
-.rate-this-pop-modal .select-stars-rating input:nth-child(2n + 1)::before, .rating input:nth-child(2n + 1)::before{
-    left: initial;
-    right: 4px;
-}
-.rate-this-pop-modal .select-stars-rating input:hover ~ input::before, .rating input:hover ~ input::before,
-.rate-this-pop-modal .select-stars-rating input:hover::before, .rating input:hover::before,
-.rate-this-pop-modal .select-stars-rating input:checked ~ input::before, .rating input:checked ~ input::before,
-.rate-this-pop-modal .select-stars-rating input:checked::before, .rating input:checked::before{
-    color: #ffd700;
-}
-.single_comment { justify-content: left; margin: 0; width: unset;}
-.single_comment input { pointer-events: none; width: 11.2px; height: 18px; margin-left: -1px;}
-.single_comment input:nth-child(2n + 1)::before{ right: 2.4px; }
-.single_comment input:before { font-size: 16px; }
-.user-rating {display: flex; gap: 10px;} .user-rating:nth-child(1) {line-height: 1.1;}
-.comment-form #author, .comment-form #email { width: 49%; }
-
-.button {
-    margin-top: 5px;
-}
-
-.rate-this-pop-modal .select-stars-rating input:checked, .rating input:checked {
-    box-shadow: none;
-}
-
-.comment-body {
-    padding: 15px 10px;
-    border: 1px solid #ebebeb;
-    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.comment-content {
-    border: unset;
-    border-top: 1px solid #ddd;
-    padding: 15px 0 0 0;
-    margin-top: 10px;
-}
-
-.comment .children {
-    margin-top: -15px !important;
-}
-
-.vcard {font-size: 1.3rem;}
-
-.entry-meta.comment-metadata {
-    font-size: 12px;
-}
-
-.rate-value {line-height: 1.2; font-size: 15px}
-
-.comment-author.vcard {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.comment-form-comment { width: 100%; }
-
-.comment-form-comment textarea::placeholder { color: #0000006b; font-size: 12px; }
-
-@media only screen and (max-width: 600px) { .comment-form #author, .comment-form #email { width: 100%; } }
 
 @media (max-width: 900px) {
     .arrows { display: flex; }

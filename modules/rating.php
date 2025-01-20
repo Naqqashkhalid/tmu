@@ -16,21 +16,6 @@ function rate_this(){
     $table_name = $wpdb->prefix.'comments';
     $comment_rating = $wpdb->get_var("SELECT comment_rating FROM $table_name WHERE comment_post_ID=$post_id AND comment_author_IP='$user_ip'");
 
-    $html = "<style> @font-face {
-    font-family: 'fontAwesome'; /* Match the font-family above */
-    src: url('".plugin_dir_url( __DIR__ )."src/icons/fontawesome-webfont.woff2') format('woff2'), /* Match your font file and format */
-    }
-    .rate-this-pop-modal .select-stars-rating input::before, .rating input::before{
-    content: '\\f005';
-    position: absolute;
-    font-family: fontAwesome;
-    font-size: 29px;
-    position: absolute;
-    left: 4px;
-    color: #e3e3e6;
-    transition: 0.5s;
-    }
-    </style>";
     $html .= '<button class="rate-this-button">';
     $html .= $comment_rating ? 'Your Rating '.$comment_rating.'/10' : '<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="StarBorderOutlinedIcon" class="svg-icon m-auto -ml-4 mr-8 icon-sm" height="1em" width="1em"><path d="m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"></path></svg> Rate this';
     $html .= '</button>';

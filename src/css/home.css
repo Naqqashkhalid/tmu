@@ -4,11 +4,11 @@ body { background-color: #fff; }
 .archive-header, .blog-section { max-width:1400px; margin: 0 auto; padding: 20px 10px; }
 .breadcrumb { margin:0; padding:0 }
 
-.heading {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
+/*.heading {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
 h2 {
     font-size: 22px;
