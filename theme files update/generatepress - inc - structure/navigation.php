@@ -27,12 +27,12 @@ if ( ! function_exists( 'generate_navigation_position' ) ) {
             <div <?php generate_do_attr( 'inside-navigation' ); ?>>
                 <form method="get" class="after-search navigation-search" action="<?php echo home_url( '/' ); ?>">
                     <div class="search-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="SearchOutlinedIcon" class="svg-icon flex-shrink-0 text-muted icon-md" height="1em" width="1em"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></div>
-                    <input type="search" style="width:100%;height:36px;background-color: #ffffff0a;color: #fff; border: 1px solid #f9731699;padding-left:40px;" placeholder="Find Asian Drama, Actors and more..." name="s" title="Search">
+                    <input type="search" style="width:100%;height:36px;background-color: #ffffff0a;color: #fff; border: 1px solid #555557b3;padding-left:40px;" placeholder="Find Pakistani Drama, Actors and more..." name="s" title="Search">
                 </form>
                 <style type="text/css">
                     .after-search { position: relative; }
                     .inside-header { padding-top: 0; padding-bottom: 0; }
-                    .nav-float-right #site-navigation { width: 100%; }
+                    .nav-float-right #site-navigation { width: 100%; padding-left: 15px; }
                     .navigation-search { width: 50%; margin: 10px 0; }
                     .main-nav { width: 100%; }
                     .main-navigation ul ul { background-color: #42444A!important; }
@@ -53,6 +53,7 @@ if ( ! function_exists( 'generate_navigation_position' ) ) {
                         min-width: 2.625rem;
                         z-index: 10;
                         height: 100%;
+                        padding-left: 10px;
                     }
                     #dropdown {
                         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -66,7 +67,7 @@ if ( ! function_exists( 'generate_navigation_position' ) ) {
                     .search-icon svg, .search-icon-mobile svg { fill: #ffffff80 }
                     input[type="search"]:focus, input[type="search"]:active { border-color: #555557b3!important  } input:focus{ outline: none; }
 
-                    @media (max-width: 959px) {
+                    @media (max-width: 1270px) {
                         .has-inline-mobile-toggle .mobile-menu-control-wrapper { display: flex; flex-wrap: wrap; }
                         /*					    .main-navigation:not(.toggled) .navigation-search { display: none; }*/
                         .navigation-search { display: none; }
@@ -77,7 +78,7 @@ if ( ! function_exists( 'generate_navigation_position' ) ) {
                         .nav-float-right #site-navigation { width: 100%; padding-left: 10px; }
                     }
 
-                    @media (min-width: 960px) {
+                    @media (min-width: 1270px) {
                         .inside-navigation { height: 60px; justify-content: flex-start !important; gap: 10px }
                     }
                 </style>
@@ -198,7 +199,7 @@ function generate_do_header_mobile_menu_toggle() {
         <div id="dropdown">
             <form method="get" class="after-search-toggle" action="<?php echo home_url( '/' ); ?>">
                 <div class="search-icon"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="SearchOutlinedIcon" class="svg-icon flex-shrink-0 text-muted icon-md" height="1em" width="1em"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></div>
-                <input type="search" style="width:100%;height:36px;background-color: #ffffff0a;color: #fff; border: 1px solid #f9731699;padding-left:40px;" placeholder="Find Asian Drama, Actors and more..." name="s" title="Search">
+                <input type="search" style="width:100%;height:36px;background-color: #ffffff0a;color: #fff; border: 1px solid #555557b3;padding-left:40px;" placeholder="Find Pakistani Drama, Actors and more..." name="s" title="Search">
             </form>
         </div>
 
