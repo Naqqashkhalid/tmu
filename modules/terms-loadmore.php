@@ -63,9 +63,10 @@ function get_term_posts_ajax($post_type, $term_id, $post_no, $page, $release, $s
   //            AND c.comment_rating > 0)
   //   END AS final_average" : '';
   
-  $sort_query = $sort === 'rating' ? "ORDER BY total_average_rating DESC, total_vote_count DESC" : ($sort === 'upcoming' ? "AND release_timestamp>unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` ASC" : "AND release_timestamp<unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` DESC");
+//  $sort_query = $sort === 'rating' ? "ORDER BY total_average_rating DESC, total_vote_count DESC" : ($sort === 'upcoming' ? "AND release_timestamp>unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` ASC" : "AND release_timestamp<unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` DESC");
+    $sort_query = $sort === 'rating' ? "ORDER BY total_average_rating DESC, total_vote_count DESC" : ($sort === 'upcoming' ? "AND release_timestamp>unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` ASC" : "ORDER BY posts.`ID` DESC");
 
-  $select_query = $release ? $table_name.".ID,{$table_name}.release_timestamp".$rating_select : ($post_type === 'people' ? $table_name.'.ID,'.$table_name.'.date_of_birth,'.$table_name.'.profession,'.$table_name.'.no_movies' : $table_name.'.ID');
+    $select_query = $release ? $table_name.".ID,{$table_name}.release_timestamp".$rating_select : ($post_type === 'people' ? $table_name.'.ID,'.$table_name.'.date_of_birth,'.$table_name.'.profession,'.$table_name.'.no_movies' : $table_name.'.ID');
 
   $posts = $post_type === 'post' ? $wpdb->prefix.'posts' : 'posts';
   $post_query = $post_type !== 'post' ? "LEFT JOIN {$wpdb->prefix}posts AS posts ON ($table_name.ID = posts.ID)" : '';

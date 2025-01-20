@@ -813,21 +813,7 @@ reply-title {
     padding: 0;
 }
 
-@font-face {
-    font-family: 'fontAwesome'; /* Match the font-family above */
-    src: url('".plugin_dir_url( __DIR__ )."src/icons/fontawesome-webfont.woff2') format('woff2'), /* Match your font file and format */
-}
 
-.rate-this-pop-modal .select-stars-rating input::before, .rating input::before{
-    content: '\\f005';
-    position: absolute;
-    font-family: fontAwesome;
-    font-size: 29px;
-    position: absolute;
-    left: 4px;
-    color: #e3e3e6;
-    transition: 0.5s;
-}
 .rate-this-pop-modal .select-stars-rating input:nth-child(2n + 1)::before, .rating input:nth-child(2n + 1)::before{
     left: initial;
     right: 4px;

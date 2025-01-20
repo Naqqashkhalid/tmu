@@ -11,12 +11,12 @@ $options = get_options(["tmu_dramas","tmu_movies","tmu_tv_series"]);
 $temp = false;
 $faqs = term_faqs($term->term_id, $term->taxonomy);
 if (is_tax( 'keyword' ) || is_tax( 'genre' ) || is_tax( 'country' ) || is_tax( 'channel' ) || is_tax( 'network' ) || is_tax( 'by-year' ) || is_tax( 'language' )) {
-  $movies = get_term_posts('movie', $term->term_id, 12);
-  $tv_series = get_term_posts('tv', $term->term_id, 12);
-  $dramas = get_term_posts('drama', $term->term_id, 12);
+  $movies = get_term_posts('movie', $term->term_id, 18);
+  $tv_series = get_term_posts('tv', $term->term_id, 18);
+  $dramas = get_term_posts('drama', $term->term_id, 18);
   $temp = true;
 } else {
-  $results = get_term_posts($post_type, $term->term_id, 12);
+  $results = get_term_posts($post_type, $term->term_id, 18);
 }
 
 if ($temp) { if (is_tax( 'channel' )) {
@@ -127,8 +127,9 @@ function get_term_posts($post_type, $term_id, $post_no){
   $post_query = $post_type !== 'post' ? "LEFT JOIN wp_posts AS posts ON ($table_name.ID = posts.ID)" : '';
 
   $tax_query = "LEFT JOIN wp_term_relationships AS tt1 ON ($table_name.ID = tt1.object_id) Where tt1.term_taxonomy_id IN (".$term_id.")";
-  $additional_query = $release ? "AND release_timestamp<unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` DESC" : ( $post_type === 'people' ? "ORDER BY `no_movies` DESC" : "ORDER BY `ID` DESC");
-  
+//  $additional_query = $release ? "AND release_timestamp<unix_timestamp(DATE_ADD(NOW(),interval 3 hour)) ORDER BY `release_timestamp` DESC" : ( $post_type === 'people' ? "ORDER BY `no_movies` DESC" : "ORDER BY `ID` DESC");
+    $additional_query =  ( $post_type === 'people' ? "ORDER BY `no_movies` DESC" : "ORDER BY posts.`ID` DESC");
+
   $results = $wpdb->get_results("SELECT $select_query FROM $table_name $post_query $tax_query AND $posts.post_status = 'publish' $additional_query LIMIT $post_no");
   if ($results) $results['max_num_pages'] = $wpdb->get_var("SELECT COUNT(*) FROM $table_name $post_query $tax_query AND $posts.post_status = 'publish' $additional_query");
 
