@@ -51,7 +51,7 @@ get_header();
 			</div>
 			
 			<?php if ($sidebar) { ?>
-				<div class="sidebar <?= $post_type === 'people' ? '' : 'item-sidebar' ?>"><div class ="sidebar-cont">
+				<div class="sidebar item-sidebar <?= $post_type === 'people' ? '' : 'item-sidebar' ?>"><div class ="sidebar-cont">
 				<?php
 					global $wpdb;
 					$post_id = get_the_ID();

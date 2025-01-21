@@ -1,7 +1,6 @@
 body { background-color: #fff; }
 .grid-container.container#page { max-width: unset; }
 .site-content#content { padding:0; }
-.archive-header { max-width:1400px; margin: 0 auto; padding: 20px 10px; }
 .breadcrumb { padding:0 }
 
 .heading {

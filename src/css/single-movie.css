@@ -1,5 +1,4 @@
 .entry-content:not(:first-child), .entry-summary:not(:first-child), .page-content:not(:first-child) { margin-top: 0!important; }
-.movie_sec p { text-align: justify; margin-bottom: 2rem; }
 .movie-trailer {
 	padding: 20px 20px 15px;
 	gap: 20px;
@@ -68,7 +67,7 @@
 
 .watch-buttons a {
 	display: block;
-    background-color: #F97316;
+    background-color: #0e9272;
     padding: 10px 5px;
     border-radius: 5px;
     font-size: .800rem;
@@ -81,7 +80,7 @@
 
 
 .watch-buttons a:hover, .watch-buttons a:focus, .watch-buttons a:active {
-    box-shadow: 0 4px 11px rgba(249, 115, 22, 0.6);
+    box-shadow: 0 4px 11px #0e9272c9;
 	color:white!important;
 }
 
@@ -108,12 +107,6 @@
     font-weight: 600;
 	margin-top:24px;
 	margin-bottom: 8px;
-}
-
-.heading {
-    display: flex;
-    justify-content: space-between;
-	color: #0e9272;
 }
 
 .movie-details-section {
@@ -203,7 +196,6 @@
 
 .credit-heading {
 	padding-left: 10px;
-	margin-top:40px;
 }
 .credit-heading:before {
 	height: 100%;
@@ -386,7 +378,7 @@
 	.credit-block .block1, .item .item-block { gap: 10px; }
 	.star-cast-container { flex-wrap:wrap; }
 	.single-cast-item { width: 100%; }
-	.single-cast-item:hover { background-color: rgba(255, 111, 97, 0.1); border-left: 3px solid #FF6F61; }
+	.single-cast-item:hover { background-color: #0e9272c9; border-left: 3px solid #097056; }
 }
 
 @media (max-width: 700px) {

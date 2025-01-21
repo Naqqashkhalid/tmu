@@ -1,6 +1,6 @@
 h1 { font-size: 28px!important; font-weight: bold!important }
 
-.entry-content p { text-align: justify; }
+.entry-content p, .movie_sec p { text-align: justify; }
 .separate-containers .comments-area, .inside-article, .separate-containers .page-header, .separate-containers .paging-navigation { padding: 10px!important }
 
 body { background-color: #fff; }
@@ -405,7 +405,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .birthdays-today { display:flex; gap:20px; text-align:center; overflow-x: auto; scroll-behavior: smooth; transition: scroll-left 5s ease-in-out; }
 
 .heading { position: relative; display: flex; justify-content: space-between; margin-bottom: 10px; }
-.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; }
+.heading h3 { position: relative; margin-top: 20px; font-weight: 800; font-size: 20px; padding-left: 10px; margin-bottom: 0 !important; }
 .heading h3:before { content: ""; width: 5px; height: 100%; background-color: #0e9272; display: block; position: absolute; left: 0; }
 .main-with-sidebar { display: flex; flex-wrap: wrap; gap:2% }
 .content-wrapper { width: 70% }
@@ -484,6 +484,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .footer-container a:hover, .footer-container a:hover, .footer-container a:focus { color: #ff6f61; }
 .footer-container .social-icon { background: unset!important; }
 
+.archive-header { max-width:1400px; margin: 0 auto; padding: 20px 10px; }
 .news-title { padding-left: 10px; margin-top: 24px; margin-bottom: 8px }
 .news-title:before { height: 100% }
 .related-news h2 {color: #0e9272!important;}
@@ -524,7 +525,7 @@ table a:hover, p a:hover, .credit-name a:hover {
 .item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 2%; }
 .item-sidebar .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }
 .item-sidebar .item-box { width: 49%; }
-.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block; box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block!important; }
 .loadmore:hover { background-color: #E65A50; color: #FFFFFF; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }
 .loading {
     position: absolute;
@@ -767,7 +768,7 @@ table a:hover, p a:hover, .credit-name a:hover {
 @media (max-width: 1040px) {
     .content-wrapper { width: 100% }
     .sidebar { width:100%; margin: 0; }
-    .item-sidebar { padding: 0 20px; }
+    .item-sidebar { padding: 0 10px; }
 
 }
 
@@ -779,7 +780,6 @@ table a:hover, p a:hover, .credit-name a:hover {
 }
 
 @media screen and (max-width: 700px) {
-    .inside-article { padding: 10px !important }
     .videos .videos-gallery a { flex: 1 1 100%; max-width: 100%; }
     .short-heading h2 { font-size: 1.3rem; margin-left: 10px!important; }
     .short-heading svg {display: none}

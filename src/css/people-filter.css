@@ -457,7 +457,3 @@ input[type=checkbox]:checked+label:before {
     #clear_all_flex { display: none; }
     .net-worth { font-size: 12px!important; }
 }
-
-@media (max-width: 420px) {
-    .myBtn_multi { font-size: 10px; }
-}

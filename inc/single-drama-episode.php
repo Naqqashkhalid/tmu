@@ -68,8 +68,12 @@ function single_drama_episode($content){
 			'.('<div class="episode-videos">'.($episode['video'] ? ytplayer($episode['video']) : '').'</div>').'
 			
 			<div class="next-prev">
-				<div class="prev-episode">'.($prev_episode ? '<a href="'.get_permalink($prev_episode).'" title="Previous Episode">Previous Episode</a>' : '').'</div>
-				<div class="next-episode">'.($next_episode ? '<a href="'.get_permalink($next_episode).'" title="Next Episode">Next Episode</a>' : '').'</div>
+				<div class="prev-episode">'.($prev_episode ? '<a href="'.get_permalink($prev_episode).'" title="Previous Episode"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+	  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+	</svg> Previous Episode</a>' : '').'</div>
+				<div class="next-episode">'.($next_episode ? '<a href="'.get_permalink($next_episode).'" title="Next Episode">Next Episode <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+	  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+	</svg></a>' : '').'</div>
 			</div>
 
 			'.($episode['overview'] ? '<div>'.$episode['overview'].'</div>' : '').'
@@ -78,9 +82,6 @@ function single_drama_episode($content){
 			<div class="cast_crew">
 				<div class="short-heading font-size-36 weight-700">
 					<h2 class="images-title weight-700 font-size-36">Cast & Crew</h2>
-					<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="KeyboardArrowRightOutlinedIcon" class="svg-icon icon-lg" height="1em" width="1em">
-						<path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
-					</svg>
 				</div>
 
 				<ul class="nav_tabs">

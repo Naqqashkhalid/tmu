@@ -35,7 +35,7 @@ function birthday_today(){
 				// $movie = ($tv_movie ?  : '<a href="'.get_permalink($tv_movie).'" class="movie">'.get_the_title($tv_movie).($year ? ' ('.$year.')' : '').'</a>');
 
 				$data .= '<div class="circle-box">
-		                <a class="person-poster" href="<?= $permalink ?>">
+		                <a class="person-poster" href="'.$permalink.'"/>
 		                	<img '.(has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/icons/no-image.svg" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/icons/no-image.svg"') ).' alt="'.$title.'" width="100%" height="100%">
 		                </a>
 		                <div class="person-details">

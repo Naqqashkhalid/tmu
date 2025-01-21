@@ -573,9 +573,13 @@ function add_additional_scripts() {
 // wp_enqueue_script( 'ajax', plugin_dir_url( __DIR__ ) . 'src/js/ajax.js', array( 'jquery' ), 1.1, true ); 
 //  wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), 1.1, true );
 
-    if ( is_singular() && get_post_type() == 'post' ) {
+    if ( get_post_type() == 'post' || get_post_type() == 'drama-episode') {
         wp_enqueue_style( 'blog_css', plugin_dir_url( __DIR__ ) . 'src/css/single-post.css', array(), '1.1', 'all' );
     }
+    if ( (get_post_type() == 'people') ) {
+        wp_enqueue_style('single_person_css', plugin_dir_url(__DIR__) . 'src/css/single-person.css', array(), '1.0', 'all');
+    }
+    add_action('wp_enqueue_scripts', 'load_single_person_styles');
     if ( (get_post_type() == 'movie' || get_post_type() == 'tv' || get_post_type() == 'drama' || get_post_type() == 'people') && is_singular() ) {
         wp_enqueue_style( 'movie_css', plugin_dir_url( __DIR__ ) . 'src/css/single-movie.css', array(), '1.1', 'all' );
     }

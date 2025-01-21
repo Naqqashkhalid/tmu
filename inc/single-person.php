@@ -4,7 +4,7 @@ add_filter( 'the_content', 'single_person' );
 function single_person($content){
   if ( !(get_post_type() === 'people' && is_singular()) ) return $content;
   $data = '';
-  $data .= person_extra_css();
+  $data .= '';
 
   $post_id = get_the_ID();
 
@@ -536,112 +536,32 @@ function person_upcoming($post_id){
   return $person_movie;
 }
 
-function known_for(){
-	$post_ids = rwmb_meta( 'known_for' );
-	$data = '';
-	if($post_ids){
-		$data .= '<style type="text/css">
-.heading {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
+function known_for() {
+    $post_ids = rwmb_meta('known_for');
+    $data = '';
+    if ($post_ids) {
+        $data .= '<div class="known-for scrollable-section" data-scroll-target="#known-for">
+            <div class="heading">
+                <h2>Known For</h2>' . (count($post_ids) > 5 ? '<div class="scroll-btns">' . button_left_person() . button_right_person() . '</div>' : '') . '
+            </div>
+            <div class="known-for-flex scrollable-content" id="known-for">';
 
-.heading h2 { font-size: 22px; font-weight: 700; }
-
-.known-for-details .known-item-title {
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 1.25;
-  color: #333333;
-  margin-bottom: 0 !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 5px 0;
-  text-align: center;
-}
-
-.scroll-btns { display:flex; gap:10px; }
-
-.scroll-btn {
-	padding: 0;
-    margin: 0;
-    background: unset;
-    height: 30px;
-    width: 30px;
-}
-.scroll-btn path { fill:white }
-.known-for {
-	margin-bottom: 30px;
-}
-
-.known-for-flex {
-	display: flex;
-  -webkit-overflow-scrolling: touch;
-  gap: 8px;
-  overflow-x: auto;	
-  scroll-behavior: smooth;
-	transition: scroll-left 5s ease-in-out;
-}
-
-.known-for-box {
-	display: block;
-    width: 180px;
-    margin-bottom: 20px;
-    text-align: center;
-    box-shadow: 0 4px 8px #0000001a;
-    transition: transform .3s ease-in-out;
-    transform-style: preserve-3d;
-    border-radius: 5px;
-    border: 1px solid #E0E0E0;
-}
-
-.known-for-box:hover {
-    transform: translateY(-5px) translateZ(20px) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 10px 20px #0003, 0 0 15px #0000001a;
-    border-radius: 5px;
-    text-decoration: none!important;
-}
-
-.known-for-poster {
-	width: 180px;
-	height: 252px;
-	overflow: hidden;
-}
-.known-for-poster img {
-	width: 180px;
-  height: 252px;
-	object-fit: cover;
-}
-#showMoreLink { cursor: pointer; }
-@media screen and (max-width: 768px) {
-	.scroll-btns { display:none }
-}
-</style>
-<div class="known-for scrollable-section" data-scroll-target="#known-for">
-	<div class="heading">
-		<h2>Known For</h2>'.(count($post_ids) > 5 ? '<div class="scroll-btns">'.button_left_person().button_right_person().'</div>' : '').'
-	</div>
-	<div class="known-for-flex scrollable-content" id="known-for">';
-		foreach ($post_ids as $result) {
-			if (get_post_status($result) === 'publish') {
-				global $wpdb;
-				$title = get_the_title($result);
-	  		$data .= '<a class="known-for-box" href="'.get_permalink($result).'" title="'.$title.'">';
-	  		$data .= '<div class="known-for-poster">';
-	  		$data .= '<img '. (has_post_thumbnail($result) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$title.'" width="100%" height="100%">';
-	  		$data .= '</div>';
-	  		$data .= '<div class="known-for-details">';
-	  		$data .= '<p class="known-item-title">'.$title.'</p>';
-	  		$data .= '</div>';
-	  		$data .= '</a>';
-	  	}
-	  }
-		$data .= '</div>';
-		$data .= '</div>';
-		$data .= '<script>
+        foreach ($post_ids as $result) {
+            if (get_post_status($result) === 'publish') {
+                $title = get_the_title($result);
+                $data .= '<a class="known-for-box" href="' . get_permalink($result) . '" title="' . esc_attr($title) . '">';
+                $data .= '<div class="known-for-poster">';
+                $data .= '<img ' . (has_post_thumbnail($result) ? ('src="' . esc_url(plugin_dir_url(__DIR__) . 'src/images/preloader.gif') . '" data-src="' . esc_url(get_the_post_thumbnail_url($result, 'full')) . '" class="lazyload"') : ('src="' . esc_url(plugin_dir_url(__DIR__) . 'src/images/no-poster.webp') . '"')) . ' alt="' . esc_attr($title) . '" width="100%" height="100%">';
+                $data .= '</div>';
+                $data .= '<div class="known-for-details">';
+                $data .= '<p class="known-item-title">' . esc_html($title) . '</p>';
+                $data .= '</div>';
+                $data .= '</a>';
+            }
+        }
+        $data .= '</div>';
+        $data .= '</div>';
+        $data .= '<script>
 function scrollRelease(button) {
   const scrollContainer = button.closest(".scrollable-section");
   const scrollTarget = scrollContainer.dataset.scrollTarget;
@@ -656,8 +576,8 @@ function scrollRelease(button) {
   }
 }
 </script>';
-	}
-	return $data;
+    }
+    return $data;
 }
 
 function button_left_person(){

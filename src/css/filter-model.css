@@ -494,7 +494,7 @@ input[type=checkbox]:checked+label:before {
 }
 
 @media (max-width: 600px) {
-    .myBtn_multi { font-size: 10px; padding: 3px 3px; }
+    .myBtn_multi { padding: 3px 3px; }
     .buttons_modals_multi { grid-gap: 2px }
     .sort-arrow-m { height: 13px!important }
 }

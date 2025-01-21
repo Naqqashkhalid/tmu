@@ -29,8 +29,6 @@
     background: #f2f2f2;
 }
 
-p { margin-bottom: 0 }
-
 .season-card .season-title {
     font-size: 1.5rem;
     font-weight: 700;
@@ -367,5 +365,5 @@ margin-top: 5px;
 
 @media (max-width: 900px) { .episode { width:100%!important } }
 @media (max-width: 700px) { .season-card .season-content { padding: 0 0 0 8px; } .countdown { margin-top: 15px } .countdown-box { flex-direction: column; align-content: center; } .countdown { justify-content: flex-start } .watch-item { width: 45%; } }
-@media (max-width: 768px) { .watch-trailer-btn a { margin-top:10px; } .episodes-container-desktop { display: none; } .inside-article { padding: 10px!important; } .site-content { padding: 0 !important; } .episodes-container { display: none; } .trailer-desktop { display: none; } .trailer-mobile { display:block } .watch_list_desktop { display: none; } }
+@media (max-width: 768px) { .watch-trailer-btn a { margin-top:10px; } .episodes-container-desktop { display: none; }  .site-content { padding: 0 !important; } .episodes-container { display: none; } .trailer-desktop { display: none; } .trailer-mobile { display:block } .watch_list_desktop { display: none; } }
 @media (min-width: 769px) { .episodes-container-mobile {display: none;} .watch_list_mobile { display: none; } }
