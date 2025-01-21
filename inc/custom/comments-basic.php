@@ -42,7 +42,13 @@ do_action( 'generate_before_comments' );
 	do_action( 'generate_inside_comments' );
 	
 	if ( have_comments() ) :
-		$comments_number = get_comments_number();
+        $comments_number = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*)
+             FROM $wpdb->comments
+             WHERE comment_post_ID = %d
+               AND comment_approved = '1'
+               AND comment_content != ''",
+                get_the_ID()));
 		$comments_title = sprintf( '<span class="title">'.(is_singular( 'movie' ) || is_singular( 'tv' ) || is_singular( 'episode' ) ? 'Reviews' : 'Comments').'</span><span class="count-comments">(%1$s)</span>', $comments_number );
 
 		// phpcs:ignore -- Title escaped in output.
