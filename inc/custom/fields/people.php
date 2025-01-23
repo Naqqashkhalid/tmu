@@ -158,6 +158,35 @@ function people( $meta_boxes ) {
                 ],
             ],
             [
+                'name'       => __( 'Social Media Account', 'people' ),
+                'id'         => $prefix . 'social_media_account',
+                'type'       => 'group',
+                'clone'      => true,
+                'sort_clone' => true,
+                'max_clone'  => 4,
+                'fields'     => [
+                    [
+                        'name'        => __( 'Platform', 'people' ),
+                        'id'          => $prefix . 'platform',
+                        'type'        => 'select',
+                        'options'     => [
+                            'Facebook'  => __( 'Facebook', 'people' ),
+                            'Instagram' => __( 'Instagram', 'people' ),
+                            'YouTube'   => __( 'YouTube', 'people' ),
+                            'X'         => __( 'X', 'people' ),
+                        ],
+                        'placeholder' => __( 'Select', 'people' ),
+                        'columns'     => 4,
+                    ],
+                    [
+                        'name'    => __( 'Url', 'people' ),
+                        'id'      => $prefix . 'url',
+                        'type'    => 'url',
+                        'columns' => 8,
+                    ],
+                ],
+            ],
+            [
                 'name' => __( 'Net worth', 'people' ),
                 'id'   => $prefix . 'net_worth',
                 'type' => 'text',
