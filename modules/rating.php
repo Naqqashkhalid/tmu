@@ -102,6 +102,66 @@ function rating_handler(){
     $col = $post_type === 'drama' ? 'dramas' : ($post_type === 'tv' ? 'tv_series' : ($post_type === 'episode' ? 'tv_series_episodes' : ($post_type === 'drama-episode' ? 'dramas_episodes' : ($post_type === 'movie' ? 'movies' : ''))));
     $table_name = $col ? $wpdb->prefix.'tmu_'.$col : '';
     $wpdb->update($table_name, [ 'total_average_rating' => $tRating['average'], 'total_vote_count' => $tRating['count']], ['ID' => $post_id], ['%f', '%d'], ['%d']);
+
+//    if ($post_type === 'drama-episode' || $post_type === 'episode') {
+//        $col2 = $post_type === 'drama-episode' ? 'dramas' : 'tv_series';
+//        $table_name = $col2 ? $wpdb->prefix.'tmu_'.$col2 : '';
+//        $parent = $wpdb->get_row("SELECT ID, total_average_rating,total_vote_count FROM {$table_name}_episodes WHERE $col2 = $post_id");
+//        $parent_total_rating = ($parent->total_average_rating ?? 0) * ($parent->total_vote_count ?? 0);
+//        $parent_total_rating += $rating;
+//        ++$parent->total_vote_count;
+//        $parent->total_average_rating = number_format($parent_total_rating / $parent->total_vote_count, 1);
+//        $wpdb->update($table_name, [ 'total_average_rating' => $parent->total_average_rating, 'total_vote_count' => $parent->total_vote_count], ['ID' => $parent->ID], ['%f', '%d'], ['%d']);
+//    }
+
+    if ($post_type === 'drama-episode' || $post_type === 'episode') {
+        $col2 = $post_type === 'drama-episode' ? 'dramas' : 'tv_series';
+        $episodes_table = $wpdb->prefix . 'tmu_' . $col2 . '_episodes';
+        $parent_table = $wpdb->prefix . 'tmu_' . $col2;
+
+        // Retrieve the parent ID of the episode
+        $parent_id_column = $col2; // 'dramas' or 'tv_series'
+        $parent_id = $wpdb->get_var("SELECT $parent_id_column FROM $episodes_table WHERE ID = $post_id LIMIT 1");
+
+        if ($parent_id) {
+            // Fetch current parent ratings
+            $parent = $wpdb->get_row("SELECT ID, total_average_rating, total_vote_count FROM $parent_table WHERE ID = $parent_id");
+
+            if ($parent) {
+                // Calculate the updated parent total rating
+                $parent_total_rating = ($parent->total_average_rating ?? 0) * ($parent->total_vote_count ?? 0);
+
+                // If the rating is being updated, adjust the total rating first
+                if (!empty($comment) && isset($comment->comment_rating)) {
+                    $parent_total_rating -= $comment->comment_rating; // Subtract old rating
+                }
+
+                // Add the new rating
+                $parent_total_rating += $rating;
+
+                // Adjust the vote count (add only if it's a new rating)
+                if (empty($comment)) {
+                    ++$parent->total_vote_count;
+                }
+
+                // Recalculate the average
+                $parent->total_average_rating = number_format($parent_total_rating / $parent->total_vote_count, 1);
+
+                // Update the parent table
+                $wpdb->update(
+                    $parent_table,
+                    [
+                        'total_average_rating' => $parent->total_average_rating,
+                        'total_vote_count' => $parent->total_vote_count,
+                    ],
+                    ['ID' => $parent->ID],
+                    ['%f', '%d'],
+                    ['%d']
+                );
+            }
+        }
+    }
+
     // $movie = $wpdb->get_row("SELECT average_rating,vote_count FROM {$wpdb->prefix}tmu_{$post_type} WHERE `ID` = $post_id");
 
     // $tmdb_rating['average'] = $movie->average_rating ?? 0;

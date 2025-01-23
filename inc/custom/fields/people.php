@@ -42,6 +42,7 @@ function people( $meta_boxes ) {
                 'id'      => $prefix . 'nick_name',
                 'type'    => 'text',
                 'columns' => 4,
+                'rank_math_analysis' => true,
             ],
             [
                 'name'    => __( 'Marital Status', 'people' ),
@@ -68,6 +69,7 @@ function people( $meta_boxes ) {
                     'sort'     => true,
                 ],
                 'columns'       => 2,
+                'rank_math_analysis' => true,
             ],
             [
                 'name'    => __( 'Date Of Birth', 'people' ),
@@ -80,6 +82,7 @@ function people( $meta_boxes ) {
                 'id'      => $prefix . 'birthplace',
                 'type'    => 'text',
                 'columns' => 4,
+                'rank_math_analysis' => true,
             ],
             [
                 'name'    => __( 'Dead On', 'people' ),
@@ -97,12 +100,14 @@ function people( $meta_boxes ) {
                         'id'      => $prefix . 'height',
                         'type'    => 'text',
                         'columns' => 6,
+                        'rank_math_analysis' => true,
                     ],
                     [
                         'name'    => __( 'Weight', 'people' ),
                         'id'      => $prefix . 'weight',
                         'type'    => 'text',
                         'columns' => 6,
+                        'rank_math_analysis' => true,
                     ],
                     [
                         'name'   => __( 'Parents', 'people' ),
@@ -114,12 +119,14 @@ function people( $meta_boxes ) {
                                 'id'      => $prefix . 'father',
                                 'type'    => 'text',
                                 'columns' => 6,
+                                'rank_math_analysis' => true,
                             ],
                             [
                                 'name'    => __( 'Mother', 'people' ),
                                 'id'      => $prefix . 'mother',
                                 'type'    => 'text',
                                 'columns' => 6,
+                                'rank_math_analysis' => true,
                             ],
                         ],
                     ],
@@ -139,6 +146,7 @@ function people( $meta_boxes ) {
                         'id'   => $prefix . 'siblings',
                         'type' => 'text',
                         'columns'     => 6,
+                        'rank_math_analysis' => true,
                     ],
                     [
                         'name'    => __( 'Popularity', 'people' ),
@@ -150,38 +158,10 @@ function people( $meta_boxes ) {
                 ],
             ],
             [
-                'name'       => __( 'Social Media Account', 'people' ),
-                'id'         => $prefix . 'social_media_account',
-                'type'       => 'group',
-                'clone'      => true,
-                'sort_clone' => true,
-                'max_clone'  => 4,
-                'fields'     => [
-                    [
-                        'name'        => __( 'Platform', 'people' ),
-                        'id'          => $prefix . 'platform',
-                        'type'        => 'select',
-                        'options'     => [
-                            'Facebook'  => __( 'Facebook', 'people' ),
-                            'Instagram' => __( 'Instagram', 'people' ),
-                            'YouTube'   => __( 'YouTube', 'people' ),
-                            'X'         => __( 'X', 'people' ),
-                        ],
-                        'placeholder' => __( 'Select', 'people' ),
-                        'columns'     => 4,
-                    ],
-                    [
-                        'name'    => __( 'Url', 'people' ),
-                        'id'      => $prefix . 'url',
-                        'type'    => 'url',
-                        'columns' => 8,
-                    ],
-                ],
-            ],
-            [
                 'name' => __( 'Net worth', 'people' ),
                 'id'   => $prefix . 'net_worth',
                 'type' => 'text',
+                'rank_math_analysis' => true,
             ],
             [
                 'name'       => __( 'Videos', 'people' ),
@@ -197,6 +177,7 @@ function people( $meta_boxes ) {
                 'id'         => $prefix . 'photos',
                 'type'       => 'image_advanced',
                 'max_status' => false,
+                'rank_math_analysis' => true,
             ],
             [
                 'name'            => __( 'Name', 'people' ),

@@ -66,7 +66,7 @@ function insert_season_episodes($series_id, $season_title, $season, $season_id, 
 		$total_average_rating += $tmdb_rating['average'] ?? 0;
 	}
 
-	return ['total' => $total_episodes, 'average' => $total_average_rating/$total_episodes];
+	return ['total' => $total_episodes, 'average' => ($total_average_rating ? $total_average_rating/$total_episodes : 5)];
 }
 
 

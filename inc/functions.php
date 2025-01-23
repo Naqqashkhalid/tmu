@@ -568,35 +568,71 @@ function get_post_rating($rating){
 }
 
 function add_additional_scripts() {
+    // Enqueue CSS files as before
     wp_enqueue_style( 'main_css', plugin_dir_url( __DIR__ ) . 'src/css/main.css', array(), '1.1', 'all' );
-    wp_enqueue_script( 'lazyload_credits', plugin_dir_url( __DIR__ ) . 'src/js/lazyload.min.js', array( 'jquery' ), 1.1 );
-// wp_enqueue_script( 'ajax', plugin_dir_url( __DIR__ ) . 'src/js/ajax.js', array( 'jquery' ), 1.1, true ); 
-//  wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), 1.1, true );
 
+    // Enqueue JS with defer or async attributes
+    wp_enqueue_script( 'lazyload_credits', plugin_dir_url( __DIR__ ) . 'src/js/lazyload.min.js', array( 'jquery' ), '1.1', false ); // Default enqueue
+    // Uncomment the scripts below and load them conditionally, if needed, with async/defer.
+    // wp_enqueue_script( 'ajax', plugin_dir_url( __DIR__ ) . 'src/js/ajax.js', array( 'jquery' ), '1.1', true );
+    // wp_enqueue_script( 'script', get_template_directory_uri() . '/js/script.js', array( 'jquery' ), '1.1', true );
+
+    // Post type-specific stylesheets
     if ( get_post_type() == 'post' || get_post_type() == 'drama-episode') {
         wp_enqueue_style( 'blog_css', plugin_dir_url( __DIR__ ) . 'src/css/single-post.css', array(), '1.1', 'all' );
     }
-    if ( (get_post_type() == 'people') ) {
+    if ( get_post_type() == 'people' ) {
         wp_enqueue_style('single_person_css', plugin_dir_url(__DIR__) . 'src/css/single-person.css', array(), '1.0', 'all');
     }
-    add_action('wp_enqueue_scripts', 'load_single_person_styles');
-    if ( (get_post_type() == 'movie' || get_post_type() == 'tv' || get_post_type() == 'drama' || get_post_type() == 'people') && is_singular() ) {
+    if ( ( get_post_type() == 'movie' || get_post_type() == 'tv' || get_post_type() == 'drama' || get_post_type() == 'people' ) && is_singular() ) {
         wp_enqueue_style( 'movie_css', plugin_dir_url( __DIR__ ) . 'src/css/single-movie.css', array(), '1.1', 'all' );
     }
-    if (get_post_type() == 'episode' || get_post_type() == 'drama-episode') {
+    if ( get_post_type() == 'episode' || get_post_type() == 'drama-episode' ) {
         wp_enqueue_style( 'episode_css', plugin_dir_url( __DIR__ ) . 'src/css/single-episode.css', array(), '1.1', 'all' );
     }
-    if (get_post_type() == 'video' ) {
+    if ( get_post_type() == 'video' ) {
         wp_enqueue_style( 'video_css', plugin_dir_url( __DIR__ ) . 'src/css/single-video.css', array(), '1.1', 'all' );
     }
+
+    // Add defer or async attributes to scripts
+    add_filter( 'script_loader_tag', function( $tag, $handle, $src ) {
+        if ( in_array( $handle, [ 'lazyload_credits', 'ajax', 'script' ] ) ) { // Add handles for scripts to defer or async
+            $tag = '<script src="' . esc_url( $src ) . '" defer></script>'; // Use async instead of defer if needed
+        }
+        return $tag;
+    }, 10, 3 );
 }
+
 add_action( 'wp_enqueue_scripts', 'add_additional_scripts' );
+
+// For admin-specific styles or scripts
 add_action( 'admin_enqueue_scripts', 'my_admin_styles' );
-add_action('admin_footer', 'admin_footer_script');
+add_action( 'admin_footer', 'admin_footer_script' );
 
 function my_admin_styles() {
     wp_enqueue_style( 'my-admin-styles', plugin_dir_url( __DIR__ ) . 'src/css/admin.css', array(), '1.0.0' );
 }
+
+add_action('wp_enqueue_scripts', function () {
+    // Dequeue and deregister the redundant Google Fonts
+    wp_dequeue_style('generate-google-fonts-css'); // Redundant font handle
+    wp_deregister_style('generate-google-fonts-css');
+
+    // Remove any other styles that might load Google Fonts
+    global $wp_styles;
+    foreach ($wp_styles->registered as $style) {
+        if (strpos($style->src, 'fonts.googleapis.com') !== false) {
+            wp_dequeue_style($style->handle);
+            wp_deregister_style($style->handle);
+        }
+    }
+}, 100); // Runs late to catch all enqueued styles
+
+add_action('wp_head', function () {
+    // Add your optimized Google Fonts preload
+    echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"></noscript>';
+}, 100); // Ensure this runs late as well
 function admin_footer_script() { ?>
     <script>
         const childElements = document.querySelectorAll('.credits > .rwmb-input > .rwmb-group-clone > .rwmb-row > .rwmb-column > .rwmb-text-wrapper[data-visible="visible"]');
@@ -630,6 +666,13 @@ function clean_job_string($text) {
 
     return $text;
 }
+
+add_action('wp_head', function() {
+    if (has_post_thumbnail()) {
+        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+        echo '<link rel="preload" as="image" href="' . esc_url($image_url) . '" />';
+    }
+});
 
 add_filter( 'generate_sidebar_layout','custom_sidebar' );
 function custom_sidebar( $layout )

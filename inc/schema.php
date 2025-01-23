@@ -252,7 +252,7 @@ function reviews_schema($reviews){
     foreach($reviews as $review):
       $username = $review->comment_author;
       if (!$username) $countReviews = $countReviews-1;
-      if ($username) {
+      if ($username && $review->comment_rating > 0) {
         $schema .= ((++$tempCount === 1) ? '' : ',').'
           {
             "@type": "Review",
