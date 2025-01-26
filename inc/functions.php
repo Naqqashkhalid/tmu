@@ -632,7 +632,7 @@ add_action('wp_head', function () {
     // Add your optimized Google Fonts preload
     echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
     echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"></noscript>';
-}, 100); // Ensure this runs late as well
+}, 100);
 function admin_footer_script() { ?>
     <script>
         const childElements = document.querySelectorAll('.credits > .rwmb-input > .rwmb-group-clone > .rwmb-row > .rwmb-column > .rwmb-text-wrapper[data-visible="visible"]');

@@ -1,6 +1,6 @@
 h1 { font-size: 28px!important; font-weight: bold!important }
 
-.entry-content p, .movie_sec p { text-align: justify; }
+.entry-content p, .movie_sec p { text-align: justify; margin-bottom: 1.5em!important;}
 .separate-containers .comments-area, .inside-article, .separate-containers .page-header, .separate-containers .paging-navigation { padding: 10px!important }
 
 body { background-color: #fff; }

@@ -215,6 +215,7 @@ function add_custom_redirects() {
 	add_rewrite_rule( 'tv/(.+?)/(.+?)/?$', 'index.php?season=$matches[1]-$matches[2]', 'top' );
 }
 
+
 function modify_slug_on_post_save($post_ID) {
     if ( wp_is_post_autosave($post_ID) || wp_is_post_revision($post_ID) ) return;
     $post_type = get_post_type($post_ID);
