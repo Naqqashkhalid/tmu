@@ -6,23 +6,23 @@ h1 { font-size: 28px!important; font-weight: bold!important }
 body { background-color: #fff; }
 
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+    width: 5px;
+    height: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+    background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #097056a6;
+    background: #097056a6;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #097056d9;
+    background: #097056d9;
 }
 
 .main-navigation, .main-navigation ul ul {
@@ -79,20 +79,20 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .videos .videos-title, .images-title { margin-left:10px; margin-bottom: 10px; }
 
 .short-heading {
-	position: relative;
-	display: flex;
-	gap: 5px;
-	line-height: 1;
-	color: #000;
-	margin: 10px 0 5px;
+    position: relative;
+    display: flex;
+    gap: 5px;
+    line-height: 1;
+    color: #000;
+    margin: 10px 0 5px;
 }
 
 /*.videos .short-heading:hover .videos-title, .short-heading:hover .images-title { color: #ea580c; }*/
 
 .short-heading:before {
-	content: "";
+    content: "";
     background-color:  #0E9272;
-	width: 0.25rem;
+    width: 0.25rem;
     border-radius: 0.25rem;
     height: 83.333333%;
     position: absolute;
@@ -134,9 +134,9 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .short-heading:hover .svg-icon { fill: #ea580c; }
 
 .videos .videos-gallery {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
 }
 
 .video-single, .episode-single {
@@ -168,24 +168,24 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 }
 
 .video-single .blend {
-	height: 61px;
+    height: 61px;
     width: 100%;
     background-image: linear-gradient(transparent, #000);
     position: absolute;
     bottom: 0;
     z-index: 29;
-} 
+}
 
 .video-single .play-icon {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	z-index: 30;
-	display: flex;
-	align-items: center;
-	column-gap: 0.375rem;
-	padding: 0.625rem;
-	color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    column-gap: 0.375rem;
+    padding: 0.625rem;
+    color: white;
 }
 
 .play-icon svg { fill: white }
@@ -194,23 +194,23 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .videos .single-video-title { padding: 1px 5px; font-weight: 600; color: #0E9272; }
 
 .modal-content {
-	display: none;
-	background-color: rgb(0 0 0 / 96%);
-	width: 100%;
-	height:100%;
-	position: fixed;
-	top:0;
-	left:0;
-	z-index: 9999999;
+    display: none;
+    background-color: rgb(0 0 0 / 96%);
+    width: 100%;
+    height:100%;
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 9999999;
 }
 
 #main-modal {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	max-width: 100%;
-	width: max-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: max-content;
 }
 
 #main-modal .img {
@@ -220,34 +220,34 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 
 /* The Close Button */
 .Box-button#close-button {
-	top: 20px;
-	right: 2%;
-	right: calc(2% + 6px);
-	width: 30px;
-	height: 30px;
+    top: 20px;
+    right: 2%;
+    right: calc(2% + 6px);
+    width: 30px;
+    height: 30px;
 }
 
 .Box-button {
-	position: absolute;
-	cursor: pointer;
-	outline: 0;
-	padding: 0;
-	margin: 0;
-	border: 0;
-	-moz-border-radius: 15%;
-	border-radius: 15%;
-	background-color: #323232;
-	background-color: rgba(50,50,50,.5);
-	color: #ddd;
-	font: 1.6em sans-serif;
-	-webkit-transition: background-color .4s ease;
-	transition: background-color .4s ease;
+    position: absolute;
+    cursor: pointer;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    -moz-border-radius: 15%;
+    border-radius: 15%;
+    background-color: #323232;
+    background-color: rgba(50,50,50,.5);
+    color: #ddd;
+    font: 1.6em sans-serif;
+    -webkit-transition: background-color .4s ease;
+    transition: background-color .4s ease;
 }
 
 .Box-button svg {
-	position: absolute;
-	left: 0;
-	top: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .Box-button:focus, .Box-button:hover{background-color:rgba(50,50,50,.9)}
@@ -255,35 +255,35 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .width-100 { width:100%!important }
 
 .green-item-list {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .green-item-list .green-item-box {
-	text-decoration: none;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
+    text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .green-item-list .green-item-box .green-item-poster {
-	width: 100%;
+    width: 100%;
     overflow: hidden;
 }
 
 .green-item-list .green-item-box .green-item-poster img {
-	width: 100%;
+    width: 100%;
     height: auto;
     object-fit: cover;
 }
 
 .green-item-list .green-item-details {
-	width: 100%;
+    width: 100%;
 }
 
 .green-item-list .green-item-details h3 {
-	text-decoration: underline;
+    text-decoration: underline;
     font-size: 20px;
     font-weight: bold;
     line-height: 1.25;
@@ -307,12 +307,12 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 }
 
 .table_scrollbar th {
-	border: solid 1px #e1e1e6;
-	padding: 0!important;
+    border: solid 1px #e1e1e6;
+    padding: 0!important;
 }
 
 .table_scrollbar h3 {
-	padding: 17px 10px;
+    padding: 17px 10px;
     vertical-align: top;
     white-space: nowrap;
     text-transform: uppercase;
@@ -325,7 +325,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 }
 
 .table_scrollbar td {
-	border-width: 0 1px 1px 0;
+    border-width: 0 1px 1px 0;
     border: solid 1px #e1e1e6;
     padding: 10px 10px;
     text-align: left;
@@ -794,4 +794,177 @@ table a:hover, p a:hover, .credit-name a:hover {
 
 @media screen and (min-width: 701px) {
     .last-episode.mobile { display: none; }
+}
+
+/* Credits Modal */
+.credits-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content_2 {
+    position: relative;
+    background: #fff;
+    margin: 2% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 8px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Credits Form */
+.add-credit-form {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-row input,
+.form-row select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.person-search {
+    flex: 2;
+}
+
+.role-input,
+.job-input,
+.department-select {
+    flex: 1;
+}
+
+/* Credits List */
+.credits-list {
+    margin-top: 20px;
+}
+
+.credit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.credit-content {
+    display: flex;
+    gap: 10px;
+}
+
+.credit-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-btn,
+.delete-btn,
+.save-credit-btn,
+.add-credit-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background: #f44336;
+    color: white;
+}
+
+.save-credit-btn {
+    background: #2196F3;
+    color: white;
+}
+
+.add-credit-btn {
+    background: #9c27b0;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/* Tabs */
+.credits-tabs {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Autocomplete */
+.ui-autocomplete {
+    z-index: 1600 !important;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ui-autocomplete li div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+}
+
+.ui-autocomplete li img {
+    border-radius: 50%;
+}
+
+.credit-item .edit-form {
+    width: 100%;
+}
+
+.credit-item .display-view {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.credit-item .role {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.save-btn {
+    background: #2196F3;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
