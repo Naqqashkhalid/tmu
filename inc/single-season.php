@@ -22,7 +22,7 @@ function single_season($content) {
     $next = $wpdb->get_var("SELECT season.ID FROM $table_name season JOIN {$wpdb->prefix}posts AS posts ON (season.ID = posts.ID) WHERE season.`tv_series` = $series_id AND season.`season_no` = $season_no+1 AND posts.post_status = 'publish'");
 
     $table_name = $wpdb->prefix . 'tmu_tv_series_episodes';
-    $sql = "SELECT episode.ID, episode.episode_title, episode.air_date, episode.runtime, episode.overview, episode.episode_no, episode.average_rating, episode.vote_count 
+    $sql = "SELECT episode.ID, episode.episode_title, episode.air_date, episode.runtime, episode.overview, episode.episode_no, episode.total_average_rating, episode.total_vote_count 
             FROM $table_name episode 
             JOIN {$wpdb->prefix}posts AS posts ON (episode.ID = posts.ID) 
             WHERE episode.`season_no` = $season_no AND episode.`tv_series` = $series_id AND posts.post_status = 'publish' 
@@ -98,10 +98,12 @@ function season_episode_block($episode) {
         $episode->runtime = $episode->runtime ? ($runtime_hours == 0 ? '' : $runtime_hours . ' hour ') . ($episode->runtime % 60) . ' minutes' : '';
 
         $tmdb_rating = [];
-        $tmdb_rating['average'] = $episode->average_rating;
-        $tmdb_rating['count'] = $episode->vote_count;
-        $comments = get_comments(['post_id' => $episode->ID, 'status' => 'approve']);
-        $average_ratings = get_average_ratings($comments, $tmdb_rating);
+        $tmdb_rating['average'] = $episode->total_average_rating;
+        $tmdb_rating['count'] = $episode->total_vote_count;
+//        $comments = get_comments(['post_id' => $episode->ID, 'status' => 'approve']);
+//        $average_ratings = get_average_ratings($comments, $tmdb_rating);
+
+        $average_ratings = $tmdb_rating;
 
         // Build HTML into a variable
         $html = '<div class="single-episode">';

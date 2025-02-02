@@ -34,36 +34,40 @@ function schema_tv(){
 
   $tv['videos'] = isset($tv['videos']) && $tv['videos'] ? @unserialize($tv['videos']) : [];
   $tv['seasons'] = isset($tv['seasons']) && $tv['seasons'] ? @unserialize($tv['seasons']) : [];
-  $tmdb_rating['average'] = isset($tv['average_rating']) ? $tv['average_rating'] : '';
-  $tmdb_rating['count'] = isset($tv['vote_count']) ? $tv['vote_count'] : '';
+  $tmdb_rating['average'] = isset($tv['total_average_rating']) ? $tv['total_average_rating'] : '';
+  $tmdb_rating['count'] = isset($tv['total_vote_count']) ? $tv['total_vote_count'] : '';
 
-  if ($post_type === 'tv' || $post_type === 'drama') {
-    $table_col = $post_type === 'tv' ? 'tv_series' : 'dramas';
-    $eps = $wpdb->get_results("SELECT ID,average_rating,vote_count FROM {$wpdb->prefix}tmu_{$table_col}_episodes WHERE $table_col = $post_id");
-    if ($eps) {
-        $ep_rating = $tmdb_rating['average']*$tmdb_rating['count'];
-        foreach ($eps as $ep) {
-            $ep_comments = get_comments(array('post_id' => $ep->ID, 'status' => 'approve'));
-            foreach($ep_comments as $comment):
-                $ep_rating += isset($comment->comment_rating) && $comment->comment_rating ? (int)$comment->comment_rating : 0;
-                $tmdb_rating['count']++;
-            endforeach;
-            $ep_rating = $ep_rating+($ep->average_rating*$ep->vote_count);
-            $tmdb_rating['count'] += $ep->vote_count;
-        }
-        $tmdb_rating['average'] = $tmdb_rating['count'] ? number_format(($ep_rating/$tmdb_rating['count']), 1) : 5;
-    }
-  }
+    $average_ratings = $tmdb_rating;
+
+//  if ($post_type === 'tv' || $post_type === 'drama') {
+//    $table_col = $post_type === 'tv' ? 'tv_series' : 'dramas';
+//    $eps = $wpdb->get_results("SELECT ID,average_rating,vote_count FROM {$wpdb->prefix}tmu_{$table_col}_episodes WHERE $table_col = $post_id");
+//    if ($eps) {
+//        $ep_rating = $tmdb_rating['average']*$tmdb_rating['count'];
+//        foreach ($eps as $ep) {
+//            $ep_comments = get_comments(array('post_id' => $ep->ID, 'status' => 'approve'));
+//            foreach($ep_comments as $comment):
+//                $ep_rating += isset($comment->comment_rating) && $comment->comment_rating ? (int)$comment->comment_rating : 0;
+//                $tmdb_rating['count']++;
+//            endforeach;
+//            $ep_rating = $ep_rating+($ep->average_rating*$ep->vote_count);
+//            $tmdb_rating['count'] += $ep->vote_count;
+//        }
+//        $tmdb_rating['average'] = $tmdb_rating['count'] ? number_format(($ep_rating/$tmdb_rating['count']), 1) : 5;
+//    }
+//  }
 
 //  $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
     $comments = $wpdb->get_results($wpdb->prepare(
-        "SELECT * 
-         FROM $wpdb->comments 
-         WHERE comment_post_ID = %d 
-           AND comment_approved = '1' 
+        "SELECT *
+         FROM $wpdb->comments
+         WHERE comment_post_ID = %d
+           AND comment_approved = '1'
            AND comment_content != ''",
             $post_id));
-  $average_ratings = get_average_ratings($comments, $tmdb_rating);
+//  $average_ratings = get_average_ratings($comments, $tmdb_rating);
+
+
 
   $organization = isset($tv[ 'production_house' ]) ? $tv[ 'production_house' ] : '';
   $description = get_the_content();
@@ -168,10 +172,11 @@ function schema_movie(){
   $director = $wpdb->get_var($wpdb->prepare("SELECT person FROM {$wpdb->prefix}tmu_movies_crew WHERE movie = %d AND (job='Director' OR job LIKE '%Co-Director%' OR job LIKE '%Assistant Director%') ORDER BY CASE WHEN job='Director' THEN 1 ELSE 2 END LIMIT 1", $post_id));
 
   $movie['videos'] = $movie['videos'] ? @unserialize($movie['videos']) : [];
-  $tmdb_rating['average'] = $movie['average_rating'];
-  $tmdb_rating['count'] = $movie['vote_count'];
-  $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
-  $average_ratings = get_average_ratings($comments, $tmdb_rating);
+  $tmdb_rating['average'] = $movie['total_average_rating'];
+  $tmdb_rating['count'] = $movie['total_vote_count'];
+    $average_ratings = $tmdb_rating;
+//  $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
+//  $average_ratings = get_average_ratings($comments, $tmdb_rating);
 
   $organization = $movie[ 'production_house' ];
   $description = get_the_content();
@@ -475,13 +480,14 @@ function schema_episode(){
   $casts = episode_credit($episode['credits']['cast']);
   $episode['video'] = $episode['video'] ?? '';
   $episode['season_permalink'] = isset($episode['season_id']) ? get_permalink($episode['season_id']) : '';
-  $tmdb_rating['average'] = $episode['average_rating'];
-  $tmdb_rating['count'] = $episode['vote_count'];
+  $tmdb_rating['average'] = $episode['total_average_rating'];
+  $tmdb_rating['count'] = $episode['total_vote_count'];
 
   $episode['season_no'] = isset($episode['season_no']) ? $episode['season_no'] : 1;
+    $average_ratings = $tmdb_rating;
 
-  $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
-  $average_ratings = get_average_ratings($comments, $tmdb_rating);
+//  $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
+//  $average_ratings = get_average_ratings($comments, $tmdb_rating);
 
   $director_id = isset($episode['credits'][ 'crew' ]) ? get_credits_ids_by_profession($episode['credits'][ 'crew' ], 'directing', 'Director', 1) : '';
   $producer_id = isset($episode['credits'][ 'crew' ]) ? get_credits_ids_by_profession($episode['credits']['crew'], 'production', 'Producer', 1) : '';

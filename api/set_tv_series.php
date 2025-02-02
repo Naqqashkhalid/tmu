@@ -194,11 +194,11 @@ function add_tv($post_id){
 		foreach ($cast as $credit) { process_custom_cast('tv_series', $post_id, $credit, $timestamp); }
 		foreach ($crew as $credit) { process_custom_crew('tv_series', $post_id, $credit, $timestamp); }
 
-		if (!isset($_POST['star_cast'][3]['person']) || !$_POST['star_cast'][3]['person'] && $cast) {
+		if ((!isset($_POST['star_cast'][3]['person']) || !$_POST['star_cast'][3]['person']) && $cast && !(isset($_POST['tmdb_id']) && $_POST['tmdb_id'])) {
 			$star_casts = array_slice($cast, 0, 4);
 	    	$_POST['star_cast'] = array_map(function($star_cast){ return ['person' => $star_cast['person'], 'character' => $star_cast['acting_job']]; }, $star_casts);
 	    	$wpdb->update($table_name, [ 'star_cast' => is_array($_POST['star_cast']) ? serialize($_POST['star_cast']) : '' ], ['ID' => $post_id], ['%s'], ['%d']);
-		}
+        }
 	}
 
 	if ($_POST['star_cast']) {

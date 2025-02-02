@@ -281,6 +281,52 @@ function save_tv_credit_handler() {
         $credit_id = $wpdb->insert_id;
     }
 
+    // Add or update the credit in wp_tmu_tv_series table
+    $tv_series_table = $wpdb->prefix . 'tmu_tv_series';
+    $credits = $wpdb->get_var($wpdb->prepare(
+        "SELECT credits FROM $tv_series_table WHERE ID = %d",
+        $series_id
+    ));
+
+    $credits_array = $credits ? unserialize($credits) : array('cast' => array(), 'crew' => array());
+
+    $new_credit = array(
+        'person' => $person_id,
+        'department' => $department,
+    );
+
+    if ($type === 'cast') {
+        $new_credit['acting_job'] = $role;
+    } else {
+        $job_type = strtolower($department) . '_job';
+        $new_credit[$job_type] = $role;
+    }
+
+    // Check if the first item is not set or has an empty 'person' field
+    if (!isset($credits_array[$type][0]) || empty($credits_array[$type][0]['person'])) {
+        $credits_array[$type][0] = $new_credit;
+    } else {
+        // Check if the credit already exists and update it, or add a new one
+        $updated = false;
+        foreach ($credits_array[$type] as &$credit) {
+            if ($credit['person'] == $person_id) {
+                $credit = $new_credit;
+                $updated = true;
+                break;
+            }
+        }
+
+        if (!$updated) {
+            $credits_array[$type][] = $new_credit;
+        }
+    }
+
+    $wpdb->update(
+        $tv_series_table,
+        array('credits' => serialize($credits_array)),
+        array('ID' => $series_id)
+    );
+
     wp_send_json_success(array('id' => $credit_id));
 }
 
@@ -291,10 +337,41 @@ function delete_tv_credit_handler() {
 
     $credit_id = intval($_POST['credit_id']);
     $type = sanitize_text_field($_POST['type']);
+    $series_id = intval($_POST['series_id']);
+    $person_id = intval($_POST['person_id']);
 
     global $wpdb;
     $table = $wpdb->prefix . 'tmu_tv_series_' . $type;
 
+    // Delete from the specific cast or crew table
     $wpdb->delete($table, array('ID' => $credit_id));
-    wp_send_json_success();
+
+    // Remove the credit from wp_tmu_tv_series table
+    $tv_series_table = $wpdb->prefix . 'tmu_tv_series';
+    $credits = $wpdb->get_var($wpdb->prepare(
+        "SELECT credits FROM $tv_series_table WHERE ID = %d",
+        $series_id
+    ));
+
+    if ($credits) {
+        $credits_array = unserialize($credits);
+        if (isset($credits_array[$type])) {
+            // Remove the credit based on the person_id
+            $credits_array[$type] = array_filter($credits_array[$type], function($credit) use ($person_id) {
+                return $credit['person'] != $person_id;
+            });
+            $credits_array[$type] = array_values($credits_array[$type]);
+        }
+        // Update the credits in the database
+        $wpdb->update(
+            $tv_series_table,
+            array('credits' => serialize($credits_array)),
+            array('ID' => $series_id)
+        );
+    }
+
+    wp_send_json_success(array('id' => $credit_id, 'credits' => $credits_array[$type], 'series_id' => $series_id));
+
+//    wp_send_json_success();
 }
+?>

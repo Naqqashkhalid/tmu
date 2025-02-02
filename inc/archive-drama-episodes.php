@@ -10,7 +10,7 @@ if ( $drama = get_page_by_path( $slug, OBJECT, 'drama' ) ):
 
   global $wpdb;
   $table_name = $wpdb->prefix.'tmu_dramas_episodes';
-  $episodes = $wpdb->get_results("SELECT t.ID,t.episode_title,t.air_date,t.runtime,t.overview,t.episode_no,t.average_rating,t.vote_count FROM $table_name t JOIN {$wpdb->prefix}posts AS posts ON (t.ID = posts.ID) WHERE t.`dramas`=$post_id AND posts.post_status = 'publish' ORDER BY air_date");
+  $episodes = $wpdb->get_results("SELECT t.ID,t.episode_title,t.air_date,t.runtime,t.overview,t.episode_no,t.total_average_rating,t.total_vote_count FROM $table_name t JOIN {$wpdb->prefix}posts AS posts ON (t.ID = posts.ID) WHERE t.`dramas`=$post_id AND posts.post_status = 'publish' ORDER BY air_date");
 
   $post = $wpdb->get_row("SELECT t.star_cast,t.release_date FROM {$wpdb->prefix}tmu_dramas t JOIN {$wpdb->prefix}posts AS posts ON (t.ID = posts.ID) WHERE t.ID=$post_id AND posts.post_status = 'publish'");
   $casts = isset($post->star_cast) && $post->star_cast ? unserialize($post->star_cast) : '';
@@ -141,10 +141,12 @@ function drama_season_episode_block($episode){
     $episode->runtime = $episode->runtime ? ($runtime_hours==0 ? '' : $runtime_hours.' hour ').($episode->runtime%60).' minutes' : '';
 
     $tmdb_rating = [];
-    $tmdb_rating['average'] = $episode->average_rating;
-    $tmdb_rating['count'] = $episode->vote_count;
-    $comments = get_comments(array('post_id' => $episode->ID, 'status' => 'approve'));
-    $average_ratings = get_average_ratings($comments, $tmdb_rating);
+    $tmdb_rating['average'] = $episode->total_average_rating;
+    $tmdb_rating['count'] = $episode->total_vote_count;
+//    $comments = get_comments(array('post_id' => $episode->ID, 'status' => 'approve'));
+//    $average_ratings = get_average_ratings($comments, $tmdb_rating);
+
+      $average_ratings = $tmdb_rating;
 
     $data = '<div class="single-episode">';
       $data .= '<a class="image" href="'.$permalink.'" title="'.$episode->episode_title.'"><img '.($poster_url ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-image.webp" data-src="'.$poster_url.'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-image.webp"') ).' alt="'.$episode->episode_title.'" width="227" height="127"></a>';

@@ -300,7 +300,8 @@ jQuery(document).ready(function($) {
         });
 
         element.find('.delete-btn').click(function() {
-            deleteCredit(credit.ID, type);
+            const personId = element.find('.person-search').attr('data-person-id');
+            deleteCredit(credit.ID, type, personId);
         });
 
         return element;
@@ -522,7 +523,7 @@ jQuery(document).ready(function($) {
     }
 
     // Delete credit function
-    function deleteCredit(creditId, type) {
+    function deleteCredit(creditId, type, personId) {
         if (confirm('Are you sure you want to delete this credit?')) {
             $.ajax({
                 url: ajax_credits_params.ajaxurl,
@@ -531,7 +532,9 @@ jQuery(document).ready(function($) {
                 data: {
                     action: 'delete_tv_credit',
                     credit_id: creditId,
-                    type: type
+                    person_id: personId,
+                    type: type,
+                    series_id: ajax_credits_params.series_id
                 },
                 success: function(response) {
                     if (response.success) {

@@ -106,10 +106,10 @@ function movie_item_template($item, $count) {
 
 	$result = $wpdb->get_row("SELECT movie.runtime,movie.certification,movie.average_rating,movie.vote_count FROM {$wpdb->prefix}tmu_movies movie JOIN {$wpdb->prefix}posts AS posts ON (movie.ID = posts.ID) WHERE movie.ID = $item AND posts.post_status = 'publish'");
 	$tmdb_rating = [];
-	$tmdb_rating['average'] = $result->average_rating;
-	$tmdb_rating['count'] = $result->vote_count;
-	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
-	$average_ratings = get_average_ratings($comments, $tmdb_rating);
+	$tmdb_rating['average'] = $result->tota_average_rating;
+	$tmdb_rating['count'] = $result->total_vote_count;
+//	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
+//	$average_ratings = get_average_ratings($comments, $tmdb_rating);
 
 	$content = '<div class="list1 numbers_of_items"><span class="item-number">'.$count.'</span></div>';
 	$content .= '<div class="single-item">';
@@ -118,7 +118,7 @@ function movie_item_template($item, $count) {
 			$content .= '<div class="item-head">';
 				$content .= '<div class="title-container">';
 					$content .= '<h3 class="item-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a>'.($year ? ' <span>('.$year.')</span>' : '').'</h3>';
-					$content .= ($average_ratings ? '<div class="item-rating"><svg id="glyphicons-basic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#ffffff" id="star" d="M27.34766,14.17944l-6.39209,4.64307,2.43744,7.506a.65414.65414,0,0,1-.62238.85632.643.643,0,0,1-.38086-.12744l-6.38568-4.6383-6.38574,4.6383a.643.643,0,0,1-.38086.12744.65419.65419,0,0,1-.62238-.85632l2.43744-7.506L4.66046,14.17944A.65194.65194,0,0,1,5.04358,13h7.89978L15.384,5.48438a.652.652,0,0,1,1.24018,0L19.06476,13h7.89978A.652.652,0,0,1,27.34766,14.17944Z"/></svg> <span>'.$average_ratings['average'].'</span></div>' : '');
+					$content .= ($tmdb_rating ? '<div class="item-rating"><svg id="glyphicons-basic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#ffffff" id="star" d="M27.34766,14.17944l-6.39209,4.64307,2.43744,7.506a.65414.65414,0,0,1-.62238.85632.643.643,0,0,1-.38086-.12744l-6.38568-4.6383-6.38574,4.6383a.643.643,0,0,1-.38086.12744.65419.65419,0,0,1-.62238-.85632l2.43744-7.506L4.66046,14.17944A.65194.65194,0,0,1,5.04358,13h7.89978L15.384,5.48438a.652.652,0,0,1,1.24018,0L19.06476,13h7.89978A.652.652,0,0,1,27.34766,14.17944Z"/></svg> <span>'.$tmdb_rating['average'].'</span></div>' : '');
 				$content .= '</div>';
 				$content .= '<div class="numbers">#'.$count.'</div>';
 			$content .= '</div>';
@@ -180,9 +180,9 @@ function tv_item_template($item, $count){
 
 	$results = $wpdb->get_row("SELECT tv.certification,tv.last_season,tv.total_average_rating,tv.total_vote_count FROM {$wpdb->prefix}tmu_tv_series tv JOIN {$wpdb->prefix}posts AS posts ON (tv.ID = posts.ID) WHERE ID = $item AND posts.post_status = 'publish'");
 	$season = $results->last_season ? $wpdb->get_row("SELECT season.ID,season.season_name FROM {$wpdb->prefix}tmu_tv_series_seasons season JOIN {$wpdb->prefix}posts AS posts ON (season.ID = posts.ID) WHERE season.tv_series = $item AND season.season_no = {$results->last_season} AND posts.post_status = 'publish'") : $results->last_season;
-	// $tmdb_rating = [];
-	// $tmdb_rating['average'] = $results->average_rating;
-	// $tmdb_rating['count'] = $results->vote_count;
+//	 $tmdb_rating = [];
+//	 $tmdb_rating['average'] = $results->total_average_rating;
+//	 $tmdb_rating['count'] = $results->total_vote_count;
 	// $comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
 	// $average_ratings = get_average_ratings($comments, $tmdb_rating);
 
@@ -255,12 +255,14 @@ function drama_item_template($item, $count){
 	$director1 = $wpdb->get_var("SELECT crew.person FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.dramas = $item AND crew.job = 'Director' AND posts.post_status = 'publish'");
 	$director = $director1 ? get_linked_post($director1) : '';
 
-	$results = $wpdb->get_row("SELECT drama.certification,drama.average_rating,drama.vote_count FROM {$wpdb->prefix}tmu_dramas drama JOIN {$wpdb->prefix}posts AS posts ON (drama.ID = posts.ID) WHERE drama.ID = $item AND posts.post_status = 'publish'");
+	$results = $wpdb->get_row("SELECT drama.certification,drama.total_average_rating,drama.total_vote_count FROM {$wpdb->prefix}tmu_dramas drama JOIN {$wpdb->prefix}posts AS posts ON (drama.ID = posts.ID) WHERE drama.ID = $item AND posts.post_status = 'publish'");
 	$tmdb_rating = [];
-	$tmdb_rating['average'] = $results->average_rating;
-	$tmdb_rating['count'] = $results->vote_count;
-	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
-	$average_ratings = get_average_ratings($comments, $tmdb_rating);
+	$tmdb_rating['average'] = $results->total_average_rating;
+	$tmdb_rating['count'] = $results->total_vote_count;
+//	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
+//	$average_ratings = get_average_ratings($comments, $tmdb_rating);
+
+    $average_ratings = $tmdb_rating;
 
 	$content = '<div class="single-item">';
 		$content .= '<div class="numbers-top">#'.$count.'</div>';

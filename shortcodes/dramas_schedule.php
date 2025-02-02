@@ -350,34 +350,36 @@ function compare_schedule_timestamp($a, $b) {
 
 function tv_item_list_schema($result, $count){
 
-	$tmdb_rating['average'] = $result->average_rating;
-  $tmdb_rating['count'] = $result->vote_count;
-  global $wpdb;
-  $rating = $wpdb->get_row("SELECT
-    d.dramas,
-    AVG(e.avg_rating) AS average_drama_rating,
-    SUM(e.comment_count) AS total_comments
-FROM
-    wp_tmu_dramas_episodes d
-JOIN (
-    SELECT
-        comment_post_ID AS episode_id,
-        AVG(IF(comment_rating > 0, comment_rating, NULL)) AS avg_rating,
-        COUNT(IF(comment_rating > 0, 1, NULL)) AS comment_count
-    FROM
-        wp_comments
-    GROUP BY
-        comment_post_ID
-) e ON d.id = e.episode_id
-WHERE
-    d.dramas = {$result->ID}
-GROUP BY
-    d.dramas;");
+	$tmdb_rating['average'] = $result->total_average_rating;
+  $tmdb_rating['count'] = $result->total_vote_count;
+//  global $wpdb;
+//  $rating = $wpdb->get_row("SELECT
+//    d.dramas,
+//    AVG(e.avg_rating) AS average_drama_rating,
+//    SUM(e.comment_count) AS total_comments
+//FROM
+//    wp_tmu_dramas_episodes d
+//JOIN (
+//    SELECT
+//        comment_post_ID AS episode_id,
+//        AVG(IF(comment_rating > 0, comment_rating, NULL)) AS avg_rating,
+//        COUNT(IF(comment_rating > 0, 1, NULL)) AS comment_count
+//    FROM
+//        wp_comments
+//    GROUP BY
+//        comment_post_ID
+//) e ON d.id = e.episode_id
+//WHERE
+//    d.dramas = {$result->ID}
+//GROUP BY
+//    d.dramas;");
+//
+//  if(isset($rating->average_drama_rating)) $tmdb_rating['average'] = ($tmdb_rating['average']+$rating->average_drama_rating)/2;
+//  if(isset($rating->total_comments)) $tmdb_rating['count'] += $rating->total_comments;
+//  $comments = get_comments(array('post_id' => $result->ID, 'status' => 'approve'));
+//  $average_ratings = get_average_ratings($comments, $tmdb_rating);
 
-  if(isset($rating->average_drama_rating)) $tmdb_rating['average'] = ($tmdb_rating['average']+$rating->average_drama_rating)/2;
-  if(isset($rating->total_comments)) $tmdb_rating['count'] += $rating->total_comments;
-  $comments = get_comments(array('post_id' => $result->ID, 'status' => 'approve'));
-  $average_ratings = get_average_ratings($comments, $tmdb_rating);
+    $average_ratings = $tmdb_rating;
 	return '{
         "@type": "ListItem",
         "position": "'.($count+1).'",

@@ -31,27 +31,27 @@ function single_drama($content){
         $drama['next_episode_timestamp'] = isset($drama['next_episode']->air_date) ? strtotime($drama['next_episode']->air_date) : '';
     }
 
-    // $tmdb_rating['average'] = $drama['average_rating'];
-    // $tmdb_rating['count'] = $drama['vote_count'];
-
-    // $table_col = $post_type === 'tv' ? 'tv_series' : 'dramas';
-    // $eps = $wpdb->get_results("SELECT ID,average_rating,vote_count FROM {$wpdb->prefix}tmu_{$table_col}_episodes WHERE $table_col = $post_id");
-    // if ($eps) {
-    // $ep_rating = $tmdb_rating['average']*$tmdb_rating['count'];
-    // foreach ($eps as $ep) {
-    //     $ep_comments = get_comments(array('post_id' => $ep->ID, 'status' => 'approve'));
-    //     foreach($ep_comments as $comment):
-    //         $ep_rating += isset($comment->comment_rating) && $comment->comment_rating ? (int)$comment->comment_rating : 0;
-    //         $tmdb_rating['count']++;
-    //     endforeach;
-    //     $ep_rating = $ep_rating+($ep->average_rating*$ep->vote_count);
-    //     $tmdb_rating['count'] += $ep->vote_count;
-    // }
-    // $tmdb_rating['average'] = $tmdb_rating['count'] ? number_format(($ep_rating/$tmdb_rating['count']), 1) : 5;
-    // }
-
-    // $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
-    // $average_ratings = get_average_ratings($comments, $tmdb_rating);
+//     $tmdb_rating['average'] = $drama['average_rating'];
+//     $tmdb_rating['count'] = $drama['vote_count'];
+//
+//     $table_col = $post_type === 'tv' ? 'tv_series' : 'dramas';
+//     $eps = $wpdb->get_results("SELECT ID,average_rating,vote_count FROM {$wpdb->prefix}tmu_{$table_col}_episodes WHERE $table_col = $post_id");
+//     if ($eps) {
+//     $ep_rating = $tmdb_rating['average']*$tmdb_rating['count'];
+//     foreach ($eps as $ep) {
+//         $ep_comments = get_comments(array('post_id' => $ep->ID, 'status' => 'approve'));
+//         foreach($ep_comments as $comment):
+//             $ep_rating += isset($comment->comment_rating) && $comment->comment_rating ? (int)$comment->comment_rating : 0;
+//             $tmdb_rating['count']++;
+//         endforeach;
+//         $ep_rating = $ep_rating+($ep->average_rating*$ep->vote_count);
+//         $tmdb_rating['count'] += $ep->vote_count;
+//     }
+//     $tmdb_rating['average'] = $tmdb_rating['count'] ? number_format(($ep_rating/$tmdb_rating['count']), 1) : 5;
+//     }
+//
+//     $comments = get_comments(array('post_id' => $post_id, 'status' => 'approve'));
+//     $average_ratings = get_average_ratings($comments, $tmdb_rating);
 
     $average_ratings = ['average' => $drama['total_average_rating'], 'count' => $drama['total_vote_count']];
 

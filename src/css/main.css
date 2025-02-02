@@ -1,6 +1,7 @@
 h1 { font-size: 28px!important; font-weight: bold!important }
 
-.entry-content p, .movie_sec p { text-align: justify; margin-bottom: 1.5em!important;}
+.content-area p, .movie_sec p { text-align: justify; margin-bottom: 1.5em!important;}
+.gg a { color: #f97316!important; }
 .separate-containers .comments-area, .inside-article, .separate-containers .page-header, .separate-containers .paging-navigation { padding: 10px!important }
 
 body { background-color: #fff; }
@@ -31,7 +32,7 @@ body { background-color: #fff; }
 
 .main-navigation .main-nav ul li a, .main-navigation .menu-toggle, .main-navigation .menu-bar-items { color: #ffffff!important; }
 
-.main-navigation .main-nav ul li[class*="current-menu-"] > a { color: #0e9272!important; }
+.main-navigation .main-nav ul li[class*="current-menu-"] > a { color: #f97316!important; }
 
 .main-with-sidebar { background-color: #fff!important; }
 
@@ -91,13 +92,14 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 
 .short-heading:before {
     content: "";
-    background-color:  #0E9272;
+    background-color: #f97316;
     width: 0.25rem;
     border-radius: 0.25rem;
     height: 83.333333%;
     position: absolute;
     left: 0;
 }
+
 
 .heading-des {
     font-size: 1rem;
