@@ -121,7 +121,7 @@ function get_term_posts($post_type, $term_id, $post_no){
   global $wpdb;
   $table_name = $wpdb->prefix.($post_type === 'movie' ? 'tmu_movies' : ($post_type === 'tv' ? 'tmu_tv_series' : ($post_type === 'drama' ? 'tmu_dramas' : ($post_type === 'people' ? 'tmu_people' : $post_type))));
 
-  $select_query = $release ? $table_name.".ID,".$table_name.".release_timestamp,".$table_name.".average_rating,".$table_name.".vote_count" : ($post_type === 'people' ? $table_name.'.ID,'.$table_name.'.date_of_birth,'.$table_name.'.profession,'.$table_name.'.no_movies' : $table_name.'.ID');
+  $select_query = $release ? $table_name.".ID,".$table_name.".release_timestamp,".$table_name.".total_average_rating,".$table_name.".total_vote_count" : ($post_type === 'people' ? $table_name.'.ID,'.$table_name.'.date_of_birth,'.$table_name.'.profession,'.$table_name.'.no_movies' : $table_name.'.ID');
 
   $posts = $post_type === 'post' ? 'wp_posts' : 'posts';
   $post_query = $post_type !== 'post' ? "LEFT JOIN wp_posts AS posts ON ($table_name.ID = posts.ID)" : '';

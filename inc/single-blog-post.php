@@ -104,9 +104,9 @@ function movie_item_template($item, $count) {
 	$director1 = $wpdb->get_var("SELECT crew.person FROM {$wpdb->prefix}tmu_movies_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.movie = $item AND crew.job = 'Director' AND posts.post_status = 'publish'");
 	$director = $director1 ? get_linked_post($director1) : '';
 
-	$result = $wpdb->get_row("SELECT movie.runtime,movie.certification,movie.average_rating,movie.vote_count FROM {$wpdb->prefix}tmu_movies movie JOIN {$wpdb->prefix}posts AS posts ON (movie.ID = posts.ID) WHERE movie.ID = $item AND posts.post_status = 'publish'");
+	$result = $wpdb->get_row("SELECT movie.runtime,movie.certification,movie.total_average_rating,movie.total_vote_count FROM {$wpdb->prefix}tmu_movies movie JOIN {$wpdb->prefix}posts AS posts ON (movie.ID = posts.ID) WHERE movie.ID = $item AND posts.post_status = 'publish'");
 	$tmdb_rating = [];
-	$tmdb_rating['average'] = $result->tota_average_rating;
+	$tmdb_rating['average'] = $result->total_average_rating;
 	$tmdb_rating['count'] = $result->total_vote_count;
 //	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
 //	$average_ratings = get_average_ratings($comments, $tmdb_rating);
@@ -331,12 +331,12 @@ function movie_list2_item($item, $count) {
 	$director1 = $wpdb->get_var("SELECT crew.person FROM {$wpdb->prefix}tmu_movies_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.movie = $item AND crew.job = 'Director' AND posts.post_status = 'publish'");
 	$director = $director1 ? get_linked_post($director1) : '';
 
-	$result = $wpdb->get_row("SELECT movie.certification,movie.videos,movie.tagline,movie.runtime,movie.release_timestamp,movie.average_rating,movie.vote_count FROM {$wpdb->prefix}tmu_movies movie JOIN {$wpdb->prefix}posts AS posts ON (movie.ID = posts.ID) WHERE movie.ID = $item AND posts.post_status = 'publish'");
+	$result = $wpdb->get_row("SELECT movie.certification,movie.videos,movie.tagline,movie.runtime,movie.release_timestamp,movie.total_average_rating,movie.total_vote_count FROM {$wpdb->prefix}tmu_movies movie JOIN {$wpdb->prefix}posts AS posts ON (movie.ID = posts.ID) WHERE movie.ID = $item AND posts.post_status = 'publish'");
 	$year = $result->release_timestamp ? date('Y', $result->release_timestamp) : implode(', ', wp_get_object_terms( $item, 'by-year', array('fields' => 'names') ));
 	$release_date = $result->release_timestamp ? date('F d, Y', $result->release_timestamp) : '';
 	$tmdb_rating = [];
-	$tmdb_rating['average'] = $result->average_rating;
-	$tmdb_rating['count'] = $result->vote_count;
+	$tmdb_rating['average'] = $result->total_average_rating;
+	$tmdb_rating['count'] = $result->total_vote_count;
 	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
 	$average_ratings = get_average_ratings($comments, $tmdb_rating);
 	$videos = $result->videos ? unserialize($result->videos) : '';
@@ -422,13 +422,13 @@ function tv_list2_item($item, $count) {
 	$director1 = $wpdb->get_var("SELECT crew.person FROM {$wpdb->prefix}tmu_tv_series_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.tv_series = $item AND crew.job = 'Director' AND posts.post_status = 'publish'");
 	$director = $director1 ? get_linked_post($director1) : '';
 
-	$result = $wpdb->get_row("SELECT tv.certification,tv.last_season,tv.streaming_platforms,tv.tagline,tv.runtime,tv.release_timestamp,tv.average_rating,tv.vote_count FROM {$wpdb->prefix}tmu_tv_series tv JOIN {$wpdb->prefix}posts AS posts ON (tv.ID = posts.ID) WHERE tv.ID = $item AND posts.post_status = 'publish'");
+	$result = $wpdb->get_row("SELECT tv.certification,tv.last_season,tv.streaming_platforms,tv.tagline,tv.runtime,tv.release_timestamp,tv.total_average_rating,tv.total_vote_count FROM {$wpdb->prefix}tmu_tv_series tv JOIN {$wpdb->prefix}posts AS posts ON (tv.ID = posts.ID) WHERE tv.ID = $item AND posts.post_status = 'publish'");
 	$season = $result->last_season ? $wpdb->get_row("SELECT season.ID,season.season_name FROM {$wpdb->prefix}tmu_tv_series_seasons as season JOIN {$wpdb->prefix}posts AS posts ON (season.ID = posts.ID) WHERE season.tv_series = $item AND season.season_no = {$result->last_season} AND posts.post_status = 'publish'") : '';
 	$year = $result->release_timestamp ? date('Y', $result->release_timestamp) : implode(', ', wp_get_object_terms( $item, 'by-year', array('fields' => 'names') ));
 	$release_date = $result->release_timestamp ? date('F d, Y', $result->release_timestamp) : '';
 	$tmdb_rating = [];
-	$tmdb_rating['average'] = $result->average_rating;
-	$tmdb_rating['count'] = $result->vote_count;
+	$tmdb_rating['average'] = $result->total_average_rating;
+	$tmdb_rating['count'] = $result->total_vote_count;
 	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
 	$average_ratings = get_average_ratings($comments, $tmdb_rating);
 
@@ -512,12 +512,12 @@ function drama_list2_item($item, $count) {
 	$director1 = $wpdb->get_var("SELECT crew.person FROM {$wpdb->prefix}tmu_dramas_crew crew JOIN {$wpdb->prefix}posts AS posts ON (crew.ID = posts.ID) WHERE crew.dramas = $item AND crew.job = 'Director' AND posts.post_status = 'publish'");
 	$director = $director1 ? get_linked_post($director1) : '';
 
-	$result = $wpdb->get_row("SELECT drama.certification,drama.streaming_platforms,drama.tagline,drama.runtime,drama.release_timestamp,drama.average_rating,drama.vote_count FROM {$wpdb->prefix}tmu_dramas drama JOIN {$wpdb->prefix}posts AS posts ON (drama.ID = posts.ID) WHERE drama.ID = $item AND posts.post_status = 'publish'");
+	$result = $wpdb->get_row("SELECT drama.certification,drama.streaming_platforms,drama.tagline,drama.runtime,drama.release_timestamp,drama.total_average_rating,drama.total_vote_count FROM {$wpdb->prefix}tmu_dramas drama JOIN {$wpdb->prefix}posts AS posts ON (drama.ID = posts.ID) WHERE drama.ID = $item AND posts.post_status = 'publish'");
 	$year = $result->release_timestamp ? date('Y', $result->release_timestamp) : implode(', ', wp_get_object_terms( $item, 'by-year', array('fields' => 'names') ));
 	$release_date = $result->release_timestamp ? date('F d, Y', $result->release_timestamp) : '';
 	$tmdb_rating = [];
-	$tmdb_rating['average'] = $result->average_rating;
-	$tmdb_rating['count'] = $result->vote_count;
+	$tmdb_rating['average'] = $result->total_average_rating;
+	$tmdb_rating['count'] = $result->total_vote_count;
 	$comments = get_comments(array('post_id' => $item, 'status' => 'approve'));
 	$average_ratings = get_average_ratings($comments, $tmdb_rating);
 

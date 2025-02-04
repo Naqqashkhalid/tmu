@@ -897,8 +897,8 @@ function get_related_news($tag_name, $no_of_news){
 }
 
 function listitem_schema($result, $count, $post_type){
-    $tmdb_rating['average'] = $result->average_rating;
-    $tmdb_rating['count'] = $result->vote_count;
+    $tmdb_rating['average'] = $result->total_average_rating;
+    $tmdb_rating['count'] = $result->total_vote_count;
     $comments = get_comments(array('post_id' => $result->ID, 'status' => 'approve'));
     $average_ratings = get_average_ratings($comments, $tmdb_rating);
     return '{
