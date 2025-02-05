@@ -674,6 +674,7 @@ table a:hover, p a:hover, .credit-name a:hover {
     display: block;
     height: 0;
     width: 100%;
+    aspect-ratio: 7 / 5;
     padding-bottom: 140%;
     position: relative;
 }

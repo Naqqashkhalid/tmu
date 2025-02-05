@@ -699,6 +699,7 @@ add_action('wp_head', function() {
     }
 });
 
+
 add_filter( 'generate_sidebar_layout','custom_sidebar' );
 function custom_sidebar( $layout )
 {
