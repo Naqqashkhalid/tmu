@@ -250,7 +250,8 @@ function drama_header($drama, $director, $director_job, $producer, $producer_job
 
     $data = '<section class="movie-trailer">';
     $data .= '<div class="feature-image" data-gallery-id="img-1" onclick="featureImage(this)">';
-    $data .= '<img src="'.(has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url(get_the_ID(), 'medium')) : plugin_dir_url(__DIR__) . 'src/images/no-poster.webp').'" srcset="'.(has_post_thumbnail() ? esc_attr(wp_get_attachment_image_srcset(get_post_thumbnail_id(get_the_ID()), 'medium')) : '').'" sizes="(max-width: 204px) 100vw, 204px" alt="'.esc_attr(get_the_title()).'" width="200" height="300" style="aspect-ratio: 2 / 3;">';    $data .= '<div class="watch-trailer-btn trailer-desktop">'.$watch_trailer.'</div>';
+    $data .= '<img src="'.(has_post_thumbnail() ? esc_url(get_the_post_thumbnail_url(get_the_ID(), 'medium-thumbnail')) : plugin_dir_url(__DIR__) . 'src/images/no-poster.webp').'" srcset="'.(has_post_thumbnail() ? esc_attr(wp_get_attachment_image_srcset(get_post_thumbnail_id(get_the_ID()), 'medium-thumbnail')) : ''). '"sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" ' . 'alt="' . esc_attr(get_the_title()) . '" ' .'width="280" height="414" decoding="async" loading="eager">';
+    $data .= '<div class="watch-trailer-btn trailer-desktop">'.$watch_trailer.'</div>';
     $data .= '</div>';
     $data .= '<div class="movie_details">';
     $data .= '<h1 class="font-size-36">'.get_the_title().'</h1>';

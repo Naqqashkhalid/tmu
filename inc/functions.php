@@ -692,12 +692,35 @@ function clean_job_string($text) {
     return $text;
 }
 
-add_action('wp_head', function() {
-    if (has_post_thumbnail()) {
-        $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-        echo '<link rel="preload" as="image" href="' . esc_url($image_url) . '" />';
-    }
+add_action('after_setup_theme', function() {
+    add_image_size('thumbnail', 140, 207, true); // IMDb-like small size
+    add_image_size('small-thumbnail', 210, 311, true); // Slightly larger size
+    add_image_size('medium-thumbnail', 280, 414, true); // Medium size for larger screens
 });
+
+function isDesktop(): bool
+{
+    // Check if the user agent is provided
+    if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+        return true; // Assume desktop if no User-Agent
+    }
+
+    $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+
+    // Common substrings for mobile devices
+    $mobileDevices = [
+        'android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone', 'opera mini', 'mobile'
+    ];
+
+    // Check against known mobile device substrings
+    foreach ($mobileDevices as $device) {
+        if (strpos($userAgent, $device) !== false) {
+            return false; // It's a mobile device
+        }
+    }
+
+    return true; // Not a mobile device
+}
 
 
 add_filter( 'generate_sidebar_layout','custom_sidebar' );
@@ -758,7 +781,6 @@ function button_right_f(){
 	  </g>
 	</svg>';
 }
-
 /**
  * Build our the_title() parameters.
  *

@@ -332,9 +332,8 @@ prevButton.addEventListener("click", () => {
 function schedule_template($result, $heading){
 	$data = '<a class="drama-box" href="'.get_permalink($result->ID).'">';
 		$data .= '<div class="drama-poster">';
-//			$data .= '<img '.(has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif"') ).' alt="'.get_the_title($result->ID).'" width="100%" height="100%">';
-    $data .= '<img '.(has_post_thumbnail($result->ID) ? ('src="'.get_the_post_thumbnail_url($result->ID, 'thumbnail-small').'" srcset="'.esc_attr(wp_get_attachment_image_srcset(get_post_thumbnail_id($result->ID), 'thumbnail-small')).'" sizes="(max-width: 200px) 100vw, 200px"') : ('src="'.plugin_dir_url(__DIR__) . 'src/images/preloader.gif"')).' alt="'.esc_attr(get_the_title($result->ID)).'" width="200" height="300">';            $data .= '</div>';
-
+    $data .= '<img ' . 'src="' . plugin_dir_url(__DIR__) . 'src/images/preloader.gif" ' . 'data-src="' . get_the_post_thumbnail_url($result->ID, 'small-thumbnail') . '" ' . 'srcset="' . esc_attr(wp_get_attachment_image_srcset(get_post_thumbnail_id($result->ID), 'thumbnail')) . '" ' . 'sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" ' . 'alt="' . esc_attr(get_the_title($result->ID)) . '" ' . 'width="210" height="267" decoding="async" loading="eager">';
+    $data .= '</div>';
 		$data .= '<div class="drama-details">';
 			$data .= '<'.$heading.' class="drama-title">'.get_the_title($result->ID).'</'.$heading.'>';
 			$data .= '<p class="schedule-time">'.date( 'h:i A', $result->schedule_timestamp ).'</p>';
