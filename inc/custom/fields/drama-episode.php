@@ -18,13 +18,20 @@ function drama_episode( $meta_boxes ) {
                 'type'       => 'post',
                 'post_type'  => ['drama'],
                 'field_type' => 'select_advanced',
-                'columns' => 8,
+                'columns' => 6,
             ],
             [
-                'name'      => __( 'Video', 'dramas' ),
+                'name'      => __( 'Video', 'drama-episode' ),
                 'id'        => $prefix . 'video',
                 'type'      => 'text',
                 'columns'       => 3,
+            ],
+            [
+                'name'        => __( 'Embed url', 'drama-episode' ),
+                'id'          => $prefix . 'embed_url',
+                'type'        => 'text',
+                'placeholder' => __( 'place dramaspice video embed code', 'drama-episode' ),
+                'columns'     => 3,
             ],
             [
                 'name'    => __( 'Episode No', 'drama-episode' ),

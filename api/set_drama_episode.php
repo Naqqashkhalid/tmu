@@ -55,6 +55,13 @@ function insert_drama_episodes($drama_id, $season_no, $tmdb_season_id){
 }
 
 function add_drama_episode($post_id){
+    $embed_url = isset($_POST['embed_url']) && $_POST['embed_url'] ? $_POST['embed_url'] : '';
+
+    if($embed_url) {
+        global $wpdb;
+        $table_name = $wpdb->prefix.'tmu_dramas_episodes';
+        $wpdb->update($table_name, ['embed_url' => $embed_url], ['ID' => $post_id], ['%s'], ['%d']);
+    }
 	$current_time = time();
 	$release_date = isset($_POST['air_date']) && $_POST['air_date'] ? strtotime($_POST['air_date']) : '';
 
@@ -65,6 +72,8 @@ function add_drama_episode($post_id){
 		wp_update_post( ['ID' => $post_id, 'post_date' => $publish_date, 'post_date_gmt' => get_gmt_from_date( $publish_date )] );
 		add_action('save_post', 'tmdb_data');
 	}
+
+
 
 	return $post_id;
 }

@@ -130,6 +130,7 @@ function check_create_table() {
 			  `average_rating` DECIMAL(10,1) NOT NULL DEFAULT 0,
 			  `vote_count` bigint(20) NOT NULL DEFAULT 0,
 			  `video` text DEFAULT NULL,
+			  `embed_url` text DEFAULT NULL,
 			  `total_average_rating` DECIMAL(10,1) DEFAULT 0,
 			  `total_vote_count` bigint(20) NOT NULL DEFAULT 0
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci',

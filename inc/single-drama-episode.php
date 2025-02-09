@@ -65,7 +65,7 @@ function single_drama_episode($content){
 			'.drama_episode_header($episode, $director, $producer, $average_ratings).'
 
 			
-			'.('<div class="episode-videos">'.($episode['video'] ? ytplayer($episode['video']) : '').'</div>').'
+			'.('<div class="episode-videos">'.($episode['video'] ? ytplayer($episode['video']) : ($episode['embed_url'] ? '<div class="embedurl"><iframe id="firstIframe" title="'.$episode['episode_title'].'" frameborder="0" width="100%" height="100%" src="'.$episode['embed_url'].'" allowfullscreen scrolling="no"></iframe></div> ' : '')).'</div>').'
 			
 			<div class="next-prev">
 				<div class="prev-episode">'.($prev_episode ? '<a href="'.get_permalink($prev_episode).'" title="Previous Episode"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
