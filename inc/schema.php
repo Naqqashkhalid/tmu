@@ -495,10 +495,12 @@ function schema_episode(){
   $director_id = $director_id ? (is_array($director_id) ? $director_id[0] : $director_id) : $wpdb->get_var($wpdb->prepare("SELECT person FROM {$table_name}_crew WHERE $col = %d AND job='Director'", $episode['tv_series']));
   $producer_id = $producer_id ? (is_array($producer_id) ? $producer_id[0] : $producer_id) : $wpdb->get_var($wpdb->prepare("SELECT person FROM {$table_name}_crew WHERE $col = %d AND job='Producer'", $episode['tv_series']));
 
-  $video_schema = '"video":{"@type":"VideoObject","name":"'.$episode['episode_title'].'","embedUrl":"'.get_permalink($post_id).'","thumbnail":{"@type":"ImageObject","contentUrl":"https://i.ytimg.com/vi/'.$episode['video'].'/hqdefault.jpg"},"thumbnailUrl":"https://i.ytimg.com/vi/'.$episode['video'].'/hqdefault.jpg","url":"'.get_permalink($post_id).'","description":"'.$episode['overview'].'","duration":"PT2M20S","uploadDate":"'.get_the_time('c',$post_id).'"}';
+  $ep_description = $episode['overview'] && $episode['overview'] != '' ? $episode['overview'] : get_drama_episode_plot_dessc($post_id);
+  $video_schema = '"video":{"@type":"VideoObject","name":"'.$episode['episode_title'].'","embedUrl":"'.get_permalink($post_id).'","thumbnail":{"@type":"ImageObject","contentUrl":"https://i.ytimg.com/vi/'.$episode['video'].'/hqdefault.jpg"},"thumbnailUrl":"https://i.ytimg.com/vi/'.$episode['video'].'/hqdefault.jpg","url":"'.get_permalink($post_id).'","description":"'.$ep_description.'","duration":"PT2M20S","uploadDate":"'.get_the_time('c',$post_id).'"}';
 
 
-    return '<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TVEpisode", "name": "'.$episode['episode_title'].'", "description": "'.$episode['overview'].'",
+
+    return '<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TVEpisode", "name": "'.$episode['episode_title'].'", "description": "'.$ep_description.'",
   "url":"'.get_permalink($post_id).'", "dateCreated":"'.$episode['air_date'].'", '.$video_schema.', '.(has_post_thumbnail($post_id) ? '"image": "'.get_the_post_thumbnail_url($post_id, 'full').'",' : '').($genres ? '"genre": '.$genres.',' : '').($director_id ? '"director": [ {"@type": "Person","url": "'.get_permalink($director_id).'", "name": "'.get_the_title($director_id).'"'.(has_post_thumbnail($director_id) ? ',"image":"'.get_the_post_thumbnail_url($director_id, 'full').'"' : '').'} ],' : '').($producer_id ? '"producer": [ {"@type": "Person","url": "'.get_permalink($producer_id).'","name": "'.get_the_title($producer_id).'"'.(has_post_thumbnail($producer_id) ? ',"image":"'.get_the_post_thumbnail_url($producer_id, 'full').'"' : '').'} ],' : '').'"actor":['.$casts['schema'].'],"partOfSeason":{"@type":"TVSeason","name":"Season '.$episode['season_no'].'","seasonNumber":"'.$episode['season_no'].'","url":"'.$episode['season_permalink'].'"},"partOfSeries":{"@type":"TVSeries","name":"'.get_the_title($episode['tv_series']).'","startDate":"'.rwmb_meta( 'release_date', '', $episode['tv_series'] ).'","url":"'.get_permalink($episode['tv_series']).'"},"aggregateRating":{"@type":"AggregateRating","bestRating":"10","ratingCount":'.($average_ratings['count'] ? $average_ratings['count'] : 1).',"ratingValue":"'.$average_ratings['average'].'","worstRating":"0"}}</script>';
 }
 
@@ -510,8 +512,8 @@ function article_schema(){
     $attachment = get_post( $attachment_id );
     $caption = $attachment->post_excerpt;
     $description = $attachment->post_content;
-    $image_url = $attachment->guid;
     $image_attributes = wp_get_attachment_image_src( $attachment_id, 'full' );
+    $image_url = $image_attributes[0];
 
   }
 

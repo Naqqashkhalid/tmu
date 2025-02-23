@@ -12,7 +12,7 @@ function custom_url_all_seasons() {
 		exit;
 	endif;
 
-	if(isset($segments[1]) && isset($segments[3]) && $segments[1] === 'drama' && ($segments[3] === 'episodes')):
+	if(isset($segments[1]) && isset($segments[3]) && $segments[1] === 'drama' && ($segments[3] === 'episodes') && (!isset($segments[4]) || $segments[4] == '')):
 		require_once __DIR__ .'/archive-drama-episodes.php';
 		drama_episodes_archive($segments[2]);
 		exit;
@@ -188,31 +188,34 @@ function custom_post_type_link( $post_link, $post, $leavename ) {
 add_action( 'init', 'add_custom_redirects' );
 
 function add_custom_redirects() {
-	// feed custom post type for single (feed|rdf|rss|rss2|atom)
-	add_rewrite_rule( 'tv/(.+?)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'movie/(.+?)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'people/(.+?)/feed/?$', 'index.php?people=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'drama/(.+?)/feed/?$', 'index.php?drama=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'tv/(.+?)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'movie/(.+?)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top' );
+	// feed custom post type for single (feed|rdf|rss|rss2|atom) (.+?)
+    add_rewrite_rule( 'drama/([^/]+)/episodes/feed/?$', 'index.php', 'top' );
+    add_rewrite_rule( 'drama/([^/]+)/([^/]+)/feed/?$', 'index.php?drama-episode=$matches[1]-$matches[2]&feed=rss2', 'top' );
+    add_rewrite_rule( 'tv/([^/]+)/([^/]+)/feed/?$', 'index.php?season=$matches[1]-$matches[2]&feed=rss2', 'top' );
+    add_rewrite_rule( 'tv/([^/]+)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top' );
+	add_rewrite_rule( 'movie/([^/]+)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top' );
+	add_rewrite_rule( 'people/([^/]+)/feed/?$', 'index.php?people=$matches[1]&feed=rss2', 'top' );
+	add_rewrite_rule( 'drama/([^/]+)/feed/?$', 'index.php?drama=$matches[1]&feed=rss2', 'top' );
+    add_rewrite_rule( 'tv/([^/]+)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top' );
+	add_rewrite_rule( 'movie/([^/]+)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top' );
 	// add_rewrite_rule( '^people/([^/]+)-([^/]+)/?$', 'index.php?people=$matches[1]&id=$matches[2]', 'top' );
 	// add_rewrite_rule( '^drama/([^/]+)-([^/]+)/?$', 'index.php?drama=$matches[1]&id=$matches[2]', 'top' );
 	// add_rewrite_rule( '^movie/([^/]+)-([^/]+)/?$', 'index.php?movie=$matches[1]&id=$matches[2]', 'top' );
 	// add_rewrite_rule( '^tv/([^/]+)-([^/]+)/?$', 'index.php?tv=$matches[1]&id=$matches[2]', 'top' );
-	add_rewrite_rule( 'video/(.+?)/feed/?$', 'index.php?video=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'tv/(.+?)/(.+?)/(.+?)/feed/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]&feed=rss2', 'top' );
-	add_rewrite_rule( 'tv/(.+?)/(.+?)/feed/?$', 'index.php?season=$matches[1]-$matches[2]&feed=rss2', 'top' );
-	add_rewrite_rule( 'drama/(.+?)/(.+?)/feed/?$', 'index.php?drama-episode=$matches[1]-$matches[2]&feed=rss2', 'top' );
+	add_rewrite_rule( 'video/([^/]+)/feed/?$', 'index.php?video=$matches[1]&feed=rss2', 'top' );
+	add_rewrite_rule( 'tv/([^/]+)/([^/]+)/([^/]+)/feed/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]&feed=rss2', 'top' );
+
+
 
 	// Episode post type redirect rule
-	add_rewrite_rule( 'tv/(.+?)/(.+?)/(.+?)/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]', 'top' );
-	add_rewrite_rule( 'drama/(.+?)/(.+?)/?$', 'index.php?drama-episode=$matches[1]-$matches[2]', 'top' );
-	// add_rewrite_rule( 'drama/([^/]+)-([^/]+)/(.+?)/?$', 'index.php?drama-episode=$matches[1]-$matches[3]', 'top' );
-	// add_rewrite_rule( '^drama/(\d+)-([^/]+)/(.+?)/?$', 'index.php?drama-episode=$matches[2]-$matches[3]', 'top' );
-	// add_rewrite_rule( '^tv/(\d+)-([^/]+)/(.+?)/(.+?)/?$', 'index.php?episode=$matches[2]-$matches[3]-$matches[4]', 'top' );
+	add_rewrite_rule( 'tv/([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]', 'top' );
+	add_rewrite_rule( 'drama/([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[1]-$matches[2]', 'top' );
+	// add_rewrite_rule( 'drama/([^/]+)-([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[1]-$matches[3]', 'top' );
+	// add_rewrite_rule( '^drama/(\d+)-([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[2]-$matches[3]', 'top' );
+	// add_rewrite_rule( '^tv/(\d+)-([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?episode=$matches[2]-$matches[3]-$matches[4]', 'top' );
 
 	// Season post type redirect rule
-	add_rewrite_rule( 'tv/(.+?)/(.+?)/?$', 'index.php?season=$matches[1]-$matches[2]', 'top' );
+	add_rewrite_rule( 'tv/([^/]+)/([^/]+)/?$', 'index.php?season=$matches[1]-$matches[2]', 'top' );
 }
 
 

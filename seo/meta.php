@@ -34,7 +34,7 @@ function seo_meta_tags($title='') {
     <meta name="twitter:description" content="<?= $description ?>" />
     <meta name="twitter:image" content="<?= $image_url ?>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <?php if($_SERVER['REQUEST_URI'] !== '/drama/' && $_SERVER['REQUEST_URI'] !== '/tv/' && $_SERVER['REQUEST_URI'] !== '/movie/' && $_SERVER['REQUEST_URI'] !== '/people/' && $_SERVER['REQUEST_URI'] !== '/video/' && $_SERVER['REQUEST_URI'] !== '/episode/' && $_SERVER['REQUEST_URI'] !== '/drama-episode/') { ?><link rel="alternate" type="application/rss+xml" title="<?= $title ?> &raquo; Feed" href="<?= $permalink ?>feed/" /> <?php } ?>
+    <?php if($_SERVER['REQUEST_URI'] !== '/drama/' && $_SERVER['REQUEST_URI'] !== '/tv/' && $_SERVER['REQUEST_URI'] !== '/movie/' && $_SERVER['REQUEST_URI'] !== '/people/' && $_SERVER['REQUEST_URI'] !== '/video/' && $_SERVER['REQUEST_URI'] !== '/episode/' &&  $_SERVER['REQUEST_URI'] !== '/drama-episode/') { ?><link rel="alternate" type="application/rss+xml" title="<?= $title ?> &raquo; Feed" href="<?= $permalink ?>feed/" /> <?php } ?>
     <?php
 }
 if ( !is_plugin_active( 'seo-by-rank-math/rank-math.php' ) || str_contains($_SERVER['REQUEST_URI'], '/episodes/')) add_action('wp_head', 'seo_meta_tags', 1);

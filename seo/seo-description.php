@@ -28,7 +28,7 @@ function get_seo_description($description='', $post_id=NULL){
 	} elseif (is_single() || $post_type === 'page') {
 		$section = 'single';
 		$post_id = get_the_ID();
-		$description = $wpdb->get_var("SELECT seo_description FROM {$wpdb->prefix}posts WHERE `ID` = {$post_id}");
+		$description = $post_id ? $wpdb->get_var("SELECT seo_description FROM {$wpdb->prefix}posts WHERE `ID` = {$post_id}") : '';
 		if(!$description){
 			$description = $wpdb->get_var("SELECT description FROM {$table_name} WHERE post_type = '{$post_type}' AND section = '{$section}'");
 			if ($post_type === 'movie' || $post_type === 'tv' || $post_type === 'drama') {

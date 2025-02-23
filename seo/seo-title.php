@@ -27,7 +27,7 @@ function get_seo_title($title){
 	} elseif (is_single() || $post_type === 'page') {
 		$section = 'single';
 		$post_id = get_the_ID();
-		$title = $wpdb->get_var("SELECT seo_title FROM {$wpdb->prefix}posts WHERE `ID` = {$post_id}");
+		$title = $post_id ? $wpdb->get_var("SELECT seo_title FROM {$wpdb->prefix}posts WHERE `ID` = {$post_id}") : '';
 		$title = $title ?? $wpdb->get_var("SELECT title FROM {$table_name} WHERE post_type = '{$post_type}' AND section = '{$section}'");
 	}
 

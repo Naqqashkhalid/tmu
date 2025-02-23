@@ -10,7 +10,7 @@ function upcoming_calendar_posts($atts=[]){
 
 	$column = $post_type === 'tv' ? 'tv_series' : ($post_type === 'drama' ? 'dramas' : ($post_type === 'movie' ? $post_type : 'post'));
 	$table_name = $wpdb->prefix.'tmu_'.($post_type === 'movie' ? 'movies' : ($post_type === 'drama' ? 'dramas' : ($post_type === 'tv' ? 'tv_series' : 'posts')));
-	$results = $column !== 'post' ? $wpdb->get_results("SELECT `ID`,`release_date`,`release_timestamp`,`star_cast`,`average_rating`,`vote_count` FROM $table_name WHERE release_timestamp BETWEEN $current_time AND $end_time ORDER BY `release_timestamp` ASC") : '';
+	$results = $column !== 'post' ? $wpdb->get_results("SELECT `ID`,`release_date`,`release_timestamp`,`star_cast`,`total_average_rating`,`total_vote_count` FROM $table_name WHERE release_timestamp BETWEEN $current_time AND $end_time ORDER BY `release_timestamp` ASC") : '';
 
 	if ($results) {
 		$results_by_day = array();

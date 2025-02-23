@@ -230,6 +230,65 @@ h3:not(.blog-posts h3) {
 .featured-second article { background-color: white; width: 23.5%; }
 .featured-second .post-title { padding: 15px; }
 
+.scroll-btns {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.scroll-btn {
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Ensure items stay in a row */
+.trending-item {
+    flex: 0 0 auto;
+    width: 250px; /* Adjust width as needed */
+}
+
+/* Ensure the container allows horizontal scrolling */
+.scrollable-content {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth; /* Enables smooth scrolling */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling on mobile */
+    scrollbar-width: none; /* Hides scrollbar on Firefox */
+}
+
+.trending-scrollable {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    overflow-x: auto !important; /* Force horizontal scroll */
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    width: 100%;
+    min-width: 0;
+}
+
+.trending-scrollable > * {
+    flex: 0 0 auto; /* Ensure items don't shrink */
+}
+
+
+.trending-scrollable::-webkit-scrollbar {
+    display: none; /* Hides scrollbar on Chrome/Safari */
+}
+/* Ensure items don't wrap */
+.trending-item {
+    flex: 0 0 auto; /* Keeps items in a single row */
+    width: 250px; /* Adjust as needed */
+}
+
+
 .scroll-btns { display:flex; gap:10px; }
 
 .scroll-btn {
@@ -239,6 +298,61 @@ h3:not(.blog-posts h3) {
     height: 30px;
     width: 30px;
 }
+
+.new-trending-posts {
+    background: #f2f2f2;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.new-trending-section {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        "nt-primary"
+        "nt-third"
+        "nt-second";
+}
+
+/* Main featured post */
+.nt-primary {
+    grid-area: nt-primary;
+}
+
+/* Scrolling section */
+.nt-second {
+    grid-area: nt-second;
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    padding-bottom: 10px;
+}
+
+.nt-second::-webkit-scrollbar {
+    display: none;
+}
+
+/* Individual article inside scrolling section */
+.nt-second article {
+    flex: 0 0 auto;
+    width: 250px;
+}
+
+/* Grid-based third section */
+.nt-third {
+    grid-area: nt-third;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
 
 .new-releases, .upcoming-movies, .trailer {
     margin-bottom: 30px;
@@ -377,4 +491,68 @@ h3:not(.blog-posts h3) {
 
 @media screen and (max-width: 767px) {
     .featured-second article { width:100% }
+}
+
+/* New trending section styles */
+.trending-section {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.trending-content {
+    display: flex;
+    gap: 2%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.trending-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+.trending-content article {
+    flex: 0 0 23.5%;
+    min-width: 250px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.trending-content .post-image {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 60.1851851852%;
+}
+
+.trending-content .post-title {
+    padding: 15px;
+}
+
+.trending-content .post-tags {
+    position: absolute;
+    right: auto;
+    top: auto;
+    bottom: 90px;
+    max-width: 100%;
+    z-index: 2;
+    left: 15px;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 1020px) {
+    .trending-content article {
+        flex: 0 0 49%;
+        min-width: 200px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .trending-content article {
+        flex: 0 0 100%;
+    }
 }

@@ -49,7 +49,8 @@ get_header();
 				do_action( 'generate_after_main_content' );
 				?>
 			</div>
-			
+
+
 			<?php if ($sidebar) { ?>
 				<div class="sidebar item-sidebar <?= $post_type === 'people' ? '' : 'item-sidebar' ?>"><div class ="sidebar-cont">
 				<?php

@@ -944,6 +944,7 @@ function listitem_schema($result, $count, $post_type){
       }';
 }
 
+
 function social_sharing_button($current_page, $title){
     ?>
     <div class="social-sharing-icons">

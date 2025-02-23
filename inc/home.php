@@ -19,10 +19,12 @@ get_header(); ?>
 	      		<div class="featured-primary"><?= $featured['primary'] ?></div>
 	      		<div class="featured-second"><?= $featured['second'] ?></div>
 	      		<div class="featured-third"><section><?= $featured['third'] ?></section></div>
-      		</section>
       	</div>
 
-      	<div class="archive-header">
+          <div class="archive-header">
+          <?= trending_posts_scrollable() ?>
+          </div>
+        <div class="archive-header">
       		<?php if($options['tmu_movies']==='on' && $options['tmu_tv_series']==='on') { ?>
       			<?php if($popular = popular_tv_movies()): ?>
 		      		<div class="new-releases scrollable-section" data-scroll-target="#trending-movies">
@@ -142,20 +144,22 @@ get_header(); ?>
     </main>
   </div>
 
+
+
 <script>
-function scrollRelease(button) {
-  const scrollContainer = button.closest('.scrollable-section');
-  const scrollTarget = scrollContainer.dataset.scrollTarget;
-  const direction = button.dataset.direction ? parseInt(button.dataset.direction) : 1; // Default right scroll
+    function scrollRelease(button) {
+      const scrollContainer = button.closest('.scrollable-section');
+      const scrollTarget = scrollContainer.dataset.scrollTarget;
+      const direction = button.dataset.direction ? parseInt(button.dataset.direction) : 1; // Default right scroll
 
-  const scrollElement = document.querySelector(scrollTarget);
+      const scrollElement = document.querySelector(scrollTarget);
 
-  if (scrollElement) {
-    scrollElement.scrollLeft += direction * 1000; // Adjust scroll distance as needed
-  } else {
-    console.warn('Scroll element not found with selector:', scrollTarget);
-  }
-}
+      if (scrollElement) {
+        scrollElement.scrollLeft += direction * 1000; // Adjust scroll distance as needed
+      } else {
+        console.warn('Scroll element not found with selector:', scrollTarget);
+      }
+    }
 </script>
 
   <?php
@@ -347,3 +351,57 @@ function featured_posts($posts){
 
 	return $featured;
 }
+
+
+function trending_posts_scrollable($category_id = 32, $number_of_posts = 8, $section_title = 'Trending Posts') {
+    $posts = get_posts([
+        'numberposts'  => $number_of_posts,
+        'post_status'  => 'publish',
+        'category__in' => [$category_id]
+    ]);
+
+    if (!$posts) return '';
+
+    $unique_id = 'trending-scroll-' . $category_id;
+    
+    $output = '<div class="trending-section scrollable-section" data-scroll-target="#' . $unique_id . '">
+        <div class="heading">
+            <h2>' . esc_html($section_title) . '</h2>
+            <div class="scroll-btns">
+                <button class="scroll-btn scroll-new-release-left" data-direction="-1" onclick="scrollRelease(this)">';
+                    ob_start();
+                    button_left();
+                    $output .= ob_get_clean();
+    $output .= '</button>
+                <button class="scroll-btn scroll-new-release-right" data-direction="1" onclick="scrollRelease(this)">';
+                    ob_start();
+                    button_right();
+                    $output .= ob_get_clean();
+    $output .= '</button>
+            </div>
+        </div>
+        <div class="trending-content scrollable-content" id="' . $unique_id . '">';
+
+    foreach ($posts as $post) {
+        $permalink = get_permalink($post->ID);
+        $title = get_the_title($post->ID);
+        $image = has_post_thumbnail($post->ID) ? get_the_post_thumbnail_url($post->ID, 'full') : '';
+        $tags = get_the_tags($post->ID);
+
+        $output .= '<article>
+            <a href="' . $permalink . '" class="post-image" title="' . $title . '">
+                <img src="' . ($image ? plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg" data-src="' . $image . '" class="lazyload' : plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg') . '" alt="' . $title . '" width="100%" height="100%">
+            </a>
+            <div class="post-content">
+                <h3 class="post-title"><a href="' . $permalink . '" title="' . $title . '">' . $title . '</a></h3>
+            </div>
+        </article>';
+    }
+
+    $output .= '</div></div>';
+
+    return $output;
+}
+
+// <div class="post-tags">' . ($tags ? '<a href="' . get_tag_link($tags[0]) . '" class="post-tag" title="' . $tags[0]->name . '">' . $tags[0]->name . '</a>' : '') . '</div>
+
