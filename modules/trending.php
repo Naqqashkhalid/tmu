@@ -17,7 +17,7 @@ function top_trending_dramas(){
 							$title = get_the_title($item);
 							$data .= '<a class="trending-item" href="'.get_permalink($item).'" title="'.$title.'">
 					  			<div class="trending-poster">
-					  				<img '.(has_post_thumbnail($item) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($item, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$title.'" width="100%" height="100%"><div class="trending-no">Rank '.++$count.'</div>
+					  				<img '.(has_post_thumbnail($item) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($item, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="Watch '.$title.' Drama" width="100%" height="100%"><div class="trending-no">Rank '.++$count.'</div>
 					  			</div>
 					  			<h3 class="trending-title">'.$title.'</h3>
 					  		</a>';
@@ -67,6 +67,8 @@ function trending_styles(){
 	    left: 10px;
 	    background: #0e9272;
 	    color: #ffffff;
+	    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+        font-weight: bold;
 	    z-index: 2 !important;
 	    border-radius: 5px;
 	    padding: 5px 10px;

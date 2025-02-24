@@ -291,26 +291,26 @@ get_header(); ?>
   	<?php
   }
 
-function button_left(){
-  ?>
-  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-left">
-	  <defs><style> .cls-1 { fill: #fff; } </style> </defs>
-	  <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30"/>
-	  <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M22.885,22.916,16.7,16.722l6.181-6.194-1.9-1.9-8.1,8.1,8.1,8.1Z" transform="translate(-4.084 -1.625)"/>
-	</svg>
-  <?php
+function button_left() {
+    ?>
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-left">
+        <defs><style> .cls-1 { fill: #fff; } </style> </defs>
+        <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30"/>
+        <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M22.885,22.916,16.7,16.722l6.181-6.194-1.9-1.9-8.1,8.1,8.1,8.1Z" transform="translate(-4.084 -1.625)"/>
+    </svg>
+    <?php
 }
 
-function button_right(){
-  ?>
-  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-right">
-	  <defs><style>.cls-1 {fill: #fff;}</style></defs>
-	  <g id="Group_276" data-name="Group 276" transform="translate(-1290 -476)">
-	    <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30" transform="translate(1290 476)"/>
-	    <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M12.885,22.916l6.181-6.194-6.181-6.194,1.9-1.9,8.1,8.1-8.1,8.1Z" transform="translate(1288.314 474.375)"/>
-	  </g>
-	</svg>
-  <?php
+function button_right() {
+    ?>
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-right">
+        <defs><style>.cls-1 {fill: #fff;}</style></defs>
+        <g id="Group_276" data-name="Group 276" transform="translate(-1290 -476)">
+            <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30" transform="translate(1290 476)"/>
+            <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M12.885,22.916l6.181-6.194-6.181-6.194,1.9-1.9,8.1,8.1-8.1,8.1Z" transform="translate(1288.314 474.375)"/>
+        </g>
+    </svg>
+    <?php
 }
 
 function featured_posts($posts){

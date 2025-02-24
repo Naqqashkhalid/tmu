@@ -127,7 +127,7 @@ function scrollRelease(button) {
 	  		?>
 	  			<a class="upcoming-movies-box" href="<?= get_permalink($result->ID) ?>" title="<?= $title ?>">
 		  			<div class="upcoming-movies-poster">
-		  				<img <?= (has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ) ?> alt="<?= $result->original_title ?>" width="100%" height="100%">
+		  				<img <?= (has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ) ?> alt="Watch <?= $result->original_title ?> Drama" width="100%" height="100%">
 		  			</div>
 		  			<div class="upcoming-movies-details">
 		  				<h3><?= $title ?></h3>

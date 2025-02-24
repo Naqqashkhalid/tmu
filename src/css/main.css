@@ -62,7 +62,7 @@ a {
     text-decoration: none!important;
 }
 
-a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!important;}
+a:hover, a:focus, a:active { color: #0e9272; text-decoration: underline!important;}
 
 .sep {
     margin: 0 5px;
@@ -193,7 +193,7 @@ a:hover, a:focus, a:active { color: #FF6F61; text-decoration: underline!importan
 .play-icon svg { fill: white }
 .videos .videos-gallery a { display:block; flex: 1 1 210px; max-width: 210px; }
 .videos .videos-gallery a:hover .single-video-title {text-decoration: underline; }
-.videos .single-video-title { padding: 1px 5px; font-weight: 600; color: #0E9272; }
+.videos .single-video-title { padding: 1px 5px; font-weight: 600; color: #075e4e; }
 
 .modal-content {
     display: none;
@@ -523,8 +523,8 @@ table a:hover, p a:hover, .credit-name a:hover {
     padding: 1px 1px;
     text-decoration: none!important;
 }
-.btn-primary { border-radius: 0.313rem; padding: 0.406rem 1.906rem; background: #0e9272; line-height: 18px; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 20px; display: block; width: 220px; text-align: center; margin-left: auto; margin-right: auto; box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.btn-primary:hover { background-color: #ff6f61; color: #FFFFFF; text-decoration: none!important; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }
+.btn-primary { border-radius: 0.313rem; padding: 0.406rem 1.906rem; background: #0e9272; line-height: 18px; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 20px; display: block; width: 220px; text-align: center; margin-left: auto; margin-right: auto; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); }
+.btn-primary:hover { background-color: #097056; color: #FFFFFF; text-decoration: none!important;}
 
 .comment-sub-title { font-size:17px; }
 
@@ -546,8 +546,8 @@ table a:hover, p a:hover, .credit-name a:hover {
 .item-sidebar .all_items { display: flex; flex-wrap: wrap; gap: 2%; }
 .item-sidebar .item-box:hover { background-color: rgba(0, 0, 0, 0.6); text-decoration: none!important; }
 .item-sidebar .item-box { width: 49%; }
-.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block!important; }
-.loadmore:hover { background-color: #E65A50; color: #FFFFFF; box-shadow: 0px 6px 10px rgba(255, 111, 97, 0.6); transform: translateY(-2px); }
+.loadmore { cursor: pointer; color: #FFFFFF; background-color: #0E9272; text-align: center; text-transform: uppercase; letter-spacing: 0.84px; font-size: 14px; font-weight: 700; width: 90%; border-radius: 5px; margin-left: auto; margin-right: auto; display: block!important;  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);}
+.loadmore:hover { background-color: #097056; color: #FFFFFF;}
 .loading {
     position: absolute;
     top: 0;
@@ -721,6 +721,8 @@ table a:hover, p a:hover, .credit-name a:hover {
 .drama-details .schedule-time {
     letter-spacing: 0.65px;
     color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-weight: bold;
     overflow: hidden;
     max-width: 100%;
     display: inline-block;

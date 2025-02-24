@@ -36,19 +36,39 @@ add_filter( 'comment_form_fields', 'fields_customization' );
 add_action( 'comment_form_logged_in_after', 'add_rating_field' );
 add_action( 'comment_form_before_fields', 'add_rating_field' );
 function add_rating_field() {
-
+    // Show 5 stars but keep 10 values
     echo (is_singular( 'movie' ) || is_singular( 'tv' ) || is_singular( 'episode' ) || is_singular( 'drama-episode' ) || is_singular( 'drama' )) ? get_rating_style().'<div class="rating">
-        <input type="radio" name="rating" value="10">
-        <input type="radio" name="rating" value="9">
-        <input type="radio" name="rating" value="8">
-        <input type="radio" name="rating" value="7">
-        <input type="radio" name="rating" value="6">
-        <input type="radio" name="rating" value="5">
-        <input type="radio" name="rating" value="4">
-        <input type="radio" name="rating" value="3">
-        <input type="radio" name="rating" value="2">
-        <input type="radio" name="rating" value="1">
-      </div>' : get_rating_style();
+        <div class="star" data-rating="9,10">
+            <input type="radio" name="rating" value="10" id="rating-10" aria-label="10 out of 10">
+            <input type="radio" name="rating" value="9" id="rating-9" aria-label="9 out of 10">
+            <label for="rating-10" class="sr-only">10 out of 10</label>
+            <label for="rating-9" class="sr-only">9 out of 10</label>
+        </div>
+        <div class="star" data-rating="7,8">
+            <input type="radio" name="rating" value="8" id="rating-8" aria-label="8 out of 10">
+            <input type="radio" name="rating" value="7" id="rating-7" aria-label="7 out of 10">
+            <label for="rating-8" class="sr-only">8 out of 10</label>
+            <label for="rating-7" class="sr-only">7 out of 10</label>
+        </div>
+        <div class="star" data-rating="5,6">
+            <input type="radio" name="rating" value="6" id="rating-6" aria-label="6 out of 10">
+            <input type="radio" name="rating" value="5" id="rating-5" aria-label="5 out of 10">
+            <label for="rating-6" class="sr-only">6 out of 10</label>
+            <label for="rating-5" class="sr-only">5 out of 10</label>
+        </div>
+        <div class="star" data-rating="3,4">
+            <input type="radio" name="rating" value="4" id="rating-4" aria-label="4 out of 10">
+            <input type="radio" name="rating" value="3" id="rating-3" aria-label="3 out of 10">
+            <label for="rating-4" class="sr-only">4 out of 10</label>
+            <label for="rating-3" class="sr-only">3 out of 10</label>
+        </div>
+        <div class="star" data-rating="1,2">
+            <input type="radio" name="rating" value="2" id="rating-2" aria-label="2 out of 10">
+            <input type="radio" name="rating" value="1" id="rating-1" aria-label="1 out of 10">
+            <label for="rating-2" class="sr-only">2 out of 10</label>
+            <label for="rating-1" class="sr-only">1 out of 10</label>
+        </div>
+    </div>' : get_rating_style();
 }
 
 function set_comment_form_defaults( $defaults ) {
@@ -114,10 +134,15 @@ function display_comment_rating($comment_ID){
     if ($comment->comment_rating) {
         $rating = $comment->comment_rating;
         $output .= '<div class="user-rating"><div class="single_comment rating">';
-        for ($i=10; $i >= 1; $i--) {
-            $output .= $rating == $i ? '<input type="radio" name="rating_'.$comment_ID.'" value="'.$i.'" checked disabled>' : '<input type="radio" name="rating" value="'.$i.'" disabled>';
+        // Show 5 stars based on rating value
+        for ($i = 5; $i >= 1; $i--) {
+            $starValue = $i * 2;
+            $isGold = ($rating >= $starValue - 1);
+            $output .= '<div class="star'.($isGold ? ' checked' : '').'" role="img" aria-label="'.($isGold ? 'Rated' : 'Not rated').' '.$i.' out of 5 stars">
+                <input type="radio" disabled aria-hidden="true">
+            </div>';
         }
-        $output .= '</div><div class="rate-value">'.($rating).'</div></div>';
+        $output .= '</div><div class="rate-value" aria-label="Rating value">'.($rating).'</div></div>';
     }
     return $output;
 }
@@ -126,16 +151,16 @@ function get_rating_style(){
     return "
 <style>
   #reply-title {
-  	font-size: 20px;
+    font-size: 20px;
     font-weight: 600;
   }
   .comments-title .title {
-  	padding-left: 15px;
+    padding-left: 15px;
     padding-bottom: 10px;
   }
   .comments-title {margin-top: 30px; gap:5px;}
   .comments-title:before {
-  	content: '';
+    content: '';
     background-color: #02c8f0;
     width: 0.25rem;
     border-radius: 0.25rem;
@@ -153,7 +178,7 @@ function get_rating_style(){
   .comment-form {
     padding: 20px;
     margin-top: 30px;
-  	border-radius: 4px;
+    border-radius: 4px;
     box-shadow: 0 -2px 4px 0 rgb(0 0 0 / 8%), 0 2px 4px 0 rgb(0 0 0 / 10%);
     background-color: white;
     display:flex;
@@ -220,7 +245,7 @@ function get_rating_style(){
   .comment-form #author, .comment-form #email { width: 49%; }
   
   .button {
-  	margin-top: 5px;
+    margin-top: 5px;
   }
 
   .rate-this-pop-modal .select-stars-rating input:checked, .rating input:checked {
@@ -264,6 +289,179 @@ function get_rating_style(){
   .comment-form-comment textarea::placeholder { color: #0000006b; font-size: 12px; }
 
   @media only screen and (max-width: 600px) { .comment-form #author, .comment-form #email { width: 100%; } }
+
+  .rating {
+    position: relative;
+    display: flex;
+    margin: 10px 0;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .rating .star {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  .rating .star input {
+    position: absolute;
+    opacity: 0;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .rating .star input:first-child {
+    left: 0;
+  }
+
+  .rating .star input:last-child {
+    right: 0;
+  }
+
+  .rating .star:before {
+    content: '\\f005';
+    font-family: fontAwesome;
+    font-size: 36px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #e3e3e6;
+    transition: 0.5s;
+  }
+
+  .rating .star:hover:before,
+  .rating .star:hover ~ .star:before,
+  .rating .star.checked:before {
+    color: #ffd700;
+  }
+
+  /* Single comment rating styles */
+  .single_comment.rating {
+    justify-content: flex-start;
+    margin: 0;
+    width: auto;
+    gap: 2px;
+  }
+
+  .single_comment .star {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+
+  .single_comment .star:before {
+    font-size: 20px;
+  }
+
+  /* Mobile styles */
+  @media only screen and (max-width: 768px) {
+    .rating .star {
+      width: 45px;
+      height: 45px;
+    }
+
+    .rating .star:before {
+      font-size: 42px;
+    }
+
+    .single_comment .star {
+      width: 16px;
+      height: 16px;
+    }
+
+    .single_comment .star:before {
+      font-size: 16px;
+    }
+  }
+
+  /* Screen reader only class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Modal rating stars */
+  .select-stars-rating {
+    position: relative;
+    display: flex;
+    margin: 10px 0;
+    flex-direction: row-reverse;
+    justify-content: center;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .select-stars-rating .star {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  .select-stars-rating .star input {
+    position: absolute;
+    opacity: 0;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .select-stars-rating .star input:first-child {
+    left: 0;
+  }
+
+  .select-stars-rating .star input:last-child {
+    right: 0;
+  }
+
+  .select-stars-rating .star:before {
+    content: '\\f005';
+    font-family: fontAwesome;
+    font-size: 36px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #e3e3e6;
+    transition: 0.5s;
+  }
+
+  .select-stars-rating .star:hover:before,
+  .select-stars-rating .star:hover ~ .star:before,
+  .select-stars-rating .star.checked:before {
+    color: #ffd700;
+  }
+
+  /* Mobile styles for modal */
+  @media only screen and (max-width: 768px) {
+    .select-stars-rating .star {
+      width: 45px;
+      height: 45px;
+    }
+
+    .select-stars-rating .star:before {
+      font-size: 42px;
+    }
+  }
 </style>
 ";
 }

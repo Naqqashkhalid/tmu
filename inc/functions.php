@@ -216,15 +216,18 @@ function display_images($images){
     $data = '';
     if($images):
         $data .= '<div class="images scrollable-section" data-scroll-target="#images">
-		  <div class="short-heading font-size-36 weight-700 heading">
-				<h2 class="images-title weight-700 font-size-36">'.get_the_title().' Images</h2>';
+          <div class="short-heading font-size-36 weight-700 heading">
+                <h2 class="images-title weight-700 font-size-36">'.get_the_title().' Images</h2>';
         if(count($images) > 5):
-            $data .= '<div class="scroll-btns"><button class="scroll-btn scroll-new-release-left" data-direction="-1" onclick="scrollRelease(this)">'.button_left_f().'</button><button class="scroll-btn scroll-new-release-right" data-direction="1" onclick="scrollRelease(this)">'.button_right_f().'</button></div>';
+            $data .= '<div class="scroll-btns">
+                <button class="scroll-btn scroll-new-release-left" data-direction="-1" onclick="scrollRelease(this)" aria-label="Scroll images left">'.button_left_f().'</button>
+                <button class="scroll-btn scroll-new-release-right" data-direction="1" onclick="scrollRelease(this)" aria-label="Scroll images right">'.button_right_f().'</button>
+            </div>';
         endif;
         $data .= '</div>';
         $data .= '<p class="heading-des">Browse the latest '.get_the_title().' photos from '.$typeText.', events, and social media highlights, all in one place.</p>
-		  <div class="images-container"><div class="images-gallery scrollable-content pics" id="images">'.get_images($images).'</div></div>
-		</div>';
+          <div class="images-container"><div class="images-gallery scrollable-content pics" id="images">'.get_images($images).'</div></div>
+        </div>';
     endif;
 
     return $data;
@@ -658,6 +661,60 @@ add_action('wp_head', function () {
     echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">';
     echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"></noscript>';
 }, 100);
+
+add_action('wp_head', function () {
+    echo '<style>
+        /* Existing styles */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Improved link styles for better contrast */
+        .movie_intro a,
+        .heading-des a,
+        .item-details a,
+        .detail-item a {
+            color: #075e4e;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .movie_intro a:hover,
+        .heading-des a:hover,
+        .item-details a:hover,
+        .detail-item a:hover {
+            color: #043d32;
+            text-decoration: none;
+        }
+
+        /* Add visual indicator for links */
+        .movie_intro a:focus,
+        .heading-des a:focus,
+        .item-details a:focus,
+        .detail-item a:focus {
+            outline: 2px solid #075e4e;
+            outline-offset: 2px;
+        }
+
+        /* Ensure sufficient contrast for all text states */
+        .movie_intro a:visited,
+        .heading-des a:visited,
+        .item-details a:visited,
+        .detail-item a:visited {
+            color: #064940;
+        }
+    </style>';
+}, 100);
+
 function admin_footer_script() { ?>
     <script>
         const childElements = document.querySelectorAll('.credits > .rwmb-input > .rwmb-group-clone > .rwmb-row > .rwmb-column > .rwmb-text-wrapper[data-visible="visible"]');
@@ -765,21 +822,23 @@ function delete_post_images($post_id) {
 add_filter( 'rank_math/json_ld', function( $data, $jsonld ) { return []; }, 99, 2 );
 
 function button_left_f(){
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-left">
-	  <defs><style> .cls-1 { fill: #fff; } </style> </defs>
-	  <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30"/>
-	  <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M22.885,22.916,16.7,16.722l6.181-6.194-1.9-1.9-8.1,8.1,8.1,8.1Z" transform="translate(-4.084 -1.625)"/>
-	</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-left" aria-hidden="true" focusable="false">
+      <defs><style> .cls-1 { fill: #fff; } </style> </defs>
+      <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30"/>
+      <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M22.885,22.916,16.7,16.722l6.181-6.194-1.9-1.9-8.1,8.1,8.1,8.1Z" transform="translate(-4.084 -1.625)"/>
+    </svg>
+    <span class="sr-only">Scroll left</span>';
 }
 
 function button_right_f(){
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-right">
-	  <defs><style>.cls-1 {fill: #fff;}</style></defs>
-	  <g id="Group_276" data-name="Group 276" transform="translate(-1290 -476)">
-	    <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30" transform="translate(1290 476)"/>
-	    <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M12.885,22.916l6.181-6.194-6.181-6.194,1.9-1.9,8.1,8.1-8.1,8.1Z" transform="translate(1288.314 474.375)"/>
-	  </g>
-	</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" class="btn-right" aria-hidden="true" focusable="false">
+      <defs><style>.cls-1 {fill: #fff;}</style></defs>
+      <g id="Group_276" data-name="Group 276" transform="translate(-1290 -476)">
+        <rect id="Rectangle_154" data-name="Rectangle 154" width="30" height="30" transform="translate(1290 476)"/>
+        <path id="Icon_material-keyboard-arrow-right" data-name="Icon material-keyboard-arrow-right" class="cls-1" d="M12.885,22.916l6.181-6.194-6.181-6.194,1.9-1.9,8.1,8.1-8.1,8.1Z" transform="translate(1288.314 474.375)"/>
+      </g>
+    </svg>
+    <span class="sr-only">Scroll right</span>';
 }
 /**
  * Build our the_title() parameters.

@@ -6,18 +6,91 @@ function custom_url_all_seasons() {
 	$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 	$segments = explode('/', $uri);
 
+	// Check for drama episodes feed and return 404
+	if(isset($segments[1]) && isset($segments[3]) && isset($segments[4]) && 
+	   $segments[1] === 'drama' && 
+	   $segments[3] === 'episodes' && 
+	   $segments[4] === 'feed') {
+		
+		// Set up 404 status
+		global $wp_query;
+		$wp_query->is_404 = true;
+		$wp_query->is_feed = false;
+		status_header(404);
+		
+		// Remove all meta tag related actions and filters
+		remove_all_actions('wp_head');
+		remove_all_actions('wpseo_head');
+		remove_theme_support('title-tag');
+		remove_theme_support('automatic-feed-links');
+		
+		// Add back only essential WordPress head elements
+		add_action('wp_head', 'wp_enqueue_scripts', 1);
+		add_action('wp_head', 'wp_print_styles', 8);
+		add_action('wp_head', 'wp_print_head_scripts', 9);
+		
+		// Prevent Yoast SEO from adding meta tags
+		add_filter('wpseo_robots', '__return_false');
+		add_filter('wpseo_metadesc', '__return_false');
+		add_filter('wpseo_title', '__return_false');
+		
+		// Add our custom meta tags with high priority
+		add_action('wp_head', function() {
+			?>
+			<meta charset="<?php bloginfo('charset'); ?>">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<meta name="robots" content="noindex,nofollow">
+			<title>404 Not Found - <?php echo get_bloginfo('name'); ?></title>
+			<meta name="description" content="The page you are looking for could not be found.">
+			<meta property="og:type" content="website">
+			<meta property="og:title" content="404 Not Found - <?php echo get_bloginfo('name'); ?>">
+			<meta property="og:description" content="The page you are looking for could not be found.">
+			<meta property="og:url" content="<?php echo esc_url(home_url($_SERVER['REQUEST_URI'])); ?>">
+			<meta property="og:site_name" content="<?php echo get_bloginfo('name'); ?>">
+			<meta name="twitter:card" content="summary">
+			<meta name="twitter:title" content="404 Not Found - <?php echo get_bloginfo('name'); ?>">
+			<meta name="twitter:description" content="The page you are looking for could not be found.">
+			<?php
+		}, 0);
+		
+		// Load header
+		get_header();
+		
+		// Output 404 content once
+		?>
+		<div id="primary" class="content-area">
+			<main id="main" class="site-main">
+				<section class="error-404 not-found">
+					<header class="page-header">
+						<h1 class="page-title">404 - Page Not Found</h1>
+					</header>
+					<div class="page-content">
+						<p>The page you are looking for could not be found.</p>
+						<?php get_search_form(); ?>
+					</div>
+				</section>
+			</main>
+		</div>
+		<?php
+		
+		// Load footer
+		get_footer();
+		exit();
+	}
+
+	// Regular seasons archive
 	if(isset($segments[3]) && ($segments[3] == 'seasons')):
 		require_once __DIR__ .'/archive-seasons.php';
 		season_archive($segments[2]);
 		exit;
 	endif;
 
+	// Regular episodes archive
 	if(isset($segments[1]) && isset($segments[3]) && $segments[1] === 'drama' && ($segments[3] === 'episodes') && (!isset($segments[4]) || $segments[4] == '')):
 		require_once __DIR__ .'/archive-drama-episodes.php';
 		drama_episodes_archive($segments[2]);
 		exit;
 	endif;
-
 
 	if($segments[1] === 'update-tv-series') {
 		require_once __DIR__ .'/custom/crons.php';
@@ -119,105 +192,24 @@ function custom_url_all_seasons() {
 	}
 }
 
-// add_filter( 'term_link', 'custom_taxonomy_season_url', 10, 3 );
-
-// function custom_taxonomy_season_url( $permalink, $term, $taxonomy ) {
-//   $new_permalink = $permalink;
-//   if ( $taxonomy === 'season' ) {
-//     $tv_post_id = rwmb_meta( 'series_name', [ 'object_type' => 'term' ], $term->term_id );
-// 		$season_no = rwmb_meta( 'season_no', [ 'object_type' => 'term' ], $term->term_id );
-// 		$post_link = get_permalink($tv_post_id);
-//     $new_permalink = ($tv_post_id && $season_no && $post_link) ? $post_link.'season-'.$season_no.'/' : $permalink; //(get_query_var( 'paged' ) ? 'page/'.get_query_var( 'paged' ).'/' : '')
-//   }
-
-//   return $new_permalink;
-// }
-
-add_filter( 'post_type_link', 'custom_post_type_link', 10, 3 );
-function custom_post_type_link( $post_link, $post, $leavename ) {
-
-	// if ($post->post_type === 'tv' || $post->post_type === 'drama' || $post->post_type === 'movie' || $post->post_type === 'people') {
-  //     $url = rtrim($post_link, '/');
-  //     return $url.'-'.$post->ID.'/';
-  // }
-
-	if ($post->post_type === 'drama-episode') {
-		$drama_id = rwmb_meta( 'dramas', '', $post->ID );
-	  $episode_no = rwmb_meta( 'episode_no', '', $post->ID );
-
-	  remove_filter('post_type_link', 'custom_post_type_link');
-	  $drama = get_permalink($drama_id);
-	  add_filter( 'post_type_link', 'custom_post_type_link', 10, 3 );
-	  
-	  return ($drama && $episode_no) ? user_trailingslashit( $drama.'episode-'.$episode_no.'/' ) : $post_link;
-	}
-
-	if ($post->post_type === 'season') {
-		global $wpdb;
-		$season = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}tmu_tv_series_seasons WHERE `ID` = {$post->ID}");
-		if ($season) {
-		  $season_no = $season->season_no ?? 0;
-
-		  remove_filter('post_type_link', 'custom_post_type_link');
-		  $series = $season->tv_series ? get_permalink($season->tv_series) : '';
-		  add_filter( 'post_type_link', 'custom_post_type_link', 10, 3 );
-		  
-		  return ($series && $season_no) ? user_trailingslashit( $series.'season-'.$season_no.'/' ) : $post_link;
-		}
-	}
-
-	if ($post->post_type === 'episode') {
-		global $wpdb;
-		$episode = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}tmu_tv_series_episodes WHERE `ID` = {$post->ID}");
-		if ($episode) {
-		  $season_no = $episode->season_no ?? 0;
-		  $episode_no = $episode->episode_no ?? 0;
-
-		  remove_filter('post_type_link', 'custom_post_type_link');
-		  $series = $episode->tv_series ? get_permalink($episode->tv_series) : '';
-		  add_filter( 'post_type_link', 'custom_post_type_link', 10, 3 );
-		  
-		  return ($series && $episode_no) ? user_trailingslashit( $series.'season-'.$season_no.'/episode-'.$episode_no.'/' ) : $post_link;
-		}
-	}
-
-	return $post_link;
-}
-
-
-add_action( 'init', 'add_custom_redirects' );
-
 function add_custom_redirects() {
-	// feed custom post type for single (feed|rdf|rss|rss2|atom) (.+?)
-    add_rewrite_rule( 'drama/([^/]+)/episodes/feed/?$', 'index.php', 'top' );
-    add_rewrite_rule( 'drama/([^/]+)/([^/]+)/feed/?$', 'index.php?drama-episode=$matches[1]-$matches[2]&feed=rss2', 'top' );
-    add_rewrite_rule( 'tv/([^/]+)/([^/]+)/feed/?$', 'index.php?season=$matches[1]-$matches[2]&feed=rss2', 'top' );
-    add_rewrite_rule( 'tv/([^/]+)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'movie/([^/]+)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'people/([^/]+)/feed/?$', 'index.php?people=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'drama/([^/]+)/feed/?$', 'index.php?drama=$matches[1]&feed=rss2', 'top' );
-    add_rewrite_rule( 'tv/([^/]+)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'movie/([^/]+)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top' );
-	// add_rewrite_rule( '^people/([^/]+)-([^/]+)/?$', 'index.php?people=$matches[1]&id=$matches[2]', 'top' );
-	// add_rewrite_rule( '^drama/([^/]+)-([^/]+)/?$', 'index.php?drama=$matches[1]&id=$matches[2]', 'top' );
-	// add_rewrite_rule( '^movie/([^/]+)-([^/]+)/?$', 'index.php?movie=$matches[1]&id=$matches[2]', 'top' );
-	// add_rewrite_rule( '^tv/([^/]+)-([^/]+)/?$', 'index.php?tv=$matches[1]&id=$matches[2]', 'top' );
-	add_rewrite_rule( 'video/([^/]+)/feed/?$', 'index.php?video=$matches[1]&feed=rss2', 'top' );
-	add_rewrite_rule( 'tv/([^/]+)/([^/]+)/([^/]+)/feed/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]&feed=rss2', 'top' );
+	// Other feed rules (but not drama episodes feed)
+	add_rewrite_rule('drama/([^/]+)/([^/]+)/feed/?$', 'index.php?drama-episode=$matches[1]-$matches[2]&feed=rss2', 'top');
+	add_rewrite_rule('tv/([^/]+)/([^/]+)/feed/?$', 'index.php?season=$matches[1]-$matches[2]&feed=rss2', 'top');
+	add_rewrite_rule('tv/([^/]+)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top');
+	add_rewrite_rule('movie/([^/]+)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top');
+	add_rewrite_rule('people/([^/]+)/feed/?$', 'index.php?people=$matches[1]&feed=rss2', 'top');
+	add_rewrite_rule('drama/([^/]+)/feed/?$', 'index.php?drama=$matches[1]&feed=rss2', 'top');
+	add_rewrite_rule('video/([^/]+)/feed/?$', 'index.php?video=$matches[1]&feed=rss2', 'top');
+	add_rewrite_rule('tv/([^/]+)/([^/]+)/([^/]+)/feed/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]&feed=rss2', 'top');
 
-
-
-	// Episode post type redirect rule
-	add_rewrite_rule( 'tv/([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]', 'top' );
-	add_rewrite_rule( 'drama/([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[1]-$matches[2]', 'top' );
-	// add_rewrite_rule( 'drama/([^/]+)-([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[1]-$matches[3]', 'top' );
-	// add_rewrite_rule( '^drama/(\d+)-([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[2]-$matches[3]', 'top' );
-	// add_rewrite_rule( '^tv/(\d+)-([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?episode=$matches[2]-$matches[3]-$matches[4]', 'top' );
-
-	// Season post type redirect rule
-	add_rewrite_rule( 'tv/([^/]+)/([^/]+)/?$', 'index.php?season=$matches[1]-$matches[2]', 'top' );
+	// Episode post type redirect rules
+	add_rewrite_rule('tv/([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]', 'top');
+	add_rewrite_rule('drama/([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[1]-$matches[2]', 'top');
 }
 
+// Remove existing template_redirect action
+remove_action('template_redirect', 'custom_url_all_seasons_template_redirect');
 
 function modify_slug_on_post_save($post_ID) {
     if ( wp_is_post_autosave($post_ID) || wp_is_post_revision($post_ID) ) return;

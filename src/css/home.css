@@ -111,7 +111,7 @@ h3:not(.blog-posts h3) {
     grid-template-rows: auto auto auto 1fr;
 }
 
-.featured-third .post-content .post-tag { margin-top: 5px; background-color: #0E9272; color: #FFFFFF; }
+.featured-third .post-content .post-tag { margin-top: 5px; background-color: #0E9272; color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); }
 
 .featured-second .post-content .post-tags {
     position: absolute;
@@ -170,7 +170,8 @@ h3:not(.blog-posts h3) {
     font-family: Roboto, sans-serif;
     font-size: .75rem;
     font-weight: 700;
-    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    color: White;
 }
 
 .blog-section article {
@@ -241,7 +242,7 @@ h3:not(.blog-posts h3) {
 
 .scroll-btn {
     cursor: pointer;
-    background: #007bff;
+    background: #0E9272;
     color: white;
     border: none;
     padding: 5px 10px;

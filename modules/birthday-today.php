@@ -64,7 +64,7 @@ function birthday_today_homepage(){
 	if ($results) { ?>
 		<div class="scrollable-section" data-scroll-target="#today-birthday">
       		<div class="heading birthdays">
-				 <h2>Born Today</h2><a href="<?= get_post_type_archive_link('people') ?>" class="born-today-view-button">View All</a><!--<div class="scroll-btns"><button class="scroll-btn scroll-today-birthday-left" data-direction="-1" onclick="scrollRelease(this)"><?php button_left() ?></button><button class="scroll-btn scroll-today-birthday-right" data-direction="1" onclick="scrollRelease(this)"><?php button_right() ?></button></div> -->
+				 <h2>Born Today</h2><a href="<?= get_post_type_archive_link('people') ?>" class="born-today-view-button">View All</a>
 			</div>
 			<div class="date-today">People Born on <?= date('d F') ?></div>
 			<div class="today-birthday-flex scrollable-content birthdays-today" id="today-birthday">

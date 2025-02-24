@@ -123,8 +123,9 @@
     justify-content: left;
     margin-right: .5rem;
     padding-right: .6rem;
-    color: #F5F5F5;
-    margin-bottom: 0rem!important;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    margin-bottom: 0rem !important;
 }
 
 .episodes-container-desktop .episode-head:after {
@@ -254,7 +255,7 @@ padding-top: 5px;
 
 .next-ep-title {
 font-size: 16px;
-color: #B0B0B0;
+color: #6B6B6B;
 }
 
 .next-ep-release {
@@ -289,7 +290,7 @@ color:  #2C2C2C;
 }
 
 .countdown .label {
-color: #B0B0B0;
+color: #6B6B6B;
 padding: 0;
 background-color: transparent;
 font-weight: 400;
@@ -301,25 +302,34 @@ margin-top: 5px;
 }
 
 .watch-trailer-btn a {
-display: block;
-background-color: #0E9272;
-padding: 10px 5px;
-border-radius: 5px;
-font-size: .800rem;
-text-align: center;
-font-weight: 700;
-color: #F5F5F5;
-margin-top: 5px;
-/*box-shadow: 0px 4px 6px rgba(14, 146, 114, 0.4); !* Subtle shadow *!*/
-/*    transition: transform 0.2s ease, box-shadow 0.2s ease; !* Smooth effect *!*/
+    display: block;
+    background-color: #0E9272;
+    padding: 10px 5px; /* Kept original padding */
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-top: 5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    background-image: linear-gradient(to bottom, #10A58A, #0E9272);
 }
-.watch-trailer-btn a:hover{
-    background-color: #097056; /* Darker shade of main color */
-    color: #FFFFFF; /* Keep the text readable */
-    text-decoration: none !important;
-    /*box-shadow: 0px 6px 10px  rgba(9, 112, 86, 0.8); !* Slightly darker shadow *!*/
-    /*transform: translateY(-2px); !* Slight "lift" effect *!*/
+
+/* Hover effect */
+.watch-trailer-btn a:hover {
+    background-image: linear-gradient(to bottom, #0E9272, #0C7A5E);
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
 }
+
+/* Active effect (on click) */
+.watch-trailer-btn a:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 .trailer-mobile { display: none }
 
 .episode .episode-details { padding: 5px; display: flex; flex-direction: column; gap: 5px; }
@@ -328,7 +338,7 @@ margin-top: 5px;
 .episodes-container .episode .ep-air-date:hover { color: #FF6F61; }
 .episodes-container .episode .ep-no { font-size: 15px; color: white; font-weight: 700; }
 .episodes-container-mobile .episode .ep-no, .episodes-container-mobile .ep-air-date { color: #353535; font-size: 14px; font-weight: 700; }
-.episodes-container-mobile  .episode-head { color: #FF6F61; font-weight: 600; font-size: 14px; }
+.episodes-container-mobile  .episode-head { color: #075E4E; font-weight: 600; }
 .drama-videos .video-single { width: 100%!important; }
 
 .episodes-btn { justify-content: space-between; }
@@ -344,7 +354,7 @@ margin-top: 5px;
 .view-all {
     font-size: 14px;
     font-weight: 600;
-    color: #FF6F61;
+    color: #075e4e;
     display: flex;
     align-content: center;
     flex-wrap: wrap;
@@ -352,7 +362,7 @@ margin-top: 5px;
 }
 
 .arrow {
-  border: solid #FF6F61;
+  border: solid #075e4e;
   border-width: 0 1px 1px 0;
   display: inline-block;
   padding: 4px;
