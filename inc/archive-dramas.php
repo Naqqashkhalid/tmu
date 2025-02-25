@@ -23,9 +23,32 @@ get_header();
       		</ul>
 
       		<h1>Best Pakistani Dramas (<?= date('F Y') ?>)</h1>
+            <p>If you're looking for the latest Pakistani dramas released this month, this page has all the updates from the Pakistani drama industry. Find dramas airing on popular channels like
+                <a href="https://www.pakdramas.com/channel/hum-tv/" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="channel-link"
+                   aria-label="Visit Hum TV dramas section (opens in new tab)">Hum TV</a>,
+                <a href="https://www.pakdramas.com/channel/geo-tv/" 
+                   target="_blank"
+                   rel="noopener"
+                   class="channel-link" 
+                   aria-label="Visit GEO TV dramas section (opens in new tab)">GEO TV</a>,
+                <a href="https://www.pakdramas.com/channel/ary-digital/" 
+                   target="_blank"
+                   rel="noopener"
+                   class="channel-link" 
+                   aria-label="Visit ARY Digital dramas section (opens in new tab)">ARY Digital</a>, and
+                <a href="https://www.pakdramas.com/channel/green-tv-entertainment/" 
+                   target="_blank"
+                   rel="noopener"
+                   class="channel-link" 
+                   aria-label="Visit Green TV Entertainment dramas section (opens in new tab)">Green TV Entertainment</a>.
+            </p>
+
 
       		<div class="block-seperate">
-	      		<!-- <div class="heading"><h2>Dramas</h2></div> -->
+                <div class="heading"><h2>Latest Pakistani Dramas</h2></div>
 	      		<?= $posts['data'] ?>
 	      	</div>
 
@@ -113,7 +136,7 @@ function scrollRelease(button) {
 	  		$title = get_the_title($result->ID);
 	  		$data .= '<a class="new-release-box dramas" href="'.get_permalink($result->ID).'" title="'.$title.'">
 		  			<div class="new-release-poster">
-		  				<img '.(has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$result->original_title.'" width="100%" height="100%">
+		  				<img '.(has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="Watch '.$result->original_title.' Drama" width="100%" height="100%">
 		  			</div>
 		  			<div class="new-release-details">
 		  				<h3>'.$title.'</h3>
@@ -135,7 +158,7 @@ function scrollRelease(button) {
 	  		$title = get_the_title($result->ID);
 	  		$data .= '<a class="upcoming-tv-series-box dramas" href="'.get_permalink($result->ID).'" title="'.$title.'">
 		  			<div class="upcoming-tv-series-poster">
-		  				<img '.(has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$result->original_title.'" width="100%" height="100%">
+		  				<img '.(has_post_thumbnail($result->ID) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.get_the_post_thumbnail_url($result->ID, 'full').'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="Watch '.$result->original_title.' Drama" width="100%" height="100%">
 		  			</div>
 		  			<div class="upcoming-tv-series-details">
 		  				<h3>'.$title.'</h3>
@@ -178,7 +201,7 @@ function scrollRelease(button) {
 		  		$title = get_the_title($result->ID);
 			  	$data .= '<div class="trailer-box">
 			  			<a class="video-image video-single" href="'.$video_permalink.'" title="'.$title.'">
-			  				<img '.('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-image.webp" data-src="'.($videoURL ? $videoURL : plugin_dir_url( __DIR__ ) . 'src/images/no-image.webp').'" class="lazyload"').' alt="'.$title.'" width="100%" height="100%">
+			  				<img '.('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-image.webp" data-src="'.($videoURL ? $videoURL : plugin_dir_url( __DIR__ ) . 'src/images/no-image.webp').'" class="lazyload"').' alt="'.$title.' Trailer" width="100%" height="100%">
 								<span class="play-icon absolute bottom-0 left-0 z-30 flex items-center gap-x-6 p-10 text-white">
 									<svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-testid="PlayCircleOutlinedIcon" class="svg-icon icon-md" height="1em" width="1em">
 										<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2.5-3.5 7-4.5-7-4.5v9z"></path>

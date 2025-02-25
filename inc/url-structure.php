@@ -1,13 +1,14 @@
 <?php
 
 add_action('parse_request', 'custom_url_all_seasons');
+add_action('init', 'add_custom_redirects');
 
 function custom_url_all_seasons() {
 	$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 	$segments = explode('/', $uri);
 
-	// Check for drama episodes feed and return 404
-	if(isset($segments[1]) && isset($segments[3]) && isset($segments[4]) && 
+	// Check ONLY for drama episodes feed pattern and return 404
+	if(isset($segments[1]) && isset($segments[2]) && isset($segments[3]) && isset($segments[4]) && 
 	   $segments[1] === 'drama' && 
 	   $segments[3] === 'episodes' && 
 	   $segments[4] === 'feed') {
@@ -18,27 +19,13 @@ function custom_url_all_seasons() {
 		$wp_query->is_feed = false;
 		status_header(404);
 		
-		// Remove all meta tag related actions and filters
-		remove_all_actions('wp_head');
-		remove_all_actions('wpseo_head');
-		remove_theme_support('title-tag');
-		remove_theme_support('automatic-feed-links');
+		// Only remove feed-related actions for this specific URL
+		remove_action('wp_head', 'feed_links', 2);
+		remove_action('wp_head', 'feed_links_extra', 3);
 		
-		// Add back only essential WordPress head elements
-		add_action('wp_head', 'wp_enqueue_scripts', 1);
-		add_action('wp_head', 'wp_print_styles', 8);
-		add_action('wp_head', 'wp_print_head_scripts', 9);
-		
-		// Prevent Yoast SEO from adding meta tags
-		add_filter('wpseo_robots', '__return_false');
-		add_filter('wpseo_metadesc', '__return_false');
-		add_filter('wpseo_title', '__return_false');
-		
-		// Add our custom meta tags with high priority
+		// Add our custom meta tags
 		add_action('wp_head', function() {
 			?>
-			<meta charset="<?php bloginfo('charset'); ?>">
-			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta name="robots" content="noindex,nofollow">
 			<title>404 Not Found - <?php echo get_bloginfo('name'); ?></title>
 			<meta name="description" content="The page you are looking for could not be found.">
@@ -53,10 +40,9 @@ function custom_url_all_seasons() {
 			<?php
 		}, 0);
 		
-		// Load header
 		get_header();
 		
-		// Output 404 content once
+		// Output 404 content
 		?>
 		<div id="primary" class="content-area">
 			<main id="main" class="site-main">
@@ -73,7 +59,6 @@ function custom_url_all_seasons() {
 		</div>
 		<?php
 		
-		// Load footer
 		get_footer();
 		exit();
 	}
@@ -193,20 +178,44 @@ function custom_url_all_seasons() {
 }
 
 function add_custom_redirects() {
-	// Other feed rules (but not drama episodes feed)
+	// Drama feed rules
+	add_rewrite_rule(
+		'drama/feed/?$',
+		'index.php?post_type=drama&feed=feed',
+		'top'
+	);
+	
+	// Keep existing feed rules
+	add_rewrite_rule('drama/([^/]+)/feed/?$', 'index.php?drama=$matches[1]&feed=rss2', 'top');
 	add_rewrite_rule('drama/([^/]+)/([^/]+)/feed/?$', 'index.php?drama-episode=$matches[1]-$matches[2]&feed=rss2', 'top');
 	add_rewrite_rule('tv/([^/]+)/([^/]+)/feed/?$', 'index.php?season=$matches[1]-$matches[2]&feed=rss2', 'top');
 	add_rewrite_rule('tv/([^/]+)/feed/?$', 'index.php?tv=$matches[1]&feed=rss2', 'top');
 	add_rewrite_rule('movie/([^/]+)/feed/?$', 'index.php?movie=$matches[1]&feed=rss2', 'top');
 	add_rewrite_rule('people/([^/]+)/feed/?$', 'index.php?people=$matches[1]&feed=rss2', 'top');
-	add_rewrite_rule('drama/([^/]+)/feed/?$', 'index.php?drama=$matches[1]&feed=rss2', 'top');
 	add_rewrite_rule('video/([^/]+)/feed/?$', 'index.php?video=$matches[1]&feed=rss2', 'top');
 	add_rewrite_rule('tv/([^/]+)/([^/]+)/([^/]+)/feed/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]&feed=rss2', 'top');
-
+	
 	// Episode post type redirect rules
 	add_rewrite_rule('tv/([^/]+)/([^/]+)/([^/]+)/?$', 'index.php?episode=$matches[1]-$matches[2]-$matches[3]', 'top');
 	add_rewrite_rule('drama/([^/]+)/([^/]+)/?$', 'index.php?drama-episode=$matches[1]-$matches[2]', 'top');
 }
+
+// Add this new function to register drama feed
+function register_drama_feed() {
+	add_feed('drama', function() {
+		get_template_part('feed', 'drama');
+	});
+}
+add_action('init', 'register_drama_feed');
+
+// After making these changes, you'll need to flush rewrite rules
+function flush_rewrite_rules_once() {
+	if (get_option('drama_feed_rules_flushed') != true) {
+		flush_rewrite_rules();
+		update_option('drama_feed_rules_flushed', true);
+	}
+}
+add_action('init', 'flush_rewrite_rules_once');
 
 // Remove existing template_redirect action
 remove_action('template_redirect', 'custom_url_all_seasons_template_redirect');
@@ -234,3 +243,4 @@ function modify_slug_on_post_save($post_ID) {
     }
 }
 add_action('save_post', 'modify_slug_on_post_save');
+

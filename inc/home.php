@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 require_once plugin_dir_path( __DIR__ ) . 'modules/celebrities.php';
 require_once plugin_dir_path( __DIR__ ) . 'modules/birthday-today.php';
+require_once plugin_dir_path( __DIR__ ) . 'modules/popular.php';
 
 $options = get_options( ['tmu_movies', 'tmu_tv_series', 'tmu_dramas'] );
 
@@ -313,45 +314,63 @@ function button_right() {
     <?php
 }
 
-function featured_posts($posts){
-	$featured = ['primary' => '', 'second' => '', 'third' => ''];
-	if ($posts) {
-		foreach ($posts as $index => $post) {
-			$permalink = get_permalink($post['ID']);
-			$title = get_the_title($post['ID']);
-			$image = has_post_thumbnail($post['ID']) ? get_the_post_thumbnail_url($post['ID'], 'full') : '';
-			$tags = get_the_tags($post['ID']);
-			if (!$index) {
-				$featured['primary'] .= '<article>
-					<a href="'.$permalink.'" class="post-image" title="'.$title.'"><img src="'.($image ? plugin_dir_url( __DIR__ ) . 'src/icons/silver-back-land.svg" data-src="'.$image.'" class="lazyload' : plugin_dir_url( __DIR__ ) . 'src/icons/silver-back-land.svg').'" alt="'.$title.'" width="100%" height="100%"></a>
-					<div class="post-content">
-						<div class="post-tags">'.($tags ? '<a href="'.get_tag_link( $tags[0] ).'" class="post-tag" title="'.$tags[0]->name.'">'.$tags[0]->name.'</a>' : '').'</div>
-						<h3 class="post-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a></h3>
-					</div>
-				</article>';
-			} elseif ($index > 3) {
-				$featured['second'] .= '<article>
-					<a href="'.$permalink.'" class="post-image" title="'.$title.'"><img src="'.($image ? plugin_dir_url( __DIR__ ) . 'src/icons/silver-back-land.svg" data-src="'.$image.'" class="lazyload' : plugin_dir_url( __DIR__ ) . 'src/icons/silver-back-land.svg').'" alt="'.$title.'" width="100%" height="100%"></a>
-					<div class="post-content">
-						<div class="post-tags">'.($tags ? '<a href="'.get_tag_link( $tags[0] ).'" class="post-tag" title="'.$tags[0]->name.'">'.$tags[0]->name.'</a>' : '').'</div>
-						<h3 class="post-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a></h3>
-					</div>
-				</article>';
-			} else {
-				$featured['third'] .= '<article>
-					<a href="'.$permalink.'" class="post-image" title="'.$title.'"><img src="'.($image ? plugin_dir_url( __DIR__ ) . 'src/icons/silver-back-land.svg" data-src="'.$image.'" class="lazyload' : plugin_dir_url( __DIR__ ) . 'src/icons/silver-back-land.svg').'" alt="'.$title.'" width="100%" height="100%"></a>
-					<div class="post-content">
-						<h3 class="post-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a></h3>
-						<div class="post-tags">'.($tags ? '<a href="'.get_tag_link( $tags[0] ).'" class="post-tag" title="'.$tags[0]->name.'">'.$tags[0]->name.'</a>' : '').'</div>
-					</div>
-				</article>';
-			}
-		}
-	}
-
-	return $featured;
+function featured_posts($posts) {
+    $featured = ['primary' => '', 'second' => '', 'third' => ''];
+    if ($posts) {
+        foreach ($posts as $index => $post) {
+            $permalink = get_permalink($post['ID']);
+            $title = get_the_title($post['ID']);
+            
+            // Get image with appropriate size based on position
+            if (has_post_thumbnail($post['ID'])) {
+                if (!$index) {
+                    $image = get_the_post_thumbnail_url($post['ID'], 'featured-hero');
+                    $context = 'hero';
+                } else if ($index > 3) {
+                    $image = get_the_post_thumbnail_url($post['ID'], 'featured-grid');
+                    $context = 'grid';
+                } else {
+                    $image = get_the_post_thumbnail_url($post['ID'], 'featured-side');
+                    $context = 'side';
+                }
+            } else {
+                $image = '';
+                $context = 'trending';
+            }
+            
+            $tags = get_the_tags($post['ID']);
+            
+            if (!$index) {
+                $featured['primary'] .= '<article>';
+                $featured['primary'] .= '<a href="'.$permalink.'" class="post-image" title="'.$title.'">';
+                $featured['primary'] .= get_optimized_image($image, $title, $context);
+                $featured['primary'] .= '</a>';
+                $featured['primary'] .= '<div class="post-content">';
+                $featured['primary'] .= '<div class="post-tags">'.($tags ? '<a href="'.get_tag_link($tags[0]).'" class="post-tag" title="'.$tags[0]->name.'">'.$tags[0]->name.'</a>' : '').'</div>';
+                $featured['primary'] .= '<h3 class="post-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a></h3>';
+                $featured['primary'] .= '</div></article>';
+            } else {
+                $article = '<article>';
+                $article .= '<a href="'.$permalink.'" class="post-image" title="'.$title.'">';
+                $article .= get_optimized_image($image, $title);
+                $article .= '</a><div class="post-content">';
+                
+                if ($index > 3) {
+                    $featured['second'] .= $article;
+                    $featured['second'] .= '<div class="post-tags">'.($tags ? '<a href="'.get_tag_link($tags[0]).'" class="post-tag" title="'.$tags[0]->name.'">'.$tags[0]->name.'</a>' : '').'</div>';
+                    $featured['second'] .= '<h3 class="post-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a></h3>';
+                    $featured['second'] .= '</div></article>';
+                } else {
+                    $featured['third'] .= $article;
+                    $featured['third'] .= '<h3 class="post-title"><a href="'.$permalink.'" title="'.$title.'">'.$title.'</a></h3>';
+                    $featured['third'] .= '<div class="post-tags">'.($tags ? '<a href="'.get_tag_link($tags[0]).'" class="post-tag" title="'.$tags[0]->name.'">'.$tags[0]->name.'</a>' : '').'</div>';
+                    $featured['third'] .= '</div></article>';
+                }
+            }
+        }
+    }
+    return $featured;
 }
-
 
 function trending_posts_scrollable($category_id = 32, $number_of_posts = 8, $section_title = 'Trending Posts') {
     $posts = get_posts([
@@ -363,45 +382,34 @@ function trending_posts_scrollable($category_id = 32, $number_of_posts = 8, $sec
     if (!$posts) return '';
 
     $unique_id = 'trending-scroll-' . $category_id;
-    
-    $output = '<div class="trending-section scrollable-section" data-scroll-target="#' . $unique_id . '">
-        <div class="heading">
-            <h2>' . esc_html($section_title) . '</h2>
-            <div class="scroll-btns">
-                <button class="scroll-btn scroll-new-release-left" data-direction="-1" onclick="scrollRelease(this)">';
-                    ob_start();
-                    button_left();
-                    $output .= ob_get_clean();
-    $output .= '</button>
-                <button class="scroll-btn scroll-new-release-right" data-direction="1" onclick="scrollRelease(this)">';
-                    ob_start();
-                    button_right();
-                    $output .= ob_get_clean();
-    $output .= '</button>
-            </div>
-        </div>
-        <div class="trending-content scrollable-content" id="' . $unique_id . '">';
+    $output = '<div class="trending-section scrollable-section" data-scroll-target="#' . $unique_id . '">';
+    $output .= '<div class="heading"><h2>' . esc_html($section_title) . '</h2>';
+    $output .= '<div class="scroll-btns">';
+    ob_start();
+    button_left();
+    $left_button = ob_get_clean();
+    ob_start();
+    button_right();
+    $right_button = ob_get_clean();
+    $output .= '<button class="scroll-btn scroll-new-release-left" data-direction="-1" onclick="scrollRelease(this)">'.$left_button.'</button>';
+    $output .= '<button class="scroll-btn scroll-new-release-right" data-direction="1" onclick="scrollRelease(this)">'.$right_button.'</button>';
+    $output .= '</div></div>';
+    $output .= '<div class="trending-content scrollable-content" id="' . $unique_id . '">';
 
-    foreach ($posts as $post) {
+    foreach ($posts as $index => $post) {
         $permalink = get_permalink($post->ID);
         $title = get_the_title($post->ID);
-        $image = has_post_thumbnail($post->ID) ? get_the_post_thumbnail_url($post->ID, 'full') : '';
-        $tags = get_the_tags($post->ID);
-
-        $output .= '<article>
-            <a href="' . $permalink . '" class="post-image" title="' . $title . '">
-                <img src="' . ($image ? plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg" data-src="' . $image . '" class="lazyload' : plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg') . '" alt="' . $title . '" width="100%" height="100%">
-            </a>
-            <div class="post-content">
-                <h3 class="post-title"><a href="' . $permalink . '" title="' . $title . '">' . $title . '</a></h3>
-            </div>
-        </article>';
+        $image = has_post_thumbnail($post->ID) ? 
+                get_the_post_thumbnail_url($post->ID, 'trending-thumb') : '';
+        
+        $output .= '<article>';
+        $output .= '<a href="' . $permalink . '" class="post-image" title="' . $title . '">';
+        $output .= get_optimized_image($image, $title, $index < 2 ? 'grid' : 'trending');
+        $output .= '</a>';
+        $output .= '</article>';
     }
 
     $output .= '</div></div>';
-
     return $output;
 }
-
-// <div class="post-tags">' . ($tags ? '<a href="' . get_tag_link($tags[0]) . '" class="post-tag" title="' . $tags[0]->name . '">' . $tags[0]->name . '</a>' : '') . '</div>
 

@@ -112,7 +112,36 @@ h3 {
     text-overflow: ellipsis;
 }
 
+.new-release-details h2,
+.upcoming-tv-series-details h2,
+.trailer-details h2 {
+    /* Keep existing styles */
+}
+
 @media screen and (max-width: 768px) {
 	.scroll-btns { display:none }
     .trailer-box, .episode_container { width: 100%; }
+}
+
+/* Channel links specific styling - matching movie_intro links style */
+.channel-link {
+    color: #075e4e;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.channel-link:hover {
+    background: #075e4e;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.channel-link[target="_blank"]::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: 3px;
+    font-size: 0.9em;
+    color: inherit;
 }

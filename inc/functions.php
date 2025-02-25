@@ -1030,3 +1030,120 @@ function social_sharing_button($current_page, $title){
     </div>
     <?php
 }
+
+// Add custom image sizes that match CSS layout dimensions
+add_action('after_setup_theme', function() {
+    // Primary featured (matches .featured-primary in CSS)
+    add_image_size('featured-hero', 800, 450, true);     // Reduced from 1200px for better LCP
+    
+    // Secondary posts (matches .featured-second article width)
+    add_image_size('featured-grid', 320, 180, true);     // 23.5% of container width
+    
+    // Third section (matches .featured-third article)
+    add_image_size('featured-side', 120, 68, true);      // Small sidebar thumbnails
+    
+    // Trending section (matches .trending-content article)
+    add_image_size('trending-thumb', 280, 158, true);    // Scrollable items
+});
+
+function get_optimized_image($image_url, $title, $context = 'trending') {
+    if (!$image_url) {
+        return sprintf(
+            '<img src="%s" alt="%s" width="100%%" height="100%%">',
+            plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg',
+            esc_attr($title)
+        );
+    }
+
+    // Get image ID
+    $image_id = attachment_url_to_postid($image_url);
+    
+    if ($image_id) {
+        // Select size based on usage context
+        $size = match($context) {
+            'hero', true => 'featured-hero',
+            'grid' => 'featured-grid',
+            'side' => 'featured-side',
+            default => 'trending-thumb'
+        };
+        
+        $image_data = wp_get_attachment_image_src($image_id, $size);
+        if ($image_data) {
+            // For hero image
+            if ($context === 'hero' || $context === true) {
+                // Preload hero image
+                add_action('wp_head', function() use ($image_data) {
+                    printf(
+                        '<link rel="preload" as="image" href="%s" fetchpriority="high">',
+                        esc_url($image_data[0])
+                    );
+                }, 1);
+
+                return sprintf(
+                    '<img src="%s" alt="%s" width="%d" height="%d" fetchpriority="high" decoding="async">',
+                    $image_data[0],
+                    esc_attr($title),
+                    $image_data[1],
+                    $image_data[2]
+                );
+            }
+
+            // For other images
+            return sprintf(
+                '<img src="%s" data-src="%s" loading="lazy" class="lazyload" alt="%s" width="%d" height="%d">',
+                plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg',
+                $image_data[0],
+                esc_attr($title),
+                $image_data[1],
+                $image_data[2]
+            );
+        }
+    }
+
+    // Fallback
+    return sprintf(
+        '<img src="%s" data-src="%s" loading="lazy" class="lazyload" alt="%s" width="100%%" height="100%%">',
+        plugin_dir_url(__DIR__) . 'src/icons/silver-back-land.svg',
+        $image_url,
+        esc_attr($title)
+    );
+}
+
+// Add this to optimize image delivery
+add_action('wp_head', function() {
+    ?>
+    <script>
+        // Preconnect to image domain
+        const preconnectLink = document.createElement('link');
+        preconnectLink.rel = 'preconnect';
+        preconnectLink.href = 'https://www.pakdramas.com';
+        document.head.appendChild(preconnectLink);
+        
+        // Initialize lazy loading after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if ('loading' in HTMLImageElement.prototype) {
+                // Use native lazy loading
+                document.querySelectorAll('img.lazyload').forEach(img => {
+                    img.src = img.dataset.src;
+                });
+            } else {
+                // Fallback to Intersection Observer
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazyload');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('img.lazyload').forEach(function(img) {
+                    lazyImageObserver.observe(img);
+                });
+            }
+        });
+    </script>
+    <?php
+}, 2);

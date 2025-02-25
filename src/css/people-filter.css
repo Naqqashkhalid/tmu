@@ -158,12 +158,12 @@
     font-family: 'Futura PT Medium';
     font-size: 13px;
     font-weight: 500;
-    color: #4490E0;
+    color: #075e4e;
 }
 
 input[type=checkbox]:checked+label:before {
     border: 2px solid #fff;
-    box-shadow: 0px 0px 0px 2px #4490e0;
+    box-shadow: 0px 0px 0px 2px #075e4e;
 }
 
 .form-group input:checked+label:after {
@@ -174,7 +174,7 @@ input[type=checkbox]:checked+label:before {
     left: 6px;
     width: 6px;
     height: 10px;
-    border: solid #4490e0;
+    border: solid #075e4e;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }

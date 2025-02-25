@@ -51,24 +51,27 @@
 }
 
 .modal_asdf {
-    transition: all 2s ease 0s;
+    transition: all 0.3s ease-in-out;
     display: none;
     position: fixed;
-    z-index: 1;
-    top: 0%;
+    z-index: 99998;
+    top: 0;
     width: 100%;
     height: 100%;
     left: 0;
+    background: rgba(0, 0, 0, 0.6); /* Darker overlay for better focus */
 }
 
 .modal-content_asdf {
     position: absolute;
-    background-color: #fefefe;
+    background-color: #fff;
     margin: auto;
     justify-content: center;
     margin-top: 100px;
     z-index: 99999;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow for depth */
 }
+
 
 .modal_drop_check_flex_header {
     display: flex;
@@ -157,14 +160,16 @@
     padding: 8px 0px;
     text-transform: uppercase;
     font-family: 'Futura PT Medium';
-    font-size: 13px;
     font-weight: 500;
-    color: #4490E0;
+    background: #075e4e;
+    color: #fff;
+    padding: 6px 6px;
+    border-radius: 3px;
 }
 
 input[type=checkbox]:checked+label:before {
     border: 2px solid #fff;
-    box-shadow: 0px 0px 0px 2px #4490e0;
+    box-shadow: 0px 0px 0px 2px #075e4e;
 }
 
 .form-group input:checked+label:after {
@@ -175,7 +180,7 @@ input[type=checkbox]:checked+label:before {
     left: 6px;
     width: 6px;
     height: 10px;
-    border: solid #4490e0;
+    border: solid #075e4e;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -200,15 +205,21 @@ input[type=checkbox]:checked+label:before {
 }
 
 .clear-button-modals {
-    color: #4490e0;
-    border: solid 1px #e4e4e4;
-    background-color: #fff;
+    color: #fff;
+    border: solid 1px #d32f2f;
+    background-color: #d32f2f;
 }
 
+.clear-button-modals:hover {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+
 .applly-button-modals {
-    color: #f5f5fa;
-    border: solid 1px #4490e0;
-    background-color: #4490e0;
+    color: #fff;
+    border: solid 1px #075e4e;
+    background-color: #075e4e;
 }
 
 .module_flexbox {

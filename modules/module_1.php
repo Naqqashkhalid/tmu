@@ -287,7 +287,7 @@ function module_template($post_type, $page=1, $sort_by='release_date', $lang=[],
         $schema .= ($count !== 0 ? ',' : '' ).'{"@type": "ListItem", "position": "'.(++$count).'", "item": { "@type": "'.$schemType.'", "url": "'.$permalink.'", "name": "'.$post_title.'", "image": "'.$image_url.'", "dateCreated": "'.$publish_date.'", '.($director ? '"director": [ { "@type": "Person", "url": "'.get_permalink($director).'", "name": "'.get_the_title($director).'" } ],' : '').' "aggregateRating": { "@type": "AggregateRating", "bestRating": "10", "worstRating": "1", "ratingValue": "'.($average_ratings['total_average_rating'] ?? 5).'", "ratingCount": "'.($average_ratings['total_vote_count'] ?? 1).'" } } }';
 
         $data .= '<a class="module_post" href="'.$permalink.'">';
-            $data .= '<div class="poster"><img '.(has_post_thumbnail($post_id) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.$image_url.'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="'.$post_title.'" width="100%" height="100%"></div>';
+            $data .= '<div class="poster"><img '.(has_post_thumbnail($post_id) ? ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/preloader.gif" data-src="'.$image_url.'" class="lazyload"') : ('src="'.plugin_dir_url( __DIR__ ) . 'src/images/no-poster.webp"') ).' alt="Watch '.$post_title.' Drama" width="100%" height="100%"></div>';
             $data .= '<div class="details"><h3>'.$post_title.'</h3></div>';
         $data .= '</a>';
 	  }
