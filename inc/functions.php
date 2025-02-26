@@ -683,7 +683,6 @@ add_action('wp_head', function () {
         .item-details a,
         .detail-item a {
             color: #075e4e;
-            text-decoration: underline;
             font-weight: 600;
             transition: all 0.2s ease;
         }
@@ -692,7 +691,7 @@ add_action('wp_head', function () {
         .heading-des a:hover,
         .item-details a:hover,
         .detail-item a:hover {
-            color: #043d32;
+            color: #FFFFFF;
             text-decoration: none;
         }
 
@@ -703,14 +702,6 @@ add_action('wp_head', function () {
         .detail-item a:focus {
             outline: 2px solid #075e4e;
             outline-offset: 2px;
-        }
-
-        /* Ensure sufficient contrast for all text states */
-        .movie_intro a:visited,
-        .heading-des a:visited,
-        .item-details a:visited,
-        .detail-item a:visited {
-            color: #064940;
         }
     </style>';
 }, 100);
